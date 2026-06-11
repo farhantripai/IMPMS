@@ -8,6 +8,7 @@ import { SocialLinks } from "./social-links";
 
 export const navLinks = [
   { to: "/about", label: "About" },
+  { to: "/board-of-directors", label: "Board of Directors" },
   { to: "/programs", label: "Programs" },
   { to: "/scientists", label: "Scholars & Science" },
   { to: "/events", label: "Events" },

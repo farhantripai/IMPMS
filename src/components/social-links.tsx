@@ -18,12 +18,12 @@ function WhatsApp({ className }: { className?: string }) {
 }
 
 const socials = [
-  { name: "YouTube", href: "https://youtube.com", Icon: Youtube },
-  { name: "Facebook", href: "https://facebook.com", Icon: Facebook },
-  { name: "Instagram", href: "https://instagram.com", Icon: Instagram },
+  { name: "YouTube", href: "https://www.youtube.com/@IMPMSTX", Icon: Youtube },
+  { name: "Facebook", href: "https://www.facebook.com/IMPMS", Icon: Facebook },
+  { name: "Instagram", href: "https://www.instagram.com/impmsteam/", Icon: Instagram },
   { name: "TikTok", href: "https://tiktok.com", Icon: TikTok },
   { name: "WhatsApp", href: "https://whatsapp.com", Icon: WhatsApp },
-  { name: "LinkedIn", href: "https://linkedin.com", Icon: Linkedin },
+  { name: "LinkedIn", href: "https://www.linkedin.com/company/impms", Icon: Linkedin },
 ];
 
 export function SocialLinks({ className = "", variant = "footer" }: { className?: string; variant?: "footer" | "header" }) {
