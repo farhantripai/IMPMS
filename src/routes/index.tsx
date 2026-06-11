@@ -92,12 +92,12 @@ function HomePage() {
               Nonprofit · Established 2001
             </p>
             <h1 className="text-balance text-4xl font-bold leading-[1.08] md:text-6xl">
-              Illuminating a golden age of science and discovery
+              Preserving a shared intellectual legacy
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-primary-foreground/85">
-              The Institute of Medieval and Post-Medieval Studies revives the contributions of
-              Muslim scholars who enlightened the world — and inspires a new generation to carry
-              that spirit of inquiry forward.
+              Inspiring curiosity, learning, and innovation for the future. IMPMS shares the
+              intellectual, scientific, and cultural contributions of Muslim scholars with broad
+              audiences through education, public engagement, and community partnerships.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg" className="bg-gold text-gold-foreground hover:bg-gold/90">
@@ -140,13 +140,13 @@ function HomePage() {
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-gold">Our Purpose</p>
           <h2 className="mt-3 text-3xl font-bold md:text-4xl">
-            Correcting the record of the "Dark Ages"
+            Connecting the past to the present
           </h2>
           <p className="mt-5 leading-relaxed text-muted-foreground">
-            For centuries, Muslim scholars and scientists made original contributions that
-            advanced medicine, astronomy, optics, and mathematics. IMPMS shares this heritage
-            with people of all faiths to foster mutual understanding and respect — and to replace
-            the notion of a clash of civilizations with a story of shared human progress.
+            Founded in 2001, IMPMS increases awareness of the achievements of Muslim scholars in
+            science, medicine, mathematics, philosophy, literature, and the arts. By highlighting
+            this shared heritage, we promote mutual respect, strengthen intercultural understanding,
+            and encourage young people to imagine themselves as future innovators and scholars.
           </p>
           <ul className="mt-6 space-y-3">
             {pillars.map((p) => (

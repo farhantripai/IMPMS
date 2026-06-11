@@ -62,6 +62,12 @@ function ProgramsPage() {
             By learning from past innovators, they gain the knowledge and confidence to become the
             innovators of tomorrow.
           </p>
+          <ul className="mt-6 space-y-2 text-sm text-muted-foreground">
+            <li className="flex gap-2"><span className="text-gold">·</span> Hosts public lectures and university-based learning events</li>
+            <li className="flex gap-2"><span className="text-gold">·</span> Partners with STEM-focused organizations to inspire student innovation</li>
+            <li className="flex gap-2"><span className="text-gold">·</span> Organizes essay competitions and educational activities for students</li>
+            <li className="flex gap-2"><span className="text-gold">·</span> Recognizes young innovators and encourages continued learning</li>
+          </ul>
         </div>
       </section>
 

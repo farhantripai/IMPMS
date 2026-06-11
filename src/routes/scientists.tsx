@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/page-hero";
 import { CtaBand } from "@/components/cta-band";
+import { heritageIntro, scholarFields, scholarsNote } from "@/data/scholars";
 import scholarsImg from "@/assets/scholars.jpg";
 
 export const Route = createFileRoute("/scientists")({
@@ -10,43 +11,23 @@ export const Route = createFileRoute("/scientists")({
       {
         name: "description",
         content:
-          "Meet the medieval Muslim scholars and scientists who advanced medicine, astronomy, optics, algebra, and engineering — and shaped the modern world.",
+          "Explore the medieval Muslim scholars who advanced astronomy, medicine, mathematics, philosophy, engineering, and geography — and shaped global intellectual history.",
       },
       { property: "og:title", content: "Scholars & Science — Pioneers of the Islamic Golden Age" },
       { property: "og:description", content: "Discover the scientists who illuminated a golden age of discovery." },
     ],
     links: [{ rel: "canonical", href: "/scientists" }],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "CollectionPage",
-          name: "Scholars & Science — Pioneers of the Islamic Golden Age",
-          about: "Medieval Muslim scholars and their scientific contributions",
-        }),
-      },
-    ],
   }),
   component: ScientistsPage,
 });
-
-const fields = [
-  { field: "Medicine", scholar: "Ibn Sina (Avicenna)", text: "His Canon of Medicine remained a standard medical text in Europe for centuries." },
-  { field: "Optics", scholar: "Ibn al-Haytham (Alhazen)", text: "Pioneered the scientific method and the modern understanding of how vision works." },
-  { field: "Mathematics", scholar: "Al-Khwarizmi", text: "The father of algebra, whose name gives us the word 'algorithm'." },
-  { field: "Astronomy", scholar: "Al-Battani", text: "Refined measurements of the solar year that influenced later European astronomers." },
-  { field: "Surgery", scholar: "Al-Zahrawi", text: "Authored a foundational surgical encyclopedia and designed enduring instruments." },
-  { field: "Engineering", scholar: "Al-Jazari", text: "Documented ingenious mechanical devices and early automata." },
-];
 
 function ScientistsPage() {
   return (
     <>
       <PageHero
-        eyebrow="Scholars & Science"
-        title="The minds that illuminated a golden age"
-        description="From medicine to mathematics, scholars of the Islamic world made original discoveries whose influence reaches into every modern laboratory and classroom."
+        eyebrow="Our Heritage"
+        title="Centuries of achievement in science and thought"
+        description="This heritage reflects centuries of achievement in astronomy, medicine, mathematics, philosophy, engineering, and other fields that helped shape global intellectual history."
       />
 
       <section className="container-page py-16">
@@ -60,22 +41,39 @@ function ScientistsPage() {
             className="aspect-[16/9] w-full object-cover"
           />
         </figure>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {fields.map((f) => (
-            <article key={f.scholar} className="rounded-2xl border border-border bg-card p-7">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">{f.field}</p>
-              <h2 className="mt-2 text-xl font-semibold">{f.scholar}</h2>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{f.text}</p>
-            </article>
+
+        <p className="mx-auto max-w-3xl text-center leading-relaxed text-muted-foreground">{heritageIntro}</p>
+        <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-relaxed text-muted-foreground">
+          {scholarsNote}
+        </p>
+
+        <div className="mt-16 space-y-16">
+          {scholarFields.map((field) => (
+            <div key={field.field}>
+              <h2 className="text-2xl font-bold">{field.field}</h2>
+              <ul className="mt-6 space-y-4">
+                {field.scholars.map((scholar) => (
+                  <li
+                    key={scholar.name}
+                    className="rounded-xl border border-border bg-card p-5"
+                  >
+                    <p className="font-semibold text-foreground">
+                      {scholar.name}
+                      {scholar.period && (
+                        <span className="ml-2 font-normal text-muted-foreground">({scholar.period})</span>
+                      )}
+                    </p>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{scholar.description}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
         </div>
 
-        <div className="mt-12 rounded-2xl border border-border bg-secondary p-8 text-center">
-          <p className="mx-auto max-w-2xl text-muted-foreground">
-            These pioneers are only the beginning. IMPMS shares their stories at conferences, in
-            newsletters, and through publications so that their legacy continues to inspire.
-          </p>
-        </div>
+        <p className="mt-12 text-center text-sm text-muted-foreground">
+          This list is intended as a broad, reader-friendly guide rather than a strict or exhaustive scholarly catalog.
+        </p>
       </section>
 
       <CtaBand />

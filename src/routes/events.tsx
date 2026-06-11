@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Calendar, MapPin } from "lucide-react";
+import { Calendar } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
 import { CtaBand } from "@/components/cta-band";
 import { Badge } from "@/components/ui/badge";
+import { eventsIntro, pastEvents, upcomingEvents } from "@/data/events";
 import eventsImg from "@/assets/events.jpg";
 
 export const Route = createFileRoute("/events")({
@@ -12,7 +13,7 @@ export const Route = createFileRoute("/events")({
       {
         name: "description",
         content:
-          "Explore upcoming and past IMPMS events: national and international conferences, lectures, and community programs celebrating scientific heritage.",
+          "Explore upcoming and past IMPMS events: conferences, lectures, galas, and community programs celebrating scientific heritage and innovation.",
       },
       { property: "og:title", content: "Events — Conferences & Lectures" },
       { property: "og:description", content: "Upcoming and past IMPMS conferences and programs." },
@@ -22,26 +23,13 @@ export const Route = createFileRoute("/events")({
   component: EventsPage,
 });
 
-const upcoming = [
-  { title: "Lecture by Dr. Tauseef", date: "Coming Soon", location: "Houston, Texas", text: "A distinguished lecture by Dr. Tauseef exploring the enduring legacy of medieval and post-medieval scientific thought." },
-  { title: "Mushaira: Celebrating the Poetry of Allama Iqbal", date: "January 2026", location: "Houston, Texas", text: "An evening of poetry honoring the philosophy and verse of Allama Iqbal, bringing together poets, scholars, and the community." },
-];
-
-const past = [
-  { title: "Annual Heritage of Science Conference", date: "2025" },
-  { title: "Youth Innovation Showcase", date: "2025" },
-  { title: "International Symposium on Medieval Science", date: "2023" },
-  { title: "Community Lecture: Optics & Ibn al-Haytham", date: "2022" },
-  { title: "STEM Mentorship Workshop Series", date: "2021" },
-];
-
 function EventsPage() {
   return (
     <>
       <PageHero
         eyebrow="Events"
-        title="Where history meets discovery"
-        description="IMPMS hosts and presents at conferences, lectures, and workshops throughout the year — connecting scholars, students, and the community."
+        title="Where scholarship meets community"
+        description={eventsIntro}
       />
 
       <section className="container-page py-16">
@@ -55,17 +43,24 @@ function EventsPage() {
             className="aspect-[16/9] w-full object-cover"
           />
         </figure>
-        <h2 className="text-2xl font-bold">Upcoming Events</h2>
-        <div className="mt-8 grid gap-6 md:grid-cols-2">
-          {upcoming.map((e) => (
+
+        <h2 className="text-2xl font-bold">Upcoming Soon</h2>
+        <div className="mt-8 grid gap-6 lg:grid-cols-2">
+          {upcomingEvents.map((e) => (
             <article key={e.title} className="rounded-2xl border border-border bg-card p-7">
-              <Badge className="bg-accent text-accent-foreground hover:bg-accent">Upcoming</Badge>
+              <Badge className="bg-accent text-accent-foreground hover:bg-accent">{e.status}</Badge>
               <h3 className="mt-4 text-xl font-semibold">{e.title}</h3>
-              <div className="mt-3 flex flex-wrap gap-4 text-sm text-muted-foreground">
-                <span className="inline-flex items-center gap-1.5"><Calendar className="h-4 w-4 text-gold" />{e.date}</span>
-                <span className="inline-flex items-center gap-1.5"><MapPin className="h-4 w-4 text-gold" />{e.location}</span>
-              </div>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{e.text}</p>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{e.description}</p>
+              {e.details && (
+                <ul className="mt-4 space-y-2">
+                  {e.details.map((detail) => (
+                    <li key={detail} className="flex gap-2 text-sm text-muted-foreground">
+                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-gold" />
+                      {detail}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </article>
           ))}
         </div>
@@ -73,12 +68,15 @@ function EventsPage() {
 
       <section className="bg-secondary">
         <div className="container-page py-16">
-          <h2 className="text-2xl font-bold">Past Events</h2>
+          <h2 className="text-2xl font-bold">Key Events Through the Years</h2>
           <ul className="mt-8 divide-y divide-border rounded-2xl border border-border bg-card">
-            {past.map((e) => (
-              <li key={e.title} className="flex items-center justify-between gap-4 px-6 py-5">
+            {pastEvents.map((e) => (
+              <li key={`${e.year}-${e.title}`} className="flex flex-col gap-1 px-6 py-5 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
                 <span className="font-medium text-foreground">{e.title}</span>
-                <span className="shrink-0 text-sm text-muted-foreground">{e.date}</span>
+                <span className="inline-flex shrink-0 items-center gap-1.5 text-sm text-muted-foreground">
+                  <Calendar className="h-4 w-4 text-gold" />
+                  {e.year}
+                </span>
               </li>
             ))}
           </ul>
