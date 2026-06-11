@@ -226,20 +226,6 @@ export const boardMembers: BoardMember[] = [
       "Sadaf Syed is a commercial broker and residential realtor who helps property investors and business owners build growth and long-term wealth. A 2025 graduate of the University of Texas at Dallas, she analyzes market trends and identifies strategic opportunities to help clients build strong investment portfolios. With a deep appreciation for culture and diversity, she works to create opportunities that benefit individuals, businesses, and communities alike.",
     ],
   },
-  {
-    name: "Br. Mohammad Bajwa",
-    role: "Board of Directors",
-    initials: "MB",
-    bio: [],
-    forthcoming: true,
-  },
-  {
-    name: "Br. Samir Iqbal",
-    role: "Board of Directors",
-    initials: "SI",
-    bio: [],
-    forthcoming: true,
-  },
 ];
 
 export const pastPresidents: BoardMember[] = [
