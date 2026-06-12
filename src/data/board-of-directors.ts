@@ -1,5 +1,5 @@
 import founderBasheer from "@/assets/board/founder-dr-m-basheer-ahmed.png";
-import founderAhsani from "@/assets/board/founder-late-ambassador-syed-a-ahsani.jpg";
+import founderAhsani from "@/assets/board/founder-late-ambassador-syed-a-ahsani.png";
 import azizBudri from "@/assets/board/aziz-budri.png";
 import khawajaAnwer from "@/assets/board/khawaja-nouman-anwer-m-d.jpg";
 import muhsinShaheed from "@/assets/board/imam-muhsin-shaheed.png";

@@ -1,8 +1,72 @@
 import { createFileRoute } from "@tanstack/react-router";
+import {
+  Cog,
+  Globe,
+  HeartPulse,
+  Lightbulb,
+  Sigma,
+  Telescope,
+  type LucideIcon,
+} from "lucide-react";
 import { PageHero } from "@/components/page-hero";
 import { CtaBand } from "@/components/cta-band";
-import { heritageIntro, scholarFields, scholarsNote } from "@/data/scholars";
-import scholarsImg from "@/assets/scholars.jpg";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import {
+  featuredScholarFieldOrder,
+  heritageIntro,
+  scholarFieldSlug,
+  scholarFields,
+  scholarsNote,
+} from "@/data/scholars";
+import arabicCalligraphyMagnifier from "@/assets/scholars/arabic-calligraphy-magnifier.png";
+import openQuranRehal from "@/assets/scholars/open-quran-rehal.png";
+import quranOnStand from "@/assets/scholars/quran-on-stand.png";
+import quranSunlight from "@/assets/scholars/quran-sunlight.png";
+
+const scholarSlides = [
+  {
+    src: quranOnStand,
+    alt: "An open book with Arabic calligraphy resting on a red velvet stand",
+  },
+  {
+    src: openQuranRehal,
+    alt: "An open Quran on a wooden rehal with illuminated borders",
+  },
+  {
+    src: arabicCalligraphyMagnifier,
+    alt: "Arabic calligraphy viewed through a magnifying glass",
+  },
+  {
+    src: quranSunlight,
+    alt: "An open book with Arabic script lit by warm sunlight",
+  },
+] as const;
+
+const scholarFieldIcons: Record<(typeof featuredScholarFieldOrder)[number], LucideIcon> = {
+  "Astronomy and Observational Science": Telescope,
+  "Mathematics and Measurement": Sigma,
+  "Medicine, Surgery, and Pharmacology": HeartPulse,
+  "Philosophy, Logic, and Intellectual Tradition": Lightbulb,
+  "Engineering, Mechanics, and Invention": Cog,
+  "Geography, Cartography, and Earth Sciences": Globe,
+};
+
+function SectionHeading({ icon: Icon, title }: { icon: LucideIcon; title: string }) {
+  return (
+    <div className="flex items-center gap-3">
+      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-foreground">
+        <Icon className="h-5 w-5" />
+      </span>
+      <h2 className="text-2xl font-bold">{title}</h2>
+    </div>
+  );
+}
 
 export const Route = createFileRoute("/scientists")({
   head: () => ({
@@ -25,32 +89,68 @@ function ScientistsPage() {
   return (
     <>
       <PageHero
+        compact
         eyebrow="Our Heritage"
         title="Centuries of achievement in science and thought"
-        description="This heritage reflects centuries of achievement in astronomy, medicine, mathematics, philosophy, engineering, and other fields that helped shape global intellectual history."
+        description="This heritage reflects centuries of achievement in astronomy, mathematics, medicine, philosophy, engineering, geography, and other fields that helped shape global intellectual history."
       />
 
       <section className="container-page py-16">
-        <figure className="mb-12 overflow-hidden rounded-2xl border border-border shadow-xl">
-          <img
-            src={scholarsImg}
-            alt="An illuminated medieval Islamic science manuscript with a brass astrolabe and quill"
-            width={1280}
-            height={960}
-            loading="lazy"
-            className="aspect-[16/9] w-full object-cover"
-          />
-        </figure>
+        <div className="relative mb-12 overflow-hidden rounded-2xl border border-border shadow-xl">
+          <Carousel opts={{ loop: true }}>
+            <CarouselContent className="-ml-0">
+              {scholarSlides.map((slide) => (
+                <CarouselItem key={slide.alt} className="pl-0">
+                  <img
+                    src={slide.src}
+                    alt={slide.alt}
+                    width={1280}
+                    height={360}
+                    loading="lazy"
+                    className="aspect-[32/9] w-full object-cover"
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-3 top-1/2 -translate-y-1/2 border-border/50 bg-background/85 shadow-md hover:bg-background" />
+            <CarouselNext className="right-3 top-1/2 -translate-y-1/2 border-border/50 bg-background/85 shadow-md hover:bg-background" />
+          </Carousel>
+        </div>
 
         <p className="mx-auto max-w-3xl text-center leading-relaxed text-muted-foreground">{heritageIntro}</p>
         <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-relaxed text-muted-foreground">
           {scholarsNote}
         </p>
 
+        <div className="mt-12 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <nav
+            className="mx-auto flex w-max flex-nowrap gap-2"
+            aria-label="Scholar categories"
+          >
+            {featuredScholarFieldOrder.map((field) => {
+              const FieldIcon = scholarFieldIcons[field];
+
+              return (
+                <a
+                  key={field}
+                  href={`#${scholarFieldSlug(field)}`}
+                  className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:border-gold/50 hover:bg-gold/10 sm:px-4 sm:py-2 sm:text-sm"
+                >
+                  <FieldIcon className="h-4 w-4 text-gold" />
+                  {field}
+                </a>
+              );
+            })}
+          </nav>
+        </div>
+
         <div className="mt-16 space-y-16">
           {scholarFields.map((field) => (
-            <div key={field.field}>
-              <h2 className="text-2xl font-bold">{field.field}</h2>
+            <div key={field.field} id={scholarFieldSlug(field.field)} className="scroll-mt-28">
+              <SectionHeading
+                icon={scholarFieldIcons[field.field as (typeof featuredScholarFieldOrder)[number]] ?? Telescope}
+                title={field.field}
+              />
               <ul className="mt-6 space-y-4">
                 {field.scholars.map((scholar) => (
                   <li

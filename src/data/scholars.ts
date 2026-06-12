@@ -15,7 +15,20 @@ export const heritageIntro =
 export const scholarsNote =
   "The scholars below represent a broad cross-section of the scientific and intellectual achievements of the medieval Islamic world. Many were polymaths whose work crossed multiple fields, so the categories here are meant to help readers explore this heritage more easily rather than to limit any scholar to a single discipline.";
 
-export const scholarFields: ScholarField[] = [
+export const featuredScholarFieldOrder = [
+  "Astronomy and Observational Science",
+  "Mathematics and Measurement",
+  "Medicine, Surgery, and Pharmacology",
+  "Philosophy, Logic, and Intellectual Tradition",
+  "Engineering, Mechanics, and Invention",
+  "Geography, Cartography, and Earth Sciences",
+] as const;
+
+export function scholarFieldSlug(field: string) {
+  return field.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+
+const scholarFieldsByField = new Map<string, ScholarField>([
   {
     field: "Astronomy and Observational Science",
     scholars: [
@@ -86,4 +99,11 @@ export const scholarFields: ScholarField[] = [
       { name: "Ibn Battuta", period: "1304–1368/69", description: "Though best known as a traveler, his travel writings preserve valuable geographic and social observations." },
     ],
   },
+].map((field) => [field.field, field] as const));
+
+export const scholarFields: ScholarField[] = [
+  ...featuredScholarFieldOrder.map((field) => scholarFieldsByField.get(field)!),
+  ...[...scholarFieldsByField.values()].filter(
+    (field) => !featuredScholarFieldOrder.includes(field.field as (typeof featuredScholarFieldOrder)[number]),
+  ),
 ];

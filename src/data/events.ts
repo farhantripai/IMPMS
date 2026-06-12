@@ -1,8 +1,11 @@
+export type UpcomingEventIcon = "brain" | "book-open";
+
 export interface UpcomingEvent {
   title: string;
   status: string;
   description: string;
   details?: string[];
+  icon: UpcomingEventIcon;
 }
 
 export interface PastEvent {
@@ -17,6 +20,7 @@ export const upcomingEvents: UpcomingEvent[] = [
   {
     title: "AI Resilience",
     status: "Coming Soon",
+    icon: "brain",
     description:
       "AI Resilience is an upcoming IMPMS conference exploring how communities, institutions, and innovators can respond thoughtfully to the opportunities and challenges of artificial intelligence. Centered on resilience, ethics, and long-term human impact, the conference will bring together scholars, professionals, educators, and emerging leaders for meaningful dialogue, shared learning, and future-facing collaboration.",
     details: [
@@ -27,6 +31,7 @@ export const upcomingEvents: UpcomingEvent[] = [
   {
     title: "Allama Iqbal's Vision for the 21st Century",
     status: "In Development",
+    icon: "book-open",
     description:
       "IMPMS is planning a special program dedicated to the timeless vision, poetry, and thought of Allama Muhammad Iqbal. This upcoming event will explore Iqbal's continuing relevance in the 21st century, including his powerful message on faith, human identity, self discovery, knowledge, and excellence.",
     details: [
