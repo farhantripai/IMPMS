@@ -80,6 +80,7 @@ function AboutPage() {
   return (
     <>
       <PageHero
+        compact={false}
         eyebrow="About the Institute"
         title="Preserving a shared intellectual legacy"
         description="Founded in 2001, the Institute of Medieval and Post-Medieval Studies (IMPMS) is a Dallas-based nonprofit dedicated to sharing the intellectual, scientific, and cultural contributions of Muslim scholars with broad audiences."

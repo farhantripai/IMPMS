@@ -89,7 +89,6 @@ function ScientistsPage() {
   return (
     <>
       <PageHero
-        compact
         eyebrow="Our Heritage"
         title="Centuries of achievement in science and thought"
         description="This heritage reflects centuries of achievement in astronomy, mathematics, medicine, philosophy, engineering, geography, and other fields that helped shape global intellectual history."
@@ -122,27 +121,25 @@ function ScientistsPage() {
           {scholarsNote}
         </p>
 
-        <div className="mt-12 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <nav
-            className="mx-auto flex w-max flex-nowrap gap-2"
-            aria-label="Scholar categories"
-          >
-            {featuredScholarFieldOrder.map((field) => {
-              const FieldIcon = scholarFieldIcons[field];
+        <nav
+          className="mt-12 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6"
+          aria-label="Scholar categories"
+        >
+          {featuredScholarFieldOrder.map((field) => {
+            const FieldIcon = scholarFieldIcons[field];
 
-              return (
-                <a
-                  key={field}
-                  href={`#${scholarFieldSlug(field)}`}
-                  className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:border-gold/50 hover:bg-gold/10 sm:px-4 sm:py-2 sm:text-sm"
-                >
-                  <FieldIcon className="h-4 w-4 text-gold" />
-                  {field}
-                </a>
-              );
-            })}
-          </nav>
-        </div>
+            return (
+              <a
+                key={field}
+                href={`#${scholarFieldSlug(field)}`}
+                className="flex items-center justify-center gap-1.5 rounded-full border border-border bg-card px-2 py-2.5 text-center text-xs font-medium leading-snug text-foreground transition-colors hover:border-gold/50 hover:bg-gold/10 sm:px-3"
+              >
+                <FieldIcon className="h-4 w-4 shrink-0 text-gold" />
+                <span>{field}</span>
+              </a>
+            );
+          })}
+        </nav>
 
         <div className="mt-16 space-y-16">
           {scholarFields.map((field) => (

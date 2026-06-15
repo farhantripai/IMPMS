@@ -28,6 +28,16 @@ export function SiteFooter() {
                 </Link>
               </li>
             ))}
+            <li>
+              <a
+                href="https://www.impmstx.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary-foreground/75 transition-colors hover:text-gold"
+              >
+                Old Website
+              </a>
+            </li>
           </ul>
         </div>
 

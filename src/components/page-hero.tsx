@@ -7,7 +7,7 @@ interface PageHeroProps {
   compact?: boolean;
 }
 
-export function PageHero({ eyebrow, title, description, compact = false }: PageHeroProps) {
+export function PageHero({ eyebrow, title, description, compact = true }: PageHeroProps) {
   return (
     <section className="relative overflow-hidden border-b border-border bg-primary text-primary-foreground">
       <div className="pattern-bg absolute inset-0 opacity-40" aria-hidden="true" />

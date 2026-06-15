@@ -33,6 +33,7 @@ import {
   type UpcomingEventIcon,
 } from "@/data/events";
 import aiResilienceChallenge from "@/assets/events/ai-resilience-challenge.png";
+import allamaIqbalVision from "@/assets/events/allama-iqbal-vision.png";
 import conferenceMeeting from "@/assets/events/conference-meeting.png";
 import eventBreakfastSetup from "@/assets/events/event-breakfast-setup.png";
 import officeLibraryNight from "@/assets/events/office-library-night.png";
@@ -40,7 +41,7 @@ import officeLibraryNight from "@/assets/events/office-library-night.png";
 const eventSlideAspect = "aspect-[800/282]";
 
 const eventSections = [
-  { id: "upcoming-soon", label: "Upcoming Soon", icon: CalendarClock },
+  { id: "upcoming-soon", label: "Coming Soon", icon: CalendarClock },
   { id: "key-events", label: "Key Events Through the Years", icon: Landmark },
 ] as const;
 
@@ -99,6 +100,10 @@ const eventSlides = [
   {
     src: aiResilienceChallenge,
     alt: "Healthcare AI Innovation Challenge — AI Resilience, Saturday October 3, 2026 at Hilton Richardson Dallas",
+  },
+  {
+    src: allamaIqbalVision,
+    alt: "Special IMPMS Event — Allama Iqbal's Vision for the 21st Century",
   },
   {
     src: officeLibraryNight,
@@ -181,7 +186,7 @@ function EventsPage() {
         </div>
 
         <section id="upcoming-soon" className="scroll-mt-28">
-          <SectionHeading icon={CalendarClock} title="Upcoming Soon" />
+          <SectionHeading icon={CalendarClock} title="Coming Soon" />
           <div className="mt-8 grid gap-6 lg:grid-cols-2">
           {upcomingEvents.map((e) => {
             const EventIcon = upcomingEventIcons[e.icon];
