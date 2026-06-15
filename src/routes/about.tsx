@@ -1,8 +1,25 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import {
+  BookOpen,
+  Briefcase,
+  Flag,
+  GraduationCap,
+  Handshake,
+  History,
+} from "lucide-react";
 import { PageHero } from "@/components/page-hero";
 import { CtaBand } from "@/components/cta-band";
 import { Button } from "@/components/ui/button";
 import manuscriptImg from "@/assets/manuscript.jpg";
+
+const aboutSections = [
+  { id: "our-mission", label: "Our Mission", icon: Flag },
+  { id: "history-and-milestones", label: "History and Milestones", icon: History },
+  { id: "youth-programs-and-partnerships", label: "Youth Programs and Partnerships", icon: GraduationCap },
+  { id: "our-work", label: "Our Work", icon: Briefcase },
+  { id: "publications", label: "Publications", icon: BookOpen },
+  { id: "affiliations-and-collaboration", label: "Affiliations and Collaboration", icon: Handshake },
+] as const;
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -73,9 +90,27 @@ function AboutPage() {
           Through educational programs, public engagement, publications, and community partnerships, IMPMS helps
           connect the past to the present in ways that inform, inspire, and build understanding.
         </p>
+
+        <div className="mt-12 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <nav
+            className="mx-auto flex w-max flex-nowrap justify-center gap-3"
+            aria-label="About page sections"
+          >
+            {aboutSections.map((section) => (
+              <a
+                key={section.id}
+                href={`#${section.id}`}
+                className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-border bg-card px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-gold/50 hover:bg-gold/10"
+              >
+                <section.icon className="h-4 w-4 text-gold" />
+                {section.label}
+              </a>
+            ))}
+          </nav>
+        </div>
       </section>
 
-      <section className="bg-secondary">
+      <section id="our-mission" className="scroll-mt-28 bg-secondary">
         <div className="container-page grid gap-12 py-16 lg:grid-cols-2">
           <div className="space-y-6 leading-relaxed text-muted-foreground">
             <div>
@@ -111,7 +146,7 @@ function AboutPage() {
         </div>
       </section>
 
-      <section className="container-page py-16">
+      <section id="history-and-milestones" className="container-page scroll-mt-28 py-16">
         <h2 className="text-2xl font-bold">History and Milestones</h2>
         <ul className="mt-6 space-y-3">
           {milestones.map((item) => (
@@ -123,7 +158,7 @@ function AboutPage() {
         </ul>
       </section>
 
-      <section className="bg-secondary">
+      <section id="youth-programs-and-partnerships" className="scroll-mt-28 bg-secondary">
         <div className="container-page py-16">
           <h2 className="text-2xl font-bold">Youth Programs and Partnerships</h2>
           <p className="mt-4 max-w-3xl leading-relaxed text-muted-foreground">
@@ -149,7 +184,7 @@ function AboutPage() {
         </div>
       </section>
 
-      <section className="container-page py-16">
+      <section id="our-work" className="container-page scroll-mt-28 py-16">
         <h2 className="text-2xl font-bold">Our Work</h2>
         <p className="mt-4 max-w-3xl leading-relaxed text-muted-foreground">
           The Institute of Medieval & Post-Medieval Studies (IMPMS) highlights the intellectual, scientific, and
@@ -174,7 +209,7 @@ function AboutPage() {
 
       <section className="bg-secondary">
         <div className="container-page grid gap-12 py-16 lg:grid-cols-2">
-          <div>
+          <div id="publications" className="scroll-mt-28">
             <h2 className="text-2xl font-bold">Publications</h2>
             <p className="mt-4 text-muted-foreground">
               IMPMS leadership has contributed to scholarship on Muslim intellectual history through several
@@ -194,7 +229,7 @@ function AboutPage() {
               <Link to="/resources">View all publications</Link>
             </Button>
           </div>
-          <div>
+          <div id="affiliations-and-collaboration" className="scroll-mt-28">
             <h2 className="text-2xl font-bold">Affiliations and Collaboration</h2>
             <p className="mt-4 text-muted-foreground">
               IMPMS develops partnerships with national and international organizations that share a commitment to
