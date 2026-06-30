@@ -71,7 +71,7 @@ export function SiteFooter() {
             </li>
           </ul>
           <p className="mt-5 text-xs text-primary-foreground/60">
-            IMPMS is a registered 501(c)(3) tax-exempt nonprofit organization.
+            IMPMS is a registered 501(c)(3) tax-exempt nonprofit organization (Tax ID 20-4962180).
           </p>
         </div>
       </div>
