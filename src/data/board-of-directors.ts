@@ -17,6 +17,7 @@ import laylaMuriby from "@/assets/board/layla-muriby.png";
 import shaukatSheikh from "@/assets/board/shaukat-sheikh.png";
 import salehaSuleman from "@/assets/board/dr-saleha-suleman.png";
 import sadafSyed from "@/assets/board/ms-sadaf-syed.png";
+import edwardThomas from "@/assets/board/edward-thomas.png";
 import mustaphaIshak from "@/assets/board/past-dr-mustapha-ishak-boushaki.png";
 
 export interface BoardMember {
@@ -232,7 +233,7 @@ export const pastPresidents: BoardMember[] = [
   {
     name: "Edward Thomas",
     role: "Past President",
-    initials: "ET",
+    photo: edwardThomas,
     bio: [
       "Edward Thomas's involvement with other parts of the world began after completing a B.A. in Mathematics at Yale University, when he taught at a high school in Kabul, Afghanistan. After completing an M.A. at Columbia University in International Relations, he joined the Foreign Service with assignments in Iran, North Africa, and post-graduate Middle East Studies at Princeton University.",
       "He served as Chief of Programs and Training for the Francophone region of Africa and Country Director in Upper Volta and Iran for the Peace Corps, and later as Executive Secretary of the Moroccan-American Fulbright Commission for nine years. A founding member of IMPMS, he has been an instructor in SMU's Continuing Education program and is fluent in French and Persian.",
