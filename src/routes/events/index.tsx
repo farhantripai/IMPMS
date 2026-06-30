@@ -1,5 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
+  ArrowRight,
   BookOpen,
   Brain,
   Building2,
@@ -27,16 +28,12 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import {
+  decorativeEventSlides,
   eventsIntro,
   pastEvents,
   upcomingEvents,
   type UpcomingEventIcon,
 } from "@/data/events";
-import aiResilienceChallenge from "@/assets/events/ai-resilience-challenge.png";
-import allamaIqbalVision from "@/assets/events/allama-iqbal-vision.png";
-import conferenceMeeting from "@/assets/events/conference-meeting.png";
-import eventBreakfastSetup from "@/assets/events/event-breakfast-setup.png";
-import officeLibraryNight from "@/assets/events/office-library-night.png";
 
 const eventSlideAspect = "aspect-[800/282]";
 
@@ -97,29 +94,18 @@ function SectionHeading({ icon: Icon, title }: { icon: LucideIcon; title: string
 }
 
 const eventSlides = [
-  {
-    src: aiResilienceChallenge,
-    alt: "Healthcare AI Innovation Challenge — AI Resilience, Saturday October 3, 2026 at Hilton Richardson Dallas",
-  },
-  {
-    src: allamaIqbalVision,
-    alt: "Special IMPMS Event — Allama Iqbal's Vision for the 21st Century",
-  },
-  {
-    src: officeLibraryNight,
-    alt: "A modern office and library space prepared for a professional gathering",
-  },
-  {
-    src: eventBreakfastSetup,
-    alt: "Round tables set for a conference breakfast or seminar",
-  },
-  {
-    src: conferenceMeeting,
-    alt: "Professionals collaborating around a conference table",
-  },
-] as const;
+  ...upcomingEvents.map((event) => ({
+    src: event.bannerImage,
+    alt: event.bannerAlt,
+    slug: event.slug,
+  })),
+  ...decorativeEventSlides.map((slide) => ({
+    ...slide,
+    slug: undefined,
+  })),
+];
 
-export const Route = createFileRoute("/events")({
+export const Route = createFileRoute("/events/")({
   head: () => ({
     meta: [
       { title: "Events — Conferences & Lectures | IMPMS" },
@@ -151,14 +137,31 @@ function EventsPage() {
             <CarouselContent className="-ml-0">
               {eventSlides.map((slide) => (
                 <CarouselItem key={slide.alt} className="pl-0">
-                  <img
-                    src={slide.src}
-                    alt={slide.alt}
-                    width={800}
-                    height={282}
-                    loading="lazy"
-                    className={`${eventSlideAspect} w-full object-cover`}
-                  />
+                  {slide.slug ? (
+                    <Link
+                      to="/events/$slug"
+                      params={{ slug: slide.slug }}
+                      className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    >
+                      <img
+                        src={slide.src}
+                        alt={slide.alt}
+                        width={800}
+                        height={282}
+                        loading="lazy"
+                        className={`${eventSlideAspect} w-full object-cover transition-opacity group-hover:opacity-95`}
+                      />
+                    </Link>
+                  ) : (
+                    <img
+                      src={slide.src}
+                      alt={slide.alt}
+                      width={800}
+                      height={282}
+                      loading="lazy"
+                      className={`${eventSlideAspect} w-full object-cover`}
+                    />
+                  )}
                 </CarouselItem>
               ))}
             </CarouselContent>
@@ -188,30 +191,47 @@ function EventsPage() {
         <section id="upcoming-soon" className="scroll-mt-28">
           <SectionHeading icon={CalendarClock} title="Coming Soon" />
           <div className="mt-8 grid gap-6 lg:grid-cols-2">
-          {upcomingEvents.map((e) => {
-            const EventIcon = upcomingEventIcons[e.icon];
+            {upcomingEvents.map((e) => {
+              const EventIcon = upcomingEventIcons[e.icon];
 
-            return (
-            <article key={e.title} className="rounded-2xl border border-border bg-card p-7">
-              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent text-accent-foreground">
-                <EventIcon className="h-6 w-6" />
-              </span>
-              <Badge className="mt-5 bg-accent text-accent-foreground hover:bg-accent">{e.status}</Badge>
-              <h3 className="mt-4 text-xl font-semibold">{e.title}</h3>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{e.description}</p>
-              {e.details && (
-                <ul className="mt-4 space-y-2">
-                  {e.details.map((detail) => (
-                    <li key={detail} className="flex gap-2 text-sm text-muted-foreground">
-                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-gold" />
-                      {detail}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </article>
-          );
-          })}
+              return (
+                <Link
+                  key={e.slug}
+                  to="/events/$slug"
+                  params={{ slug: e.slug }}
+                  className="group block rounded-2xl border border-border bg-card p-7 transition-colors hover:border-gold/50 hover:bg-gold/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                >
+                  <article>
+                    <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent text-accent-foreground">
+                      <EventIcon className="h-6 w-6" />
+                    </span>
+                    <Badge className="mt-5 bg-accent text-accent-foreground hover:bg-accent">
+                      {e.status}
+                    </Badge>
+                    <h3 className="mt-4 text-xl font-semibold group-hover:text-foreground">
+                      {e.subtitle ? `${e.title}: ${e.subtitle}` : e.title}
+                    </h3>
+                    <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                      {e.description}
+                    </p>
+                    {e.details && (
+                      <ul className="mt-4 space-y-2">
+                        {e.details.slice(0, 2).map((detail) => (
+                          <li key={detail} className="flex gap-2 text-sm text-muted-foreground">
+                            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-gold" />
+                            {detail}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    <span className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-gold">
+                      View event details
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                    </span>
+                  </article>
+                </Link>
+              );
+            })}
           </div>
         </section>
       </section>
@@ -224,19 +244,22 @@ function EventsPage() {
               const PastIcon = pastEventIcon(e.title);
 
               return (
-              <li key={`${e.year}-${e.title}`} className="flex flex-col gap-3 px-6 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-                <span className="flex items-start gap-3 sm:items-center">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent/60 text-accent-foreground">
-                    <PastIcon className="h-4 w-4" />
+                <li
+                  key={`${e.year}-${e.title}`}
+                  className="flex flex-col gap-3 px-6 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-4"
+                >
+                  <span className="flex items-start gap-3 sm:items-center">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent/60 text-accent-foreground">
+                      <PastIcon className="h-4 w-4" />
+                    </span>
+                    <span className="font-medium text-foreground">{e.title}</span>
                   </span>
-                  <span className="font-medium text-foreground">{e.title}</span>
-                </span>
-                <span className="inline-flex shrink-0 items-center gap-1.5 pl-12 text-sm text-muted-foreground sm:pl-0">
-                  <Calendar className="h-4 w-4 text-gold" />
-                  {e.year}
-                </span>
-              </li>
-            );
+                  <span className="inline-flex shrink-0 items-center gap-1.5 pl-12 text-sm text-muted-foreground sm:pl-0">
+                    <Calendar className="h-4 w-4 text-gold" />
+                    {e.year}
+                  </span>
+                </li>
+              );
             })}
           </ul>
         </div>

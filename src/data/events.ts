@@ -1,11 +1,44 @@
+import aiResilienceChallenge from "@/assets/events/ai-resilience-challenge.png";
+import allamaIqbalVision from "@/assets/events/allama-iqbal-vision.png";
+import conferenceMeeting from "@/assets/events/conference-meeting.png";
+import eventBreakfastSetup from "@/assets/events/event-breakfast-setup.png";
+import officeLibraryNight from "@/assets/events/office-library-night.png";
+
 export type UpcomingEventIcon = "brain" | "book-open";
 
-export interface UpcomingEvent {
+export interface EventSpeaker {
+  name: string;
   title: string;
+  bio: string;
+}
+
+export interface EventAudience {
+  title: string;
+  description: string;
+}
+
+export interface EventSchedule {
+  date?: string;
+  time?: string;
+  venue?: string;
+}
+
+export interface UpcomingEvent {
+  slug: string;
+  title: string;
+  subtitle?: string;
+  tagline?: string;
   status: string;
   description: string;
   details?: string[];
   icon: UpcomingEventIcon;
+  bannerImage: string;
+  bannerAlt: string;
+  schedule?: EventSchedule;
+  keynote?: EventSpeaker;
+  registrationPrompt?: string;
+  ticketNote?: string;
+  audiences?: EventAudience[];
 }
 
 export interface PastEvent {
@@ -13,33 +46,99 @@ export interface PastEvent {
   title: string;
 }
 
+export interface DecorativeEventSlide {
+  src: string;
+  alt: string;
+}
+
 export const eventsIntro =
   "IMPMS events connect scholarship, science, and community impact—creating opportunities for supporters, partners, and donors to help expand educational access, celebrate achievement, and invest in future generations of innovators.";
 
 export const upcomingEvents: UpcomingEvent[] = [
   {
-    title: "AI Resilience",
+    slug: "ai-resilience",
+    title: "Healthcare AI Innovation Challenge",
+    subtitle: "AI Resilience",
+    tagline: "The Edge That Keeps You Ahead",
     status: "Coming Soon",
     icon: "brain",
+    bannerImage: aiResilienceChallenge,
+    bannerAlt:
+      "Healthcare AI Innovation Challenge — AI Resilience, Saturday October 3, 2026 at Hilton Richardson Dallas",
     description:
       "AI Resilience is an upcoming IMPMS conference exploring how communities, institutions, and innovators can respond thoughtfully to the opportunities and challenges of artificial intelligence. Centered on resilience, ethics, and long-term human impact, the conference will bring together scholars, professionals, educators, and emerging leaders for meaningful dialogue, shared learning, and future-facing collaboration.",
+    schedule: {
+      date: "Saturday, October 3, 2026",
+      time: "6:00 PM to 9:30 PM",
+      venue: "Hilton Richardson Dallas",
+    },
+    keynote: {
+      name: "Dr. Salma Tauseef",
+      title: "Chief Technology Officer, Johnson Matthey",
+      bio: "Dr. Salma Tauseef serves as Chief Technology Officer at Johnson Matthey, where she leads technology strategy and innovation across global operations. A recognized leader at the intersection of science, engineering, and digital transformation, she was named Woman of the Year 2024 by Women in Chemicals. Her keynote will focus on the role of AI resilience in healthcare, leadership, ethics, and innovation.",
+    },
+    registrationPrompt:
+      "Register your interest for an evening focused on how AI resilience is transforming healthcare, leadership, ethics, and innovation.",
+    ticketNote:
+      "Ticket information will be released by email as the event date gets closer.",
+    audiences: [
+      {
+        title: "Technology Leaders",
+        description:
+          "Explore practical uses of AI in healthcare innovation, leadership, and patient centered systems.",
+      },
+      {
+        title: "Students and Researchers",
+        description:
+          "Gain exposure to emerging ideas, professional networks, and real world innovation themes.",
+      },
+      {
+        title: "Sponsors and Partners",
+        description:
+          "Support a timely program that connects education, innovation, and public dialogue.",
+      },
+    ],
     details: [
       "Priority list registration details will be announced soon.",
       "Sponsorship opportunities will be announced soon for organizations and supporters interested in advancing education, innovation, and community engagement through this conference.",
     ],
   },
   {
+    slug: "allama-iqbal-vision",
     title: "Allama Iqbal's Vision for the 21st Century",
     status: "In Development",
     icon: "book-open",
+    bannerImage: allamaIqbalVision,
+    bannerAlt: "Special IMPMS Event — Allama Iqbal's Vision for the 21st Century",
     description:
       "IMPMS is planning a special program dedicated to the timeless vision, poetry, and thought of Allama Muhammad Iqbal. This upcoming event will explore Iqbal's continuing relevance in the 21st century, including his powerful message on faith, human identity, self discovery, knowledge, and excellence.",
-    details: [
-      "The format is currently being developed and may include poetry, scholarly reflections, keynote insights, youth perspectives, and meaningful discussion.",
-      "Details, date, speakers, and registration information will be shared soon.",
-    ],
+    registrationPrompt:
+      "Join the priority list to be among the first to receive program details, speaker announcements, and registration information.",
   },
 ];
+
+export const decorativeEventSlides: DecorativeEventSlide[] = [
+  {
+    src: officeLibraryNight,
+    alt: "A modern office and library space prepared for a professional gathering",
+  },
+  {
+    src: eventBreakfastSetup,
+    alt: "Round tables set for a conference breakfast or seminar",
+  },
+  {
+    src: conferenceMeeting,
+    alt: "Professionals collaborating around a conference table",
+  },
+];
+
+export function getEventBySlug(slug: string): UpcomingEvent | undefined {
+  return upcomingEvents.find((event) => event.slug === slug);
+}
+
+export function getEventPath(slug: string): `/events/${string}` {
+  return `/events/${slug}`;
+}
 
 export const pastEvents: PastEvent[] = [
   { year: "2025", title: "IMPMS Annual Gala: Artificial Intelligence & The Future: Bridging Heritage and Innovation" },

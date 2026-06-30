@@ -17,12 +17,16 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PartnershipsRouteImport } from './routes/partnerships'
 import { Route as NewsRouteImport } from './routes/news'
 import { Route as GetInvolvedRouteImport } from './routes/get-involved'
-import { Route as EventsRouteImport } from './routes/events'
 import { Route as DonateRouteImport } from './routes/donate'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BoardOfDirectorsRouteImport } from './routes/board-of-directors'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as EventsRouteRouteImport } from './routes/events/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EventsIndexRouteImport } from './routes/events/index'
+import { Route as EventsSlugRouteRouteImport } from './routes/events/$slug/route'
+import { Route as EventsSlugIndexRouteImport } from './routes/events/$slug/index'
+import { Route as EventsSlugPriorityListRouteImport } from './routes/events/$slug/priority-list'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -64,11 +68,6 @@ const GetInvolvedRoute = GetInvolvedRouteImport.update({
   path: '/get-involved',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EventsRoute = EventsRouteImport.update({
-  id: '/events',
-  path: '/events',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const DonateRoute = DonateRouteImport.update({
   id: '/donate',
   path: '/donate',
@@ -89,19 +88,44 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EventsRouteRoute = EventsRouteRouteImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EventsIndexRoute = EventsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => EventsRouteRoute,
+} as any)
+const EventsSlugRouteRoute = EventsSlugRouteRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => EventsRouteRoute,
+} as any)
+const EventsSlugIndexRoute = EventsSlugIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => EventsSlugRouteRoute,
+} as any)
+const EventsSlugPriorityListRoute = EventsSlugPriorityListRouteImport.update({
+  id: '/priority-list',
+  path: '/priority-list',
+  getParentRoute: () => EventsSlugRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/events': typeof EventsRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/board-of-directors': typeof BoardOfDirectorsRoute
   '/contact': typeof ContactRoute
   '/donate': typeof DonateRoute
-  '/events': typeof EventsRoute
   '/get-involved': typeof GetInvolvedRoute
   '/news': typeof NewsRoute
   '/partnerships': typeof PartnershipsRoute
@@ -110,6 +134,10 @@ export interface FileRoutesByFullPath {
   '/resources': typeof ResourcesRoute
   '/scientists': typeof ScientistsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/events/$slug': typeof EventsSlugRouteRouteWithChildren
+  '/events/': typeof EventsIndexRoute
+  '/events/$slug/priority-list': typeof EventsSlugPriorityListRoute
+  '/events/$slug/': typeof EventsSlugIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -117,7 +145,6 @@ export interface FileRoutesByTo {
   '/board-of-directors': typeof BoardOfDirectorsRoute
   '/contact': typeof ContactRoute
   '/donate': typeof DonateRoute
-  '/events': typeof EventsRoute
   '/get-involved': typeof GetInvolvedRoute
   '/news': typeof NewsRoute
   '/partnerships': typeof PartnershipsRoute
@@ -126,15 +153,18 @@ export interface FileRoutesByTo {
   '/resources': typeof ResourcesRoute
   '/scientists': typeof ScientistsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/events': typeof EventsIndexRoute
+  '/events/$slug/priority-list': typeof EventsSlugPriorityListRoute
+  '/events/$slug': typeof EventsSlugIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/events': typeof EventsRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/board-of-directors': typeof BoardOfDirectorsRoute
   '/contact': typeof ContactRoute
   '/donate': typeof DonateRoute
-  '/events': typeof EventsRoute
   '/get-involved': typeof GetInvolvedRoute
   '/news': typeof NewsRoute
   '/partnerships': typeof PartnershipsRoute
@@ -143,16 +173,20 @@ export interface FileRoutesById {
   '/resources': typeof ResourcesRoute
   '/scientists': typeof ScientistsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/events/$slug': typeof EventsSlugRouteRouteWithChildren
+  '/events/': typeof EventsIndexRoute
+  '/events/$slug/priority-list': typeof EventsSlugPriorityListRoute
+  '/events/$slug/': typeof EventsSlugIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/events'
     | '/about'
     | '/board-of-directors'
     | '/contact'
     | '/donate'
-    | '/events'
     | '/get-involved'
     | '/news'
     | '/partnerships'
@@ -161,6 +195,10 @@ export interface FileRouteTypes {
     | '/resources'
     | '/scientists'
     | '/sitemap.xml'
+    | '/events/$slug'
+    | '/events/'
+    | '/events/$slug/priority-list'
+    | '/events/$slug/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -168,7 +206,6 @@ export interface FileRouteTypes {
     | '/board-of-directors'
     | '/contact'
     | '/donate'
-    | '/events'
     | '/get-involved'
     | '/news'
     | '/partnerships'
@@ -177,14 +214,17 @@ export interface FileRouteTypes {
     | '/resources'
     | '/scientists'
     | '/sitemap.xml'
+    | '/events'
+    | '/events/$slug/priority-list'
+    | '/events/$slug'
   id:
     | '__root__'
     | '/'
+    | '/events'
     | '/about'
     | '/board-of-directors'
     | '/contact'
     | '/donate'
-    | '/events'
     | '/get-involved'
     | '/news'
     | '/partnerships'
@@ -193,15 +233,19 @@ export interface FileRouteTypes {
     | '/resources'
     | '/scientists'
     | '/sitemap.xml'
+    | '/events/$slug'
+    | '/events/'
+    | '/events/$slug/priority-list'
+    | '/events/$slug/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  EventsRouteRoute: typeof EventsRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   BoardOfDirectorsRoute: typeof BoardOfDirectorsRoute
   ContactRoute: typeof ContactRoute
   DonateRoute: typeof DonateRoute
-  EventsRoute: typeof EventsRoute
   GetInvolvedRoute: typeof GetInvolvedRoute
   NewsRoute: typeof NewsRoute
   PartnershipsRoute: typeof PartnershipsRoute
@@ -270,13 +314,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GetInvolvedRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/events': {
-      id: '/events'
-      path: '/events'
-      fullPath: '/events'
-      preLoaderRoute: typeof EventsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/donate': {
       id: '/donate'
       path: '/donate'
@@ -305,6 +342,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/events': {
+      id: '/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof EventsRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -312,16 +356,72 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/events/': {
+      id: '/events/'
+      path: '/'
+      fullPath: '/events/'
+      preLoaderRoute: typeof EventsIndexRouteImport
+      parentRoute: typeof EventsRouteRoute
+    }
+    '/events/$slug': {
+      id: '/events/$slug'
+      path: '/$slug'
+      fullPath: '/events/$slug'
+      preLoaderRoute: typeof EventsSlugRouteRouteImport
+      parentRoute: typeof EventsRouteRoute
+    }
+    '/events/$slug/': {
+      id: '/events/$slug/'
+      path: '/'
+      fullPath: '/events/$slug/'
+      preLoaderRoute: typeof EventsSlugIndexRouteImport
+      parentRoute: typeof EventsSlugRouteRoute
+    }
+    '/events/$slug/priority-list': {
+      id: '/events/$slug/priority-list'
+      path: '/priority-list'
+      fullPath: '/events/$slug/priority-list'
+      preLoaderRoute: typeof EventsSlugPriorityListRouteImport
+      parentRoute: typeof EventsSlugRouteRoute
+    }
   }
 }
 
+interface EventsSlugRouteRouteChildren {
+  EventsSlugPriorityListRoute: typeof EventsSlugPriorityListRoute
+  EventsSlugIndexRoute: typeof EventsSlugIndexRoute
+}
+
+const EventsSlugRouteRouteChildren: EventsSlugRouteRouteChildren = {
+  EventsSlugPriorityListRoute: EventsSlugPriorityListRoute,
+  EventsSlugIndexRoute: EventsSlugIndexRoute,
+}
+
+const EventsSlugRouteRouteWithChildren = EventsSlugRouteRoute._addFileChildren(
+  EventsSlugRouteRouteChildren,
+)
+
+interface EventsRouteRouteChildren {
+  EventsSlugRouteRoute: typeof EventsSlugRouteRouteWithChildren
+  EventsIndexRoute: typeof EventsIndexRoute
+}
+
+const EventsRouteRouteChildren: EventsRouteRouteChildren = {
+  EventsSlugRouteRoute: EventsSlugRouteRouteWithChildren,
+  EventsIndexRoute: EventsIndexRoute,
+}
+
+const EventsRouteRouteWithChildren = EventsRouteRoute._addFileChildren(
+  EventsRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  EventsRouteRoute: EventsRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   BoardOfDirectorsRoute: BoardOfDirectorsRoute,
   ContactRoute: ContactRoute,
   DonateRoute: DonateRoute,
-  EventsRoute: EventsRoute,
   GetInvolvedRoute: GetInvolvedRoute,
   NewsRoute: NewsRoute,
   PartnershipsRoute: PartnershipsRoute,

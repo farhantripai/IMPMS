@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
+import { upcomingEvents } from "@/data/events";
 
 const BASE_URL = "";
 
@@ -20,6 +21,22 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/programs", changefreq: "monthly", priority: "0.9" },
           { path: "/scientists", changefreq: "monthly", priority: "0.8" },
           { path: "/events", changefreq: "weekly", priority: "0.8" },
+          ...upcomingEvents.flatMap((event) => [
+            {
+              path: `/events/${event.slug}`,
+              changefreq: "weekly" as const,
+              priority: "0.7",
+            },
+            ...(event.registrationPrompt
+              ? [
+                  {
+                    path: `/events/${event.slug}/priority-list`,
+                    changefreq: "weekly" as const,
+                    priority: "0.6",
+                  },
+                ]
+              : []),
+          ]),
           { path: "/news", changefreq: "weekly", priority: "0.8" },
           { path: "/resources", changefreq: "monthly", priority: "0.7" },
           { path: "/partnerships", changefreq: "monthly", priority: "0.6" },
