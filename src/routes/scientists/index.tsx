@@ -1,13 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import {
-  Cog,
-  Globe,
-  HeartPulse,
-  Lightbulb,
-  Sigma,
-  Telescope,
-  type LucideIcon,
-} from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, Cog, Globe, HeartPulse, Lightbulb, Sigma, Telescope, type LucideIcon } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
 import { CtaBand } from "@/components/cta-band";
 import {
@@ -22,29 +14,35 @@ import {
   heritageIntro,
   scholarFieldSlug,
   scholarFields,
+  scholarProfiles,
   scholarsNote,
 } from "@/data/scholars";
-import arabicCalligraphyMagnifier from "@/assets/scholars/arabic-calligraphy-magnifier.png";
-import openQuranRehal from "@/assets/scholars/open-quran-rehal.png";
-import quranOnStand from "@/assets/scholars/quran-on-stand.png";
-import quranSunlight from "@/assets/scholars/quran-sunlight.png";
+import cartographyWorkshop from "@/assets/scholars/cartography-workshop.png";
+import engineeringWorkshop from "@/assets/scholars/engineering-workshop.png";
+import medicineBimaristan from "@/assets/scholars/medicine-bimaristan.png";
+import astronomyObservatory from "@/assets/scholars/astronomy-observatory.png";
+import libraryHouseOfWisdom from "@/assets/scholars/library-house-of-wisdom.png";
 
 const scholarSlides = [
   {
-    src: quranOnStand,
-    alt: "An open book with Arabic calligraphy resting on a red velvet stand",
+    src: cartographyWorkshop,
+    alt: "Scholars studying cartography and navigation with maps, globes, and instruments in a workshop overlooking a harbor",
   },
   {
-    src: openQuranRehal,
-    alt: "An open Quran on a wooden rehal with illuminated borders",
+    src: engineeringWorkshop,
+    alt: "Engineers and scholars working with brass mechanical devices and water-powered machinery in an Islamic Golden Age workshop",
   },
   {
-    src: arabicCalligraphyMagnifier,
-    alt: "Arabic calligraphy viewed through a magnifying glass",
+    src: medicineBimaristan,
+    alt: "Physicians and scholars studying anatomy, medicine, and pharmacology in a historical library and hospital",
   },
   {
-    src: quranSunlight,
-    alt: "An open book with Arabic script lit by warm sunlight",
+    src: astronomyObservatory,
+    alt: "Scholars observing the night sky with an armillary sphere and astronomical instruments on a terrace beneath the Milky Way",
+  },
+  {
+    src: libraryHouseOfWisdom,
+    alt: "Scholars reading, writing, and studying scientific instruments in a grand library of the Islamic Golden Age",
   },
 ] as const;
 
@@ -68,7 +66,11 @@ function SectionHeading({ icon: Icon, title }: { icon: LucideIcon; title: string
   );
 }
 
-export const Route = createFileRoute("/scientists")({
+function getScholarProfile(name: string, field: string) {
+  return scholarProfiles.find((profile) => profile.name === name && profile.field === field)!;
+}
+
+export const Route = createFileRoute("/scientists/")({
   head: () => ({
     meta: [
       { title: "Scholars & Science — Pioneers of the Islamic Golden Age | IMPMS" },
@@ -116,13 +118,13 @@ function ScientistsPage() {
           </Carousel>
         </div>
 
-        <p className="mx-auto max-w-3xl text-center leading-relaxed text-muted-foreground">{heritageIntro}</p>
-        <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-relaxed text-muted-foreground">
+        <p className="w-full text-lg leading-relaxed text-muted-foreground">{heritageIntro}</p>
+        <p className="mt-6 w-full text-base leading-relaxed text-muted-foreground">
           {scholarsNote}
         </p>
 
         <nav
-          className="mt-12 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6"
+          className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6"
           aria-label="Scholar categories"
         >
           {featuredScholarFieldOrder.map((field) => {
@@ -132,9 +134,11 @@ function ScientistsPage() {
               <a
                 key={field}
                 href={`#${scholarFieldSlug(field)}`}
-                className="flex items-center justify-center gap-1.5 rounded-full border border-border bg-card px-2 py-2.5 text-center text-xs font-medium leading-snug text-foreground transition-colors hover:border-gold/50 hover:bg-gold/10 sm:px-3"
+                className="flex items-center justify-center gap-2 rounded-full border-2 border-gold/40 bg-gold/10 px-3 py-3 text-center text-sm font-semibold leading-snug text-foreground shadow-sm transition-all hover:border-gold hover:bg-gold/20 hover:shadow-md sm:px-4"
               >
-                <FieldIcon className="h-4 w-4 shrink-0 text-gold" />
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/20 text-gold">
+                  <FieldIcon className="h-4 w-4" />
+                </span>
                 <span>{field}</span>
               </a>
             );
@@ -149,20 +153,35 @@ function ScientistsPage() {
                 title={field.field}
               />
               <ul className="mt-6 space-y-4">
-                {field.scholars.map((scholar) => (
-                  <li
-                    key={scholar.name}
-                    className="rounded-xl border border-border bg-card p-5"
-                  >
-                    <p className="font-semibold text-foreground">
-                      {scholar.name}
-                      {scholar.period && (
-                        <span className="ml-2 font-normal text-muted-foreground">({scholar.period})</span>
-                      )}
-                    </p>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{scholar.description}</p>
-                  </li>
-                ))}
+                {field.scholars.map((scholar) => {
+                  const profile = getScholarProfile(scholar.name, field.field);
+
+                  return (
+                    <li key={`${field.field}-${scholar.name}`}>
+                      <Link
+                        to="/scientists/$slug"
+                        params={{ slug: profile.slug }}
+                        className="group block rounded-xl border border-border bg-card p-5 transition-colors hover:border-gold/50 hover:bg-gold/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                      >
+                        <p className="font-semibold text-foreground group-hover:text-foreground">
+                          {scholar.name}
+                          {scholar.period && (
+                            <span className="ml-2 font-normal text-muted-foreground">
+                              ({scholar.period})
+                            </span>
+                          )}
+                        </p>
+                        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                          {scholar.description}
+                        </p>
+                        <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-gold">
+                          Read more
+                          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                        </span>
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}

@@ -1,8 +1,5 @@
 import aiResilienceChallenge from "@/assets/events/ai-resilience-challenge.png";
 import allamaIqbalVision from "@/assets/events/allama-iqbal-vision.png";
-import conferenceMeeting from "@/assets/events/conference-meeting.png";
-import eventBreakfastSetup from "@/assets/events/event-breakfast-setup.png";
-import officeLibraryNight from "@/assets/events/office-library-night.png";
 
 export type UpcomingEventIcon = "brain" | "book-open";
 
@@ -46,11 +43,6 @@ export interface PastEvent {
   title: string;
 }
 
-export interface DecorativeEventSlide {
-  src: string;
-  alt: string;
-}
-
 export const eventsIntro =
   "IMPMS events connect scholarship, science, and community impact—creating opportunities for supporters, partners, and donors to help expand educational access, celebrate achievement, and invest in future generations of innovators.";
 
@@ -83,6 +75,11 @@ export const upcomingEvents: UpcomingEvent[] = [
       "Ticket information will be released by email as the event date gets closer.",
     audiences: [
       {
+        title: "Healthcare Professionals",
+        description:
+          "Explore practical uses of AI in healthcare innovation, leadership, and patient centred systems.",
+      },
+      {
         title: "Technology Leaders",
         description:
           "Explore practical uses of AI in healthcare innovation, leadership, and patient centered systems.",
@@ -114,21 +111,6 @@ export const upcomingEvents: UpcomingEvent[] = [
       "IMPMS is planning a special program dedicated to the timeless vision, poetry, and thought of Allama Muhammad Iqbal. This upcoming event will explore Iqbal's continuing relevance in the 21st century, including his powerful message on faith, human identity, self discovery, knowledge, and excellence.",
     registrationPrompt:
       "Join the priority list to be among the first to receive program details, speaker announcements, and registration information.",
-  },
-];
-
-export const decorativeEventSlides: DecorativeEventSlide[] = [
-  {
-    src: officeLibraryNight,
-    alt: "A modern office and library space prepared for a professional gathering",
-  },
-  {
-    src: eventBreakfastSetup,
-    alt: "Round tables set for a conference breakfast or seminar",
-  },
-  {
-    src: conferenceMeeting,
-    alt: "Professionals collaborating around a conference table",
   },
 ];
 

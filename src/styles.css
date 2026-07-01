@@ -174,23 +174,40 @@
 
   .board-collapsible-content {
     overflow: hidden;
+    will-change: height;
   }
 
   .board-collapsible-content[data-state="open"] {
-    animation: board-collapsible-down 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    animation: board-collapsible-down 600ms cubic-bezier(0.32, 0.72, 0, 1);
   }
 
   .board-collapsible-content[data-state="closed"] {
-    animation: board-collapsible-up 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    animation: board-collapsible-up 500ms cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  .board-collapsible-inner {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity 500ms cubic-bezier(0.32, 0.72, 0, 1) 80ms,
+      transform 500ms cubic-bezier(0.32, 0.72, 0, 1) 80ms;
+  }
+
+  .board-collapsible-content[data-state="closed"] .board-collapsible-inner {
+    opacity: 0;
+    transform: translateY(-0.375rem);
+    transition:
+      opacity 250ms cubic-bezier(0.32, 0.72, 0, 1),
+      transform 250ms cubic-bezier(0.32, 0.72, 0, 1);
   }
 
   .featured-leader-layout {
-    transition: gap 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: gap 600ms cubic-bezier(0.32, 0.72, 0, 1);
   }
 
   .featured-leader-photo {
     width: 10.5rem;
-    transition: width 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: width 600ms cubic-bezier(0.32, 0.72, 0, 1);
   }
 
   .featured-leader-photo-inner {
@@ -203,7 +220,7 @@
   }
 
   .featured-leader-card {
-    transition: max-width 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: max-width 600ms cubic-bezier(0.32, 0.72, 0, 1);
   }
 
   .featured-leader-card[data-state="open"] {
@@ -234,21 +251,17 @@
 @keyframes board-collapsible-down {
   from {
     height: 0;
-    opacity: 0;
   }
   to {
     height: var(--radix-collapsible-content-height);
-    opacity: 1;
   }
 }
 
 @keyframes board-collapsible-up {
   from {
     height: var(--radix-collapsible-content-height);
-    opacity: 1;
   }
   to {
     height: 0;
-    opacity: 0;
   }
 }

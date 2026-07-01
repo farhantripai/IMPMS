@@ -28,14 +28,13 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import {
-  decorativeEventSlides,
   eventsIntro,
   pastEvents,
   upcomingEvents,
   type UpcomingEventIcon,
 } from "@/data/events";
 
-const eventSlideAspect = "aspect-[800/282]";
+const eventBannerImageClass = "aspect-[800/282] w-full object-cover";
 
 const eventSections = [
   { id: "upcoming-soon", label: "Coming Soon", icon: CalendarClock },
@@ -93,17 +92,11 @@ function SectionHeading({ icon: Icon, title }: { icon: LucideIcon; title: string
   );
 }
 
-const eventSlides = [
-  ...upcomingEvents.map((event) => ({
-    src: event.bannerImage,
-    alt: event.bannerAlt,
-    slug: event.slug,
-  })),
-  ...decorativeEventSlides.map((slide) => ({
-    ...slide,
-    slug: undefined,
-  })),
-];
+const eventSlides = upcomingEvents.map((event) => ({
+  src: event.bannerImage,
+  alt: event.bannerAlt,
+  slug: event.slug,
+}));
 
 export const Route = createFileRoute("/events/")({
   head: () => ({
@@ -132,36 +125,25 @@ function EventsPage() {
       />
 
       <section className="container-page py-16">
-        <div className="relative mx-auto mb-12 max-w-4xl overflow-hidden rounded-2xl border border-border shadow-xl">
+        <div className="relative mb-12 overflow-hidden rounded-2xl border border-border shadow-xl">
           <Carousel opts={{ loop: true }}>
             <CarouselContent className="-ml-0">
               {eventSlides.map((slide) => (
                 <CarouselItem key={slide.alt} className="pl-0">
-                  {slide.slug ? (
-                    <Link
-                      to="/events/$slug"
-                      params={{ slug: slide.slug }}
-                      className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                    >
-                      <img
-                        src={slide.src}
-                        alt={slide.alt}
-                        width={800}
-                        height={282}
-                        loading="lazy"
-                        className={`${eventSlideAspect} w-full object-cover transition-opacity group-hover:opacity-95`}
-                      />
-                    </Link>
-                  ) : (
+                  <Link
+                    to="/events/$slug"
+                    params={{ slug: slide.slug }}
+                    className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  >
                     <img
                       src={slide.src}
                       alt={slide.alt}
                       width={800}
                       height={282}
                       loading="lazy"
-                      className={`${eventSlideAspect} w-full object-cover`}
+                      className={`${eventBannerImageClass} transition-opacity group-hover:opacity-95`}
                     />
-                  )}
+                  </Link>
                 </CarouselItem>
               ))}
             </CarouselContent>

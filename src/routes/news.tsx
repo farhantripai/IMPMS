@@ -49,14 +49,14 @@ function NewsPage() {
       />
 
       <section className="container-page py-16">
-        <figure className="mb-12 overflow-hidden rounded-2xl border border-border shadow-xl">
+        <figure className="relative mb-12 overflow-hidden rounded-2xl border border-border shadow-xl">
           <img
             src={newsImg}
             alt="Newspapers, a tablet, microphone and reading glasses representing news and media"
             width={1280}
-            height={960}
+            height={360}
             loading="lazy"
-            className="aspect-[16/9] w-full object-cover"
+            className="aspect-[32/9] w-full object-cover"
           />
         </figure>
 

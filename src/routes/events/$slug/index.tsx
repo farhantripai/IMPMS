@@ -5,6 +5,7 @@ import {
   Calendar,
   Clock,
   GraduationCap,
+  HeartPulse,
   MapPin,
   Mic,
   Users,
@@ -51,7 +52,6 @@ function EventDetailPage() {
         eyebrow={event.status}
         title={eventTitle}
         description={event.tagline ?? event.description}
-        compact={false}
       />
 
       <section className="container-page py-16">
@@ -151,14 +151,16 @@ function EventDetailPage() {
               </span>
               <h2 className="text-2xl font-bold">Who Should Attend</h2>
             </div>
-            <div className="mt-8 grid gap-6 md:grid-cols-3">
+            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {event.audiences.map((audience) => {
                 const Icon =
-                  audience.title === "Technology Leaders"
-                    ? Briefcase
-                    : audience.title === "Students and Researchers"
-                      ? GraduationCap
-                      : Users;
+                  audience.title === "Healthcare Professionals"
+                    ? HeartPulse
+                    : audience.title === "Technology Leaders"
+                      ? Briefcase
+                      : audience.title === "Students and Researchers"
+                        ? GraduationCap
+                        : Users;
 
                 return (
                   <article key={audience.title} className="rounded-2xl border border-border bg-card p-6">

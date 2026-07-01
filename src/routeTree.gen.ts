@@ -10,7 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as ScientistsRouteImport } from './routes/scientists'
 import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as ProgramsRouteImport } from './routes/programs'
 import { Route as PrivacyRouteImport } from './routes/privacy'
@@ -21,9 +20,12 @@ import { Route as DonateRouteImport } from './routes/donate'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BoardOfDirectorsRouteImport } from './routes/board-of-directors'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as ScientistsRouteRouteImport } from './routes/scientists/route'
 import { Route as EventsRouteRouteImport } from './routes/events/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ScientistsIndexRouteImport } from './routes/scientists/index'
 import { Route as EventsIndexRouteImport } from './routes/events/index'
+import { Route as ScientistsSlugRouteImport } from './routes/scientists/$slug'
 import { Route as EventsSlugRouteRouteImport } from './routes/events/$slug/route'
 import { Route as EventsSlugIndexRouteImport } from './routes/events/$slug/index'
 import { Route as EventsSlugPriorityListRouteImport } from './routes/events/$slug/priority-list'
@@ -31,11 +33,6 @@ import { Route as EventsSlugPriorityListRouteImport } from './routes/events/$slu
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ScientistsRoute = ScientistsRouteImport.update({
-  id: '/scientists',
-  path: '/scientists',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResourcesRoute = ResourcesRouteImport.update({
@@ -88,6 +85,11 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ScientistsRouteRoute = ScientistsRouteRouteImport.update({
+  id: '/scientists',
+  path: '/scientists',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EventsRouteRoute = EventsRouteRouteImport.update({
   id: '/events',
   path: '/events',
@@ -98,10 +100,20 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ScientistsIndexRoute = ScientistsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ScientistsRouteRoute,
+} as any)
 const EventsIndexRoute = EventsIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => EventsRouteRoute,
+} as any)
+const ScientistsSlugRoute = ScientistsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ScientistsRouteRoute,
 } as any)
 const EventsSlugRouteRoute = EventsSlugRouteRouteImport.update({
   id: '/$slug',
@@ -122,6 +134,7 @@ const EventsSlugPriorityListRoute = EventsSlugPriorityListRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/events': typeof EventsRouteRouteWithChildren
+  '/scientists': typeof ScientistsRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/board-of-directors': typeof BoardOfDirectorsRoute
   '/contact': typeof ContactRoute
@@ -132,10 +145,11 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/programs': typeof ProgramsRoute
   '/resources': typeof ResourcesRoute
-  '/scientists': typeof ScientistsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/events/$slug': typeof EventsSlugRouteRouteWithChildren
+  '/scientists/$slug': typeof ScientistsSlugRoute
   '/events/': typeof EventsIndexRoute
+  '/scientists/': typeof ScientistsIndexRoute
   '/events/$slug/priority-list': typeof EventsSlugPriorityListRoute
   '/events/$slug/': typeof EventsSlugIndexRoute
 }
@@ -151,9 +165,10 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/programs': typeof ProgramsRoute
   '/resources': typeof ResourcesRoute
-  '/scientists': typeof ScientistsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/scientists/$slug': typeof ScientistsSlugRoute
   '/events': typeof EventsIndexRoute
+  '/scientists': typeof ScientistsIndexRoute
   '/events/$slug/priority-list': typeof EventsSlugPriorityListRoute
   '/events/$slug': typeof EventsSlugIndexRoute
 }
@@ -161,6 +176,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/events': typeof EventsRouteRouteWithChildren
+  '/scientists': typeof ScientistsRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/board-of-directors': typeof BoardOfDirectorsRoute
   '/contact': typeof ContactRoute
@@ -171,10 +187,11 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/programs': typeof ProgramsRoute
   '/resources': typeof ResourcesRoute
-  '/scientists': typeof ScientistsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/events/$slug': typeof EventsSlugRouteRouteWithChildren
+  '/scientists/$slug': typeof ScientistsSlugRoute
   '/events/': typeof EventsIndexRoute
+  '/scientists/': typeof ScientistsIndexRoute
   '/events/$slug/priority-list': typeof EventsSlugPriorityListRoute
   '/events/$slug/': typeof EventsSlugIndexRoute
 }
@@ -183,6 +200,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/events'
+    | '/scientists'
     | '/about'
     | '/board-of-directors'
     | '/contact'
@@ -193,10 +211,11 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/programs'
     | '/resources'
-    | '/scientists'
     | '/sitemap.xml'
     | '/events/$slug'
+    | '/scientists/$slug'
     | '/events/'
+    | '/scientists/'
     | '/events/$slug/priority-list'
     | '/events/$slug/'
   fileRoutesByTo: FileRoutesByTo
@@ -212,15 +231,17 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/programs'
     | '/resources'
-    | '/scientists'
     | '/sitemap.xml'
+    | '/scientists/$slug'
     | '/events'
+    | '/scientists'
     | '/events/$slug/priority-list'
     | '/events/$slug'
   id:
     | '__root__'
     | '/'
     | '/events'
+    | '/scientists'
     | '/about'
     | '/board-of-directors'
     | '/contact'
@@ -231,10 +252,11 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/programs'
     | '/resources'
-    | '/scientists'
     | '/sitemap.xml'
     | '/events/$slug'
+    | '/scientists/$slug'
     | '/events/'
+    | '/scientists/'
     | '/events/$slug/priority-list'
     | '/events/$slug/'
   fileRoutesById: FileRoutesById
@@ -242,6 +264,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EventsRouteRoute: typeof EventsRouteRouteWithChildren
+  ScientistsRouteRoute: typeof ScientistsRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   BoardOfDirectorsRoute: typeof BoardOfDirectorsRoute
   ContactRoute: typeof ContactRoute
@@ -252,7 +275,6 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   ProgramsRoute: typeof ProgramsRoute
   ResourcesRoute: typeof ResourcesRoute
-  ScientistsRoute: typeof ScientistsRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
@@ -263,13 +285,6 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/scientists': {
-      id: '/scientists'
-      path: '/scientists'
-      fullPath: '/scientists'
-      preLoaderRoute: typeof ScientistsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/resources': {
@@ -342,6 +357,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/scientists': {
+      id: '/scientists'
+      path: '/scientists'
+      fullPath: '/scientists'
+      preLoaderRoute: typeof ScientistsRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/events': {
       id: '/events'
       path: '/events'
@@ -356,12 +378,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/scientists/': {
+      id: '/scientists/'
+      path: '/'
+      fullPath: '/scientists/'
+      preLoaderRoute: typeof ScientistsIndexRouteImport
+      parentRoute: typeof ScientistsRouteRoute
+    }
     '/events/': {
       id: '/events/'
       path: '/'
       fullPath: '/events/'
       preLoaderRoute: typeof EventsIndexRouteImport
       parentRoute: typeof EventsRouteRoute
+    }
+    '/scientists/$slug': {
+      id: '/scientists/$slug'
+      path: '/$slug'
+      fullPath: '/scientists/$slug'
+      preLoaderRoute: typeof ScientistsSlugRouteImport
+      parentRoute: typeof ScientistsRouteRoute
     }
     '/events/$slug': {
       id: '/events/$slug'
@@ -415,9 +451,24 @@ const EventsRouteRouteWithChildren = EventsRouteRoute._addFileChildren(
   EventsRouteRouteChildren,
 )
 
+interface ScientistsRouteRouteChildren {
+  ScientistsSlugRoute: typeof ScientistsSlugRoute
+  ScientistsIndexRoute: typeof ScientistsIndexRoute
+}
+
+const ScientistsRouteRouteChildren: ScientistsRouteRouteChildren = {
+  ScientistsSlugRoute: ScientistsSlugRoute,
+  ScientistsIndexRoute: ScientistsIndexRoute,
+}
+
+const ScientistsRouteRouteWithChildren = ScientistsRouteRoute._addFileChildren(
+  ScientistsRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EventsRouteRoute: EventsRouteRouteWithChildren,
+  ScientistsRouteRoute: ScientistsRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   BoardOfDirectorsRoute: BoardOfDirectorsRoute,
   ContactRoute: ContactRoute,
@@ -428,7 +479,6 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   ProgramsRoute: ProgramsRoute,
   ResourcesRoute: ResourcesRoute,
-  ScientistsRoute: ScientistsRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport

@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ChevronDown } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
 import { CtaBand } from "@/components/cta-band";
+import { BoardColumnGrid } from "@/components/board-column-grid";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { boardMembers, founders, pastPresidents, type BoardMember } from "@/data/board-of-directors";
 import { cn } from "@/lib/utils";
@@ -144,7 +145,7 @@ function FeaturedLeaderCard({
     <Collapsible className="featured-leader-card group/leader mx-auto w-full max-w-4xl self-start">
       <article
         className={cn(
-          "rounded-[1.75rem] bg-muted p-5 transition-[box-shadow,padding] duration-500 ease-in-out sm:p-6",
+          "rounded-[1.75rem] bg-muted p-5 transition-[box-shadow,padding] duration-[600ms] ease-[cubic-bezier(0.32,0.72,0,1)] sm:p-6",
           "group-data-[state=open]/leader:shadow-lg",
           inMemoriam && "opacity-95",
         )}
@@ -167,7 +168,7 @@ function FeaturedLeaderCard({
                     aria-label={`${member.name} — expand biography`}
                   >
                     <ChevronDown
-                      className="h-3.5 w-3.5 text-muted-foreground transition-transform duration-500 ease-in-out group-data-[state=open]/leader:rotate-180"
+                      className="h-3.5 w-3.5 text-muted-foreground transition-transform duration-[600ms] ease-[cubic-bezier(0.32,0.72,0,1)] group-data-[state=open]/leader:rotate-180"
                       aria-hidden="true"
                     />
                   </button>
@@ -175,7 +176,7 @@ function FeaturedLeaderCard({
               </div>
 
               <CollapsibleContent className="board-collapsible-content">
-                <div className="space-y-3 pt-3 text-sm leading-relaxed text-muted-foreground">
+                <div className="board-collapsible-inner space-y-3 pt-3 text-sm font-semibold leading-relaxed text-muted-foreground">
                   {restBio.map((paragraph, i) => (
                     <p key={i}>
                       <BioText text={paragraph} />
@@ -203,8 +204,7 @@ function TeamProfileCard({
   const hasBio = !member.forthcoming && member.bio.length > 0;
 
   const cardClass = cn(
-    "group/card mx-auto w-full self-start rounded-[1.75rem] border border-border bg-muted p-4 transition-[box-shadow,max-width] duration-300 hover:shadow-md",
-    size === "large" ? "max-w-[300px]" : "max-w-[250px]",
+    "group/card w-full rounded-[1.75rem] border border-border bg-muted p-4 transition-[box-shadow] duration-[600ms] ease-[cubic-bezier(0.32,0.72,0,1)] hover:shadow-md",
     inMemoriam && "opacity-95",
   );
 
@@ -243,18 +243,26 @@ function TeamProfileCard({
         aria-label={`${member.name} — expand biography`}
       >
         <ChevronDown
-          className="h-3.5 w-3.5 text-muted-foreground transition-transform duration-500 ease-in-out group-data-[state=open]/card:rotate-180"
+          className="h-3.5 w-3.5 text-muted-foreground transition-transform duration-[600ms] ease-[cubic-bezier(0.32,0.72,0,1)] group-data-[state=open]/card:rotate-180"
           aria-hidden="true"
         />
       </button>
     </CollapsibleTrigger>
   );
 
+  const collapsedFooterClass = cn(
+    "mt-4 flex w-full items-start justify-between gap-2",
+    size === "default" && "min-h-[5.5rem]",
+  );
+
   if (!hasBio) {
     return (
       <article className={cardClass}>
         {photoBlock}
-        <div className="mt-4">{memberInfo}</div>
+        <div className={collapsedFooterClass}>
+          {memberInfo}
+          {size === "default" && <span className="h-7 w-7 shrink-0" aria-hidden="true" />}
+        </div>
         {member.forthcoming && (
           <p className="mt-3 text-xs italic text-muted-foreground">Biography forthcoming.</p>
         )}
@@ -266,13 +274,13 @@ function TeamProfileCard({
     <Collapsible className={cardClass}>
       <article>
         {photoBlock}
-        <div className="mt-4 flex w-full items-start justify-between gap-2">
+        <div className={collapsedFooterClass}>
           {memberInfo}
           {expandButton}
         </div>
 
         <CollapsibleContent className="board-collapsible-content">
-          <div className="mt-3 space-y-2.5 border-t border-border/60 pt-3 text-xs leading-relaxed text-muted-foreground">
+          <div className="board-collapsible-inner mt-3 space-y-3 border-t border-border/60 pt-3 text-sm font-semibold leading-relaxed text-muted-foreground">
             {member.bio.map((paragraph, i) => (
               <p key={i}>
                 <BioText text={paragraph} />
@@ -304,16 +312,25 @@ function TeamSection({
   );
 }
 
-function TeamGrid({ children, large }: { children: React.ReactNode; large?: boolean }) {
+function TeamGrid({
+  items,
+  renderCard,
+  columnClassName,
+  className,
+}: {
+  items: BoardMember[];
+  renderCard: (member: BoardMember) => React.ReactNode;
+  columnClassName?: string;
+  className?: string;
+}) {
   return (
-    <div
-      className={cn(
-        "flex flex-wrap items-start justify-center gap-5 md:gap-6",
-        large && "md:gap-8",
-      )}
-    >
-      {children}
-    </div>
+    <BoardColumnGrid
+      items={items}
+      getKey={(member) => member.name}
+      renderItem={renderCard}
+      columnClassName={columnClassName}
+      className={className}
+    />
   );
 }
 
@@ -339,19 +356,21 @@ function BoardOfDirectorsPage() {
       </TeamSection>
 
       <TeamSection title="Board of Directors" className="bg-secondary">
-        <TeamGrid>
-          {boardMembers.map((member) => (
-            <TeamProfileCard key={member.name} member={member} />
-          ))}
-        </TeamGrid>
+        <TeamGrid
+          items={boardMembers}
+          className="mx-auto w-[80%]"
+          renderCard={(member) => <TeamProfileCard member={member} />}
+        />
       </TeamSection>
 
       <TeamSection title="Past Presidents">
-        <TeamGrid large>
+        <div className="flex flex-wrap items-start justify-center gap-5 md:gap-8">
           {pastPresidents.map((member) => (
-            <TeamProfileCard key={member.name} member={member} size="large" />
+            <div key={member.name} className="w-full max-w-[300px]">
+              <TeamProfileCard member={member} size="large" />
+            </div>
           ))}
-        </TeamGrid>
+        </div>
       </TeamSection>
 
       <CtaBand />

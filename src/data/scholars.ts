@@ -1,19 +1,38 @@
+import astronomyObservatory from "@/assets/scholars/astronomy-observatory.png";
+import cartographyWorkshop from "@/assets/scholars/cartography-workshop.png";
+import engineeringWorkshop from "@/assets/scholars/engineering-workshop.png";
+import libraryHouseOfWisdom from "@/assets/scholars/library-house-of-wisdom.png";
+import medicineBimaristan from "@/assets/scholars/medicine-bimaristan.png";
+
+const scholarPortraitModules = import.meta.glob<string>(
+  "../assets/scholars/portraits/*.{jpg,jpeg,png,webp,gif}",
+  { eager: true, import: "default" },
+);
+
+function getScholarPortrait(slug: string): string | undefined {
+  for (const [path, src] of Object.entries(scholarPortraitModules)) {
+    const filename = path.split("/").pop() ?? "";
+    if (filename.startsWith(`${slug}.`)) return src;
+  }
+  return undefined;
+}
+
 export interface Scholar {
   name: string;
   period?: string;
   description: string;
 }
 
+export interface ScholarProfile extends Scholar {
+  slug: string;
+  field: string;
+  image: string;
+}
+
 export interface ScholarField {
   field: string;
   scholars: Scholar[];
 }
-
-export const heritageIntro =
-  "From the 7th to the 15th centuries, Muslim scholars contributed to major advances across many disciplines. Their ideas were preserved, translated, and expanded in other parts of the world, influencing generations of learning and research. IMPMS celebrates this legacy as a source of understanding, pride, and inspiration for today's communities.";
-
-export const scholarsNote =
-  "The scholars below represent a broad cross-section of the scientific and intellectual achievements of the medieval Islamic world. Many were polymaths whose work crossed multiple fields, so the categories here are meant to help readers explore this heritage more easily rather than to limit any scholar to a single discipline.";
 
 export const featuredScholarFieldOrder = [
   "Astronomy and Observational Science",
@@ -23,6 +42,36 @@ export const featuredScholarFieldOrder = [
   "Engineering, Mechanics, and Invention",
   "Geography, Cartography, and Earth Sciences",
 ] as const;
+
+export const scholarFieldImages: Record<(typeof featuredScholarFieldOrder)[number], string> = {
+  "Astronomy and Observational Science": astronomyObservatory,
+  "Mathematics and Measurement": libraryHouseOfWisdom,
+  "Medicine, Surgery, and Pharmacology": medicineBimaristan,
+  "Philosophy, Logic, and Intellectual Tradition": libraryHouseOfWisdom,
+  "Engineering, Mechanics, and Invention": engineeringWorkshop,
+  "Geography, Cartography, and Earth Sciences": cartographyWorkshop,
+};
+
+export const scholarFieldIntros: Record<(typeof featuredScholarFieldOrder)[number], string> = {
+  "Astronomy and Observational Science":
+    "Medieval Muslim astronomers refined observation, instrument design, and planetary calculation in ways that shaped later astronomy across the Islamic world and Europe.",
+  "Mathematics and Measurement":
+    "Scholars in this tradition advanced algebra, trigonometry, geometry, and practical calculation, building methods that influenced mathematics for centuries.",
+  "Medicine, Surgery, and Pharmacology":
+    "Physicians and surgeons in the medieval Islamic world combined clinical observation, encyclopedic writing, and practical treatment in hospitals and teaching centers.",
+  "Philosophy, Logic, and Intellectual Tradition":
+    "Philosophers in this period engaged logic, metaphysics, ethics, and the relationship between reason and revelation across a rich intellectual tradition.",
+  "Engineering, Mechanics, and Invention":
+    "Engineers and inventors translated scientific insight into mechanical design, hydraulics, instruments, and practical devices.",
+  "Geography, Cartography, and Earth Sciences":
+    "Geographers and cartographers mapped regions, described cultures, and studied the earth through travel writing, measurement, and comparative observation.",
+};
+
+export const heritageIntro =
+  "From the 7th to the 15th centuries, Muslim scholars contributed to major advances across many disciplines. Their ideas were preserved, translated, and expanded in other parts of the world, influencing generations of learning and research. IMPMS celebrates this legacy as a source of understanding, pride, and inspiration for today's communities.";
+
+export const scholarsNote =
+  "The scholars below represent a broad cross-section of the scientific and intellectual achievements of the medieval Islamic world. Many were polymaths whose work crossed multiple fields, so the categories here are meant to help readers explore this heritage more easily rather than to limit any scholar to a single discipline.";
 
 export function scholarFieldSlug(field: string) {
   return field.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
@@ -107,3 +156,59 @@ export const scholarFields: ScholarField[] = [
     (field) => !featuredScholarFieldOrder.includes(field.field as (typeof featuredScholarFieldOrder)[number]),
   ),
 ];
+
+const scholarFieldShortSlug: Record<(typeof featuredScholarFieldOrder)[number], string> = {
+  "Astronomy and Observational Science": "astronomy",
+  "Mathematics and Measurement": "mathematics",
+  "Medicine, Surgery, and Pharmacology": "medicine",
+  "Philosophy, Logic, and Intellectual Tradition": "philosophy",
+  "Engineering, Mechanics, and Invention": "engineering",
+  "Geography, Cartography, and Earth Sciences": "geography",
+};
+
+function slugifyScholarName(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/\([^)]*\)/g, "")
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+function buildScholarProfiles(): ScholarProfile[] {
+  const nameCounts = new Map<string, number>();
+
+  for (const field of scholarFields) {
+    for (const scholar of field.scholars) {
+      nameCounts.set(scholar.name, (nameCounts.get(scholar.name) ?? 0) + 1);
+    }
+  }
+
+  return scholarFields.flatMap((field) =>
+    field.scholars.map((scholar) => {
+      const nameSlug = slugifyScholarName(scholar.name);
+      const fieldKey = field.field as (typeof featuredScholarFieldOrder)[number];
+      const slug =
+        (nameCounts.get(scholar.name) ?? 0) > 1
+          ? `${nameSlug}-${scholarFieldShortSlug[fieldKey]}`
+          : nameSlug;
+
+      return {
+        ...scholar,
+        slug,
+        field: field.field,
+        image: getScholarPortrait(slug) ?? scholarFieldImages[fieldKey] ?? libraryHouseOfWisdom,
+      };
+    }),
+  );
+}
+
+export const scholarProfiles = buildScholarProfiles();
+
+export function getScholarBySlug(slug: string): ScholarProfile | undefined {
+  return scholarProfiles.find((scholar) => scholar.slug === slug);
+}
+
+export function getScholarPath(slug: string): `/scientists/${string}` {
+  return `/scientists/${slug}`;
+}
