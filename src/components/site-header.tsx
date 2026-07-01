@@ -7,14 +7,15 @@ import { Sheet, SheetContent, SheetTrigger, SheetClose } from "./ui/sheet";
 import { SocialLinks } from "./social-links";
 
 export const navLinks = [
+  { to: "/", label: "Home" },
   { to: "/about", label: "About" },
-  { to: "/board-of-directors", label: "Board of Directors" },
+  { to: "/board-of-directors", label: "Board" },
   { to: "/programs", label: "Programs" },
-  { to: "/scientists", label: "Scholars & Science" },
+  { to: "/scientists", label: "Scholars" },
   { to: "/events", label: "Events" },
-  { to: "/news", label: "News & Media" },
+  { to: "/news", label: "News" },
   { to: "/resources", label: "Resources" },
-  { to: "/partnerships", label: "Partnerships" },
+  { to: "/partnerships", label: "Partners" },
 ] as const;
 
 export function SiteHeader() {
@@ -46,6 +47,7 @@ export function SiteHeader() {
                 to={l.to}
                 className="rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-accent-foreground"
                 activeProps={{ className: "text-foreground bg-accent" }}
+                activeOptions={l.to === "/" ? { exact: true } : undefined}
               >
                 {l.label}
               </Link>
@@ -54,7 +56,7 @@ export function SiteHeader() {
 
           <div className="flex items-center gap-2">
             <Button asChild variant="ghost" className="hidden md:inline-flex">
-              <Link to="/get-involved">Get Involved</Link>
+              <Link to="/get-involved">Join</Link>
             </Button>
             <Button asChild className="hidden sm:inline-flex bg-gold text-gold-foreground hover:bg-gold/90">
               <Link to="/donate">
@@ -70,12 +72,13 @@ export function SiteHeader() {
               </SheetTrigger>
               <SheetContent side="right" className="w-72">
                 <div className="mt-8 flex flex-col gap-1">
-                  {[...navLinks, { to: "/get-involved", label: "Get Involved" }, { to: "/contact", label: "Contact" }].map((l) => (
+                  {[...navLinks, { to: "/get-involved", label: "Join" }, { to: "/contact", label: "Contact" }].map((l) => (
                     <SheetClose asChild key={l.to}>
                       <Link
                         to={l.to}
                         className="rounded-md px-3 py-2.5 text-base font-medium text-foreground/80 hover:bg-accent"
                         activeProps={{ className: "text-foreground bg-accent" }}
+                        activeOptions={l.to === "/" ? { exact: true } : undefined}
                       >
                         {l.label}
                       </Link>
