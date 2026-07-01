@@ -87,7 +87,7 @@ function ScientistsPage() {
         description="This heritage reflects centuries of achievement in astronomy, mathematics, medicine, philosophy, engineering, geography, and other fields that helped shape global intellectual history."
       />
 
-      <section className="container-page py-16">
+      <section className="container-page section-y">
         <div className="relative mb-12 overflow-hidden rounded-2xl border border-border shadow-xl">
           <Carousel opts={{ loop: true }}>
             <CarouselContent className="-ml-0">
@@ -104,8 +104,8 @@ function ScientistsPage() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="left-3 top-1/2 -translate-y-1/2 border-border/50 bg-background/85 shadow-md hover:bg-background" />
-            <CarouselNext className="right-3 top-1/2 -translate-y-1/2 border-border/50 bg-background/85 shadow-md hover:bg-background" />
+            <CarouselPrevious className="left-2 top-1/2 h-9 w-9 -translate-y-1/2 border-border/50 bg-background/85 shadow-md hover:bg-background sm:left-3 sm:h-10 sm:w-10" />
+            <CarouselNext className="right-2 top-1/2 h-9 w-9 -translate-y-1/2 border-border/50 bg-background/85 shadow-md hover:bg-background sm:right-3 sm:h-10 sm:w-10" />
           </Carousel>
         </div>
 
@@ -115,7 +115,7 @@ function ScientistsPage() {
         </p>
 
         <nav
-          className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6"
+          className="mt-10 grid grid-cols-1 gap-3 min-[480px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6"
           aria-label="Scholar categories"
         >
           {featuredScholarFieldOrder.map((field) => {
@@ -125,7 +125,7 @@ function ScientistsPage() {
               <a
                 key={field}
                 href={`#${scholarFieldSlug(field)}`}
-                className="flex items-center justify-center gap-2 rounded-full border-2 border-gold/40 bg-gold/10 px-3 py-3 text-center text-sm font-semibold leading-snug text-foreground shadow-sm transition-all hover:border-gold hover:bg-gold/20 hover:shadow-md sm:px-4"
+                className="flex min-h-11 items-center justify-center gap-2 rounded-full border-2 border-gold/40 bg-gold/10 px-3 py-3 text-center text-sm font-semibold leading-snug text-foreground shadow-sm transition-all hover:border-gold hover:bg-gold/20 hover:shadow-md sm:px-4"
               >
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/20 text-gold">
                   <FieldIcon className="h-4 w-4" />

@@ -40,7 +40,7 @@ function ProgramsPage() {
         description="Through our DiscoverSTEM collaboration, IMPMS equips young people with the mindset and skills to turn curiosity into invention."
       />
 
-      <section className="container-page grid items-center gap-12 py-16 lg:grid-cols-2">
+      <section className="container-page grid items-center gap-8 section-y lg:gap-12 lg:grid-cols-2">
         <img
           src={stemImg}
           alt="Students collaborating around a microscope in a bright STEM classroom"
@@ -72,7 +72,7 @@ function ProgramsPage() {
       </section>
 
       <section className="bg-secondary">
-        <div className="container-page py-16">
+        <div className="container-page section-y">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold">What students gain</h2>
             <p className="mt-4 text-muted-foreground">

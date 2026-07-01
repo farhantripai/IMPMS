@@ -86,26 +86,26 @@ function HomePage() {
           className="absolute inset-0 h-full w-full object-cover opacity-40"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/85 to-primary/40" aria-hidden="true" />
-        <div className="container-page relative grid min-h-[78vh] items-center py-24">
+        <div className="container-page relative grid min-h-[clamp(24rem,72vh,42rem)] items-center py-12 sm:py-16 md:py-20">
           <div className="max-w-2xl">
-            <p className="mb-5 inline-flex rounded-full border border-gold/40 bg-gold/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-gold">
+            <p className="mb-4 inline-flex rounded-full border border-gold/40 bg-gold/10 px-3 py-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-gold sm:mb-5 sm:px-4 sm:text-xs">
               Nonprofit · Established 2001
             </p>
-            <h1 className="text-balance text-4xl font-bold leading-[1.08] md:text-6xl">
+            <h1 className="text-balance text-[clamp(1.875rem,5vw+1rem,3.75rem)] font-bold leading-[1.08]">
               Preserving a shared intellectual legacy
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-primary-foreground/85">
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-primary-foreground/85 sm:mt-6 sm:text-lg">
               Inspiring curiosity, learning, and innovation for the future. IMPMS shares the
               intellectual, scientific, and cultural contributions of Muslim scholars with broad
               audiences through education, public engagement, and community partnerships.
             </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Button asChild size="lg" className="bg-gold text-gold-foreground hover:bg-gold/90">
+            <div className="mt-7 flex flex-col gap-3 sm:mt-9 sm:flex-row">
+              <Button asChild size="lg" className="w-full bg-gold text-gold-foreground hover:bg-gold/90 sm:w-auto">
                 <Link to="/about">
                   Discover Our Mission <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10">
+              <Button asChild size="lg" variant="outline" className="w-full border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 sm:w-auto">
                 <Link to="/programs">Explore Programs</Link>
               </Button>
             </div>
@@ -115,18 +115,18 @@ function HomePage() {
 
       {/* Stats */}
       <section className="border-b border-border bg-card">
-        <div className="container-page grid grid-cols-2 gap-8 py-10 md:grid-cols-4">
+        <div className="container-page grid grid-cols-1 gap-6 py-8 min-[400px]:grid-cols-2 min-[400px]:gap-8 md:grid-cols-4 md:py-10">
           {stats.map((s) => (
             <div key={s.label} className="text-center">
-              <p className="font-serif text-3xl font-bold text-foreground md:text-4xl">{s.value}</p>
-              <p className="mt-1 text-sm text-muted-foreground">{s.label}</p>
+              <p className="font-serif text-[clamp(1.5rem,3vw+1rem,2.25rem)] font-bold text-foreground">{s.value}</p>
+              <p className="mt-1 text-xs text-muted-foreground sm:text-sm">{s.label}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Mission intro */}
-      <section className="container-page grid items-center gap-12 py-20 lg:grid-cols-2">
+      <section className="container-page section-y-lg grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
         <div className="relative">
           <img
             src={manuscriptImg}
@@ -171,7 +171,7 @@ function HomePage() {
 
       {/* Featured program */}
       <section className="bg-secondary">
-        <div className="container-page grid items-center gap-12 py-20 lg:grid-cols-2">
+        <div className="container-page section-y-lg grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
           <div className="order-2 lg:order-1">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-gold">DiscoverSTEM Collaboration</p>
             <h2 className="mt-3 text-3xl font-bold md:text-4xl">Creating the innovators of tomorrow</h2>
@@ -201,14 +201,14 @@ function HomePage() {
       </section>
 
       {/* Explore cards */}
-      <section className="container-page py-20">
+      <section className="container-page section-y-lg">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold md:text-4xl">Explore the Institute</h2>
+          <h2 className="text-[clamp(1.5rem,3vw+1rem,2.25rem)] font-bold md:text-4xl">Explore the Institute</h2>
           <p className="mt-4 text-muted-foreground">
             Discover the people, programs, and stories at the heart of our mission.
           </p>
         </div>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="mt-8 grid gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-6 md:grid-cols-3">
           {explore.map((c) => (
             <Link
               key={c.title}

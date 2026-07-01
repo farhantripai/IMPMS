@@ -36,7 +36,7 @@ function DonatePage() {
         description="IMPMS is a registered 501(c)(3) nonprofit. Every contribution is tax-deductible and directly supports our programs."
       />
 
-      <section className="container-page grid gap-12 py-16 lg:grid-cols-2">
+      <section className="container-page grid gap-8 section-y lg:gap-12 lg:grid-cols-2">
         <div className="rounded-2xl border border-border bg-card p-8">
           <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-gold text-gold-foreground">
             <Heart className="h-6 w-6" />
@@ -47,7 +47,7 @@ function DonatePage() {
               <button
                 key={a}
                 type="button"
-                className="rounded-lg border border-border bg-background py-4 text-lg font-semibold transition-colors hover:border-gold hover:bg-accent"
+                className="min-h-11 rounded-lg border border-border bg-background py-4 text-base font-semibold transition-colors hover:border-gold hover:bg-accent sm:text-lg"
               >
                 {a}
               </button>

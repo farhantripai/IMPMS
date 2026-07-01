@@ -54,7 +54,7 @@ function EventDetailPage() {
         description={event.tagline ?? event.description}
       />
 
-      <section className="container-page py-16">
+      <section className="container-page section-y">
         <Link
           to="/events"
           className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"

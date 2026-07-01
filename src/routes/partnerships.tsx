@@ -37,7 +37,7 @@ function PartnershipsPage() {
         description="Collaboration multiplies our impact. IMPMS works with partners who share our commitment to education, discovery, and understanding."
       />
 
-      <section className="container-page py-16">
+      <section className="container-page section-y">
         <figure className="mb-12 overflow-hidden rounded-2xl border border-border shadow-xl">
           <img
             src={partnershipsImg}

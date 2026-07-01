@@ -16,7 +16,7 @@ function PrivacyPage() {
   return (
     <>
       <PageHero eyebrow="Legal" title="Privacy Policy" />
-      <section className="container-page max-w-3xl space-y-6 py-16 leading-relaxed text-muted-foreground">
+      <section className="container-page max-w-3xl space-y-6 section-y leading-relaxed text-muted-foreground">
         <p>
           The Institute of Medieval and Post-Medieval Studies (IMPMS) respects your privacy. We
           collect only the information you choose to share with us — such as your name and email

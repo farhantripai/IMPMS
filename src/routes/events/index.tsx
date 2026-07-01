@@ -124,7 +124,7 @@ function EventsPage() {
         description={eventsIntro}
       />
 
-      <section className="container-page py-16">
+      <section className="container-page section-y">
         <div className="relative mb-12 overflow-hidden rounded-2xl border border-border shadow-xl">
           <Carousel opts={{ loop: true }}>
             <CarouselContent className="-ml-0">
@@ -147,12 +147,12 @@ function EventsPage() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="left-3 top-1/2 -translate-y-1/2 border-border/50 bg-background/85 shadow-md hover:bg-background" />
-            <CarouselNext className="right-3 top-1/2 -translate-y-1/2 border-border/50 bg-background/85 shadow-md hover:bg-background" />
+            <CarouselPrevious className="left-2 top-1/2 h-9 w-9 -translate-y-1/2 border-border/50 bg-background/85 shadow-md hover:bg-background sm:left-3 sm:h-10 sm:w-10" />
+            <CarouselNext className="right-2 top-1/2 h-9 w-9 -translate-y-1/2 border-border/50 bg-background/85 shadow-md hover:bg-background sm:right-3 sm:h-10 sm:w-10" />
           </Carousel>
         </div>
 
-        <div className="mb-12 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="scroll-nav-pills mb-12 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <nav
             className="mx-auto flex w-max flex-nowrap justify-center gap-3"
             aria-label="Event categories"
@@ -219,7 +219,7 @@ function EventsPage() {
       </section>
 
       <section id="key-events" className="scroll-mt-28 bg-secondary">
-        <div className="container-page py-16">
+        <div className="container-page section-y">
           <SectionHeading icon={Landmark} title="Key Events Through the Years" />
           <ul className="mt-8 divide-y divide-border rounded-2xl border border-border bg-card">
             {pastEvents.map((e) => {

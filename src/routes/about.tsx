@@ -85,13 +85,13 @@ function AboutPage() {
         description="Founded in 2001, the Institute of Medieval and Post-Medieval Studies (IMPMS) is a Dallas-based nonprofit dedicated to sharing the intellectual, scientific, and cultural contributions of Muslim scholars with broad audiences."
       />
 
-      <section className="container-page py-16">
+      <section className="container-page section-y">
         <p className="mx-auto max-w-3xl text-center text-lg leading-relaxed text-muted-foreground">
           Through educational programs, public engagement, publications, and community partnerships, IMPMS helps
           connect the past to the present in ways that inform, inspire, and build understanding.
         </p>
 
-        <div className="mt-12 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="scroll-nav-pills mt-10 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mt-12">
           <nav
             className="mx-auto flex w-max flex-nowrap justify-center gap-3"
             aria-label="About page sections"
@@ -111,7 +111,7 @@ function AboutPage() {
       </section>
 
       <section id="our-mission" className="scroll-mt-28 bg-secondary">
-        <div className="container-page grid gap-12 py-16 lg:grid-cols-2">
+        <div className="container-page grid gap-8 section-y lg:gap-12 lg:grid-cols-2">
           <div className="space-y-6 leading-relaxed text-muted-foreground">
             <div>
               <h2 className="text-2xl font-bold text-foreground">Our Mission</h2>
@@ -146,7 +146,7 @@ function AboutPage() {
         </div>
       </section>
 
-      <section id="history-and-milestones" className="container-page scroll-mt-28 py-16">
+      <section id="history-and-milestones" className="container-page scroll-mt-28 section-y">
         <h2 className="text-2xl font-bold">History and Milestones</h2>
         <ul className="mt-6 space-y-3">
           {milestones.map((item) => (
@@ -159,7 +159,7 @@ function AboutPage() {
       </section>
 
       <section id="youth-programs-and-partnerships" className="scroll-mt-28 bg-secondary">
-        <div className="container-page py-16">
+        <div className="container-page section-y">
           <h2 className="text-2xl font-bold">Youth Programs and Partnerships</h2>
           <p className="mt-4 max-w-3xl leading-relaxed text-muted-foreground">
             A core part of IMPMS's mission is encouraging young people to explore the arts, humanities, science, and
@@ -184,7 +184,7 @@ function AboutPage() {
         </div>
       </section>
 
-      <section id="our-work" className="container-page scroll-mt-28 py-16">
+      <section id="our-work" className="container-page scroll-mt-28 section-y">
         <h2 className="text-2xl font-bold">Our Work</h2>
         <p className="mt-4 max-w-3xl leading-relaxed text-muted-foreground">
           The Institute of Medieval & Post-Medieval Studies (IMPMS) highlights the intellectual, scientific, and
@@ -208,7 +208,7 @@ function AboutPage() {
       </section>
 
       <section className="bg-secondary">
-        <div className="container-page grid gap-12 py-16 lg:grid-cols-2">
+        <div className="container-page grid gap-8 section-y lg:gap-12 lg:grid-cols-2">
           <div id="publications" className="scroll-mt-28">
             <h2 className="text-2xl font-bold">Publications</h2>
             <p className="mt-4 text-muted-foreground">

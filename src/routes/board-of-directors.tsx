@@ -75,7 +75,7 @@ function FeaturedLeaderPhoto({
   inMemoriam?: boolean;
 }) {
   return (
-    <div className="featured-leader-photo relative shrink-0 overflow-hidden rounded-2xl bg-secondary mx-auto sm:mx-0">
+    <div className="featured-leader-photo relative mx-auto shrink-0 overflow-hidden rounded-2xl bg-secondary md:mx-0">
       <div className="featured-leader-photo-inner overflow-hidden">
         <TeamPhoto member={member} />
       </div>
@@ -121,7 +121,7 @@ function FeaturedLeaderCard({
         inMemoriam && "opacity-95",
       )}
     >
-      <div className="featured-leader-layout flex flex-col gap-5 sm:flex-row sm:items-start sm:gap-6">
+      <div className="featured-leader-layout flex flex-col gap-5 md:flex-row md:items-start md:gap-6">
         <FeaturedLeaderPhoto member={member} inMemoriam={inMemoriam} />
         <div className="featured-leader-content">
           {headerBlock}
@@ -150,7 +150,7 @@ function FeaturedLeaderCard({
           inMemoriam && "opacity-95",
         )}
       >
-        <div className="featured-leader-layout flex flex-col gap-5 sm:flex-row sm:items-start sm:gap-6">
+        <div className="featured-leader-layout flex flex-col gap-5 md:flex-row md:items-start md:gap-6">
           <FeaturedLeaderPhoto member={member} inMemoriam={inMemoriam} />
 
           <div className="featured-leader-content">
@@ -164,7 +164,7 @@ function FeaturedLeaderCard({
                 <CollapsibleTrigger asChild>
                   <button
                     type="button"
-                    className="flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-full border border-border/70 bg-background/80 outline-none transition-colors hover:bg-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full border border-border/70 bg-background/80 outline-none transition-colors hover:bg-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                     aria-label={`${member.name} — expand biography`}
                   >
                     <ChevronDown
@@ -239,7 +239,7 @@ function TeamProfileCard({
     <CollapsibleTrigger asChild>
       <button
         type="button"
-        className="mt-0.5 flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-full border border-border/70 bg-background/80 outline-none transition-colors hover:bg-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    className="mt-0.5 flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full border border-border/70 bg-background/80 outline-none transition-colors hover:bg-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
         aria-label={`${member.name} — expand biography`}
       >
         <ChevronDown
@@ -252,7 +252,7 @@ function TeamProfileCard({
 
   const collapsedFooterClass = cn(
     "mt-4 flex w-full items-start justify-between gap-2",
-    size === "default" && "min-h-[5.5rem]",
+    size === "default" && "md:min-h-[5.5rem]",
   );
 
   if (!hasBio) {
@@ -303,10 +303,10 @@ function TeamSection({
   className?: string;
 }) {
   return (
-    <section className={cn("py-16 md:py-20", className)}>
+    <section className={cn("section-y", className)}>
       <div className="container-page">
-        <h2 className="text-center text-3xl font-bold md:text-4xl">{title}</h2>
-        <div className="mt-12 md:mt-14">{children}</div>
+        <h2 className="text-center text-[clamp(1.5rem,3vw+1rem,2.25rem)] font-bold">{title}</h2>
+        <div className="mt-8 md:mt-12 lg:mt-14">{children}</div>
       </div>
     </section>
   );
@@ -358,7 +358,7 @@ function BoardOfDirectorsPage() {
       <TeamSection title="Board of Directors" className="bg-secondary">
         <TeamGrid
           items={boardMembers}
-          className="mx-auto w-[80%]"
+          className="mx-auto w-full lg:w-[80%]"
           renderCard={(member) => <TeamProfileCard member={member} />}
         />
       </TeamSection>
@@ -366,7 +366,7 @@ function BoardOfDirectorsPage() {
       <TeamSection title="Past Presidents">
         <div className="flex flex-wrap items-start justify-center gap-5 md:gap-8">
           {pastPresidents.map((member) => (
-            <div key={member.name} className="w-full max-w-[300px]">
+            <div key={member.name} className="w-full min-w-0 max-w-[300px] sm:w-[calc(50%-0.625rem)] lg:w-full lg:max-w-[300px]">
               <TeamProfileCard member={member} size="large" />
             </div>
           ))}

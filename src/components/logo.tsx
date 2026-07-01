@@ -4,7 +4,7 @@ import impmsHomeLogo from "@/assets/impms-home-logo.png";
 
 export function Logo({ light = false }: { light?: boolean }) {
   return (
-    <Link to="/" className="flex shrink-0 items-center" aria-label="IMPMS home">
+    <Link to="/" className="flex max-w-[min(100%,14rem)] shrink-0 items-center sm:max-w-none" aria-label="IMPMS home">
       <img
         src={light ? impmsFooterLogo : impmsHomeLogo}
         alt="Institute for Medieval and Post Medieval Studies (IMPMS) logo"
@@ -12,8 +12,8 @@ export function Logo({ light = false }: { light?: boolean }) {
         height={421}
         className={
           light
-            ? "h-14 w-auto rounded-lg bg-white p-1"
-            : "h-11 w-auto md:h-12"
+            ? "h-12 w-auto max-h-14 rounded-lg bg-white p-1 sm:h-14"
+            : "h-9 w-auto sm:h-11 md:h-12"
         }
       />
     </Link>

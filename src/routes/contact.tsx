@@ -44,7 +44,7 @@ function ContactPage() {
         description="Questions about membership, partnerships, or speaking engagements? Send us a message."
       />
 
-      <section className="container-page grid gap-12 py-16 lg:grid-cols-[1fr_1.2fr]">
+      <section className="container-page grid gap-8 section-y lg:gap-12 lg:grid-cols-[1fr_1.2fr]">
         <div className="space-y-6">
           <div className="flex items-start gap-4">
             <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-accent text-accent-foreground">

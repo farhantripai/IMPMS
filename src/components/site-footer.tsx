@@ -7,8 +7,8 @@ import { navLinks } from "./site-header";
 export function SiteFooter() {
   const year = new Date().getFullYear();
   return (
-    <footer className="mt-24 bg-primary text-primary-foreground">
-      <div className="container-page grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
+    <footer className="mt-12 bg-primary text-primary-foreground md:mt-20 lg:mt-24">
+      <div className="container-page grid gap-10 py-12 md:grid-cols-2 md:gap-12 md:py-16 lg:grid-cols-4">
         <div className="lg:col-span-1">
           <Logo light />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-primary-foreground/70">

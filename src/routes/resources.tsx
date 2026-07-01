@@ -43,7 +43,7 @@ function ResourcesPage() {
         description="IMPMS leadership has contributed to scholarship on Muslim intellectual history through books, research, and educational materials."
       />
 
-      <section className="container-page py-16">
+      <section className="container-page section-y">
         <h2 className="text-2xl font-bold">Books</h2>
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {books.map((book) => (
@@ -87,7 +87,7 @@ function ResourcesPage() {
       </section>
 
       <section className="bg-secondary">
-        <div className="container-page py-16">
+        <div className="container-page section-y">
           <h2 className="text-2xl font-bold">Articles</h2>
           <ul className="mt-8 divide-y divide-border rounded-2xl border border-border bg-card">
             {articles.map((article) => (
@@ -117,7 +117,7 @@ function ResourcesPage() {
         </div>
       </section>
 
-      <section className="container-page py-16">
+      <section className="container-page section-y">
         <div className="mx-auto max-w-lg rounded-2xl border border-border bg-primary p-8 text-primary-foreground">
           <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-gold text-gold-foreground">
             <Mail className="h-6 w-6" />

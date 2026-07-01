@@ -78,7 +78,7 @@ function NewsPage() {
         description="Updates on annual events, research milestones, and the Institute's ongoing work in education, scholarship, and community engagement."
       />
 
-      <section className="container-page py-16">
+      <section className="container-page section-y">
         <div className="relative mb-12 overflow-hidden rounded-2xl border border-border shadow-xl">
           <Carousel opts={{ loop: true }}>
             <CarouselContent className="-ml-0">
@@ -95,12 +95,12 @@ function NewsPage() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="left-3 top-1/2 -translate-y-1/2 border-border/50 bg-background/85 shadow-md hover:bg-background" />
-            <CarouselNext className="right-3 top-1/2 -translate-y-1/2 border-border/50 bg-background/85 shadow-md hover:bg-background" />
+            <CarouselPrevious className="left-2 top-1/2 h-9 w-9 -translate-y-1/2 border-border/50 bg-background/85 shadow-md hover:bg-background sm:left-3 sm:h-10 sm:w-10" />
+            <CarouselNext className="right-2 top-1/2 h-9 w-9 -translate-y-1/2 border-border/50 bg-background/85 shadow-md hover:bg-background sm:right-3 sm:h-10 sm:w-10" />
           </Carousel>
         </div>
 
-        <div className="mb-16 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="scroll-nav-pills mb-12 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <nav
             className="mx-auto flex w-max flex-nowrap justify-center gap-3"
             aria-label="News and media sections"

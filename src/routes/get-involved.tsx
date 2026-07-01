@@ -86,7 +86,7 @@ function GetInvolvedPage() {
         description="Whether you are an educator, student, researcher, or community member, IMPMS invites you to explore this shared heritage through its programs, events, and publications."
       />
 
-      <section className="container-page py-16">
+      <section className="container-page section-y">
         <figure className="mb-12 overflow-hidden rounded-2xl border border-border shadow-xl">
           <img
             src={communityImg}
@@ -98,7 +98,7 @@ function GetInvolvedPage() {
           />
         </figure>
 
-        <div className="mb-16 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="scroll-nav-pills mb-12 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <nav
             className="mx-auto flex w-max flex-nowrap justify-center gap-3"
             aria-label="Ways to get involved"

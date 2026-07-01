@@ -66,7 +66,7 @@ function ScholarDetailPage() {
         description={scholar.period ? `Active ${scholar.period}` : undefined}
       />
 
-      <section className="container-page py-16">
+      <section className="container-page section-y">
         <Link
           to="/scientists"
           hash={scholarFieldSlug(scholar.field)}
@@ -76,7 +76,7 @@ function ScholarDetailPage() {
           Back to Scholars & Science
         </Link>
 
-        <div className="mt-8 overflow-hidden rounded-2xl border border-border shadow-lg md:max-w-md">
+        <div className="mx-auto mt-6 w-full max-w-md overflow-hidden rounded-2xl border border-border shadow-lg sm:mt-8">
           <img
             src={scholar.image}
             alt={`Portrait or historical illustration of ${scholar.name}`}
@@ -99,7 +99,7 @@ function ScholarDetailPage() {
           <p className="mt-6 text-lg leading-relaxed text-muted-foreground">{scholar.description}</p>
         </div>
 
-        <section className="mt-12 rounded-2xl border border-border bg-card p-8 md:p-10">
+        <section className="mt-10 rounded-2xl border border-border bg-card card-pad sm:mt-12 md:p-10">
           <h2 className="text-2xl font-bold">Field of Achievement</h2>
           <p className="mt-4 max-w-3xl leading-relaxed text-muted-foreground">{fieldIntro}</p>
           <p className="mt-4 max-w-3xl leading-relaxed text-muted-foreground">
