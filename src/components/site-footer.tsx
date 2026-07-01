@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, MapPin } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { Logo } from "./logo";
 import { SocialLinks } from "./social-links";
 import { navLinks } from "./site-header";
@@ -15,7 +15,6 @@ export function SiteFooter() {
             A nonprofit institute advancing understanding of the scientific and cultural
             contributions of the Islamic world, and inspiring the innovators of tomorrow.
           </p>
-          <SocialLinks className="mt-6" />
         </div>
 
         <div>
@@ -66,10 +65,15 @@ export function SiteFooter() {
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" /> Texas, United States
             </li>
             <li className="flex items-start gap-2.5">
+              <Phone className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
+              <a href="tel:+14692095990" className="hover:text-gold">(469) 209-5990</a>
+            </li>
+            <li className="flex items-start gap-2.5">
               <Mail className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
               <a href="mailto:info@impmstx.org" className="hover:text-gold">info@impmstx.org</a>
             </li>
           </ul>
+          <SocialLinks className="mt-5" />
           <p className="mt-5 text-xs text-primary-foreground/60">
             IMPMS is a registered 501(c)(3) tax-exempt nonprofit organization (Tax ID 20-4962180).
           </p>

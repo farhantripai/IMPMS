@@ -66,7 +66,7 @@ function ContactPage() {
           </div>
           <div>
             <p className="font-semibold">Follow us</p>
-            <SocialLinks variant="header" className="mt-2 -ml-2" />
+            <SocialLinks className="mt-2 -ml-2" />
           </div>
         </div>
 

@@ -39,7 +39,9 @@ export function SocialLinks({ className = "", variant = "footer" }: { className?
             className={
               variant === "footer"
                 ? "flex h-9 w-9 items-center justify-center rounded-full border border-primary-foreground/20 text-primary-foreground/80 transition-colors hover:border-gold hover:text-gold"
-                : "flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                : variant === "header"
+                  ? "flex h-9 w-9 items-center justify-center rounded-full text-primary-foreground/90 transition-colors hover:text-gold"
+                  : "flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
             }
           >
             <Icon className="h-[18px] w-[18px]" />

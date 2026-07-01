@@ -32,7 +32,8 @@ const volunteerBenefits = [
 ];
 
 const programFundingAreas = [
-  "DiscoverSTEM youth innovation and mentorship",
+  "Research Grants for high school students",
+  "Student mentorship and academic enrichment",
   "Conferences, lectures, and public programs",
   "Publications and educational resources",
   "Community outreach and cultural understanding initiatives",
@@ -90,9 +91,9 @@ function GetInvolvedPage() {
             src={communityImg}
             alt="A diverse community of IMPMS volunteers and students smiling together"
             width={1280}
-            height={960}
+            height={360}
             loading="lazy"
-            className="aspect-[21/9] w-full object-cover"
+            className="aspect-[32/9] w-full object-cover"
           />
         </figure>
 
@@ -228,9 +229,11 @@ function GetInvolvedPage() {
             <div className="mt-8 grid gap-8 lg:grid-cols-2">
               <div className="rounded-2xl border border-border bg-card p-7 lg:p-8">
                 <p className="leading-relaxed text-muted-foreground">
-                  Program funding directly supports IMPMS initiatives that connect heritage with
-                  hands-on learning, mentorship, and public impact. Sponsors and donors help expand
-                  access to conferences, STEM education, and community programs.
+                  Program funding helps IMPMS advance scholarship, education, mentorship, and public
+                  engagement. Support from sponsors and donors strengthens programs that serve
+                  students, scholars, educators, and the wider community through research
+                  opportunities, conferences, lectures, publications, and cultural understanding
+                  initiatives.
                 </p>
                 <ul className="mt-6 space-y-3">
                   {programFundingAreas.map((area) => (
