@@ -2,8 +2,38 @@ import { createFileRoute } from "@tanstack/react-router";
 import { FileText, MonitorPlay, Newspaper, type LucideIcon } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
 import { CtaBand } from "@/components/cta-band";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import { newsStories } from "@/data/news";
-import newsImg from "@/assets/news.jpg";
+import aiAndTheFuture from "@/assets/news/ai-and-the-future.png";
+import annualEvent2022 from "@/assets/news/annual-event-2022.png";
+import annualEvent2023 from "@/assets/news/annual-event-2023.png";
+import utdAuditoriumDedication from "@/assets/news/utd-auditorium-dedication.png";
+import { pageBannerDimensions, pageBannerImageClass } from "@/lib/page-banner";
+
+const newsSlides = [
+  {
+    src: aiAndTheFuture,
+    alt: "Artificial Intelligence & The Future: Bridging Heritage and Innovation — IMPMS event banner",
+  },
+  {
+    src: annualEvent2022,
+    alt: "IMPMS Annual Event 2022 group photo with Dr. Burçin Mutlu-Pakdil",
+  },
+  {
+    src: annualEvent2023,
+    alt: "IMPMS Annual Event 2023 gala with keynote presentation",
+  },
+  {
+    src: utdAuditoriumDedication,
+    alt: "UTD Auditorium dedication honoring Dr. Basheer and Dr. Shakila Ahmed",
+  },
+] as const;
 
 const newsSections = [
   { id: "press-releases-and-updates", label: "Press Releases and Updates", icon: FileText },
@@ -49,16 +79,26 @@ function NewsPage() {
       />
 
       <section className="container-page py-16">
-        <figure className="relative mb-12 overflow-hidden rounded-2xl border border-border shadow-xl">
-          <img
-            src={newsImg}
-            alt="Newspapers, a tablet, microphone and reading glasses representing news and media"
-            width={1280}
-            height={360}
-            loading="lazy"
-            className="aspect-[32/9] w-full object-cover"
-          />
-        </figure>
+        <div className="relative mb-12 overflow-hidden rounded-2xl border border-border shadow-xl">
+          <Carousel opts={{ loop: true }}>
+            <CarouselContent className="-ml-0">
+              {newsSlides.map((slide) => (
+                <CarouselItem key={slide.alt} className="pl-0">
+                  <img
+                    src={slide.src}
+                    alt={slide.alt}
+                    width={pageBannerDimensions.width}
+                    height={pageBannerDimensions.height}
+                    loading="lazy"
+                    className={pageBannerImageClass}
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-3 top-1/2 -translate-y-1/2 border-border/50 bg-background/85 shadow-md hover:bg-background" />
+            <CarouselNext className="right-3 top-1/2 -translate-y-1/2 border-border/50 bg-background/85 shadow-md hover:bg-background" />
+          </Carousel>
+        </div>
 
         <div className="mb-16 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <nav

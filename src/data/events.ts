@@ -31,6 +31,7 @@ export interface UpcomingEvent {
   icon: UpcomingEventIcon;
   bannerImage: string;
   bannerAlt: string;
+  hideDetailBanner?: boolean;
   schedule?: EventSchedule;
   keynote?: EventSpeaker;
   registrationPrompt?: string;
@@ -57,6 +58,7 @@ export const upcomingEvents: UpcomingEvent[] = [
     bannerImage: aiResilienceChallenge,
     bannerAlt:
       "Healthcare AI Innovation Challenge — AI Resilience, Saturday October 3, 2026 at Hilton Richardson Dallas",
+    hideDetailBanner: true,
     description:
       "AI Resilience is an upcoming IMPMS conference exploring how communities, institutions, and innovators can respond thoughtfully to the opportunities and challenges of artificial intelligence. Centered on resilience, ethics, and long-term human impact, the conference will bring together scholars, professionals, educators, and emerging leaders for meaningful dialogue, shared learning, and future-facing collaboration.",
     schedule: {
@@ -107,6 +109,7 @@ export const upcomingEvents: UpcomingEvent[] = [
     icon: "book-open",
     bannerImage: allamaIqbalVision,
     bannerAlt: "Special IMPMS Event — Allama Iqbal's Vision for the 21st Century",
+    hideDetailBanner: true,
     description:
       "IMPMS is planning a special program dedicated to the timeless vision, poetry, and thought of Allama Muhammad Iqbal. This upcoming event will explore Iqbal's continuing relevance in the 21st century, including his powerful message on faith, human identity, self discovery, knowledge, and excellence.",
     registrationPrompt:

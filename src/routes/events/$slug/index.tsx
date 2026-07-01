@@ -63,18 +63,20 @@ function EventDetailPage() {
           Back to all events
         </Link>
 
-        <div className="mt-8 overflow-hidden rounded-2xl border border-border shadow-lg">
-          <img
-            src={event.bannerImage}
-            alt={event.bannerAlt}
-            width={800}
-            height={282}
-            className="aspect-[800/282] w-full object-cover"
-          />
-        </div>
+        {!event.hideDetailBanner && (
+          <div className="mt-8 overflow-hidden rounded-2xl border border-border shadow-lg">
+            <img
+              src={event.bannerImage}
+              alt={event.bannerAlt}
+              width={800}
+              height={282}
+              className="aspect-[800/282] w-full object-cover"
+            />
+          </div>
+        )}
 
         {event.schedule && (event.schedule.date || event.schedule.time || event.schedule.venue) && (
-          <div className="mt-10 grid gap-4 sm:grid-cols-3">
+          <div className={event.hideDetailBanner ? "mt-8 grid gap-4 sm:grid-cols-3" : "mt-10 grid gap-4 sm:grid-cols-3"}>
             {event.schedule.date && (
               <div className="rounded-2xl border border-border bg-card p-6">
                 <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent text-accent-foreground">

@@ -3,6 +3,7 @@ import { Handshake } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
 import { CtaBand } from "@/components/cta-band";
 import partnershipsImg from "@/assets/partnerships.jpg";
+import { pageBannerDimensions, pageBannerImageClass } from "@/lib/page-banner";
 
 export const Route = createFileRoute("/partnerships")({
   head: () => ({
@@ -41,10 +42,10 @@ function PartnershipsPage() {
           <img
             src={partnershipsImg}
             alt="A diverse group of professionals collaborating and shaking hands at a meeting"
-            width={1280}
-            height={960}
+            width={pageBannerDimensions.width}
+            height={pageBannerDimensions.height}
             loading="lazy"
-            className="aspect-[16/9] w-full object-cover"
+            className={pageBannerImageClass}
           />
         </figure>
         <div className="grid gap-6 md:grid-cols-3">

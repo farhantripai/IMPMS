@@ -17,32 +17,23 @@ import {
   scholarProfiles,
   scholarsNote,
 } from "@/data/scholars";
-import cartographyWorkshop from "@/assets/scholars/cartography-workshop.png";
-import engineeringWorkshop from "@/assets/scholars/engineering-workshop.png";
-import medicineBimaristan from "@/assets/scholars/medicine-bimaristan.png";
-import astronomyObservatory from "@/assets/scholars/astronomy-observatory.png";
-import libraryHouseOfWisdom from "@/assets/scholars/library-house-of-wisdom.png";
+import bannerAlFazari from "@/assets/scholars/banner-al-fazari.png";
+import bannerAlKhwarizmi from "@/assets/scholars/banner-al-khwarizmi.png";
+import bannerAlRazi from "@/assets/scholars/banner-al-razi.png";
+import { pageBannerDimensions, pageBannerImageClass } from "@/lib/page-banner";
 
 const scholarSlides = [
   {
-    src: cartographyWorkshop,
-    alt: "Scholars studying cartography and navigation with maps, globes, and instruments in a workshop overlooking a harbor",
+    src: bannerAlKhwarizmi,
+    alt: "Al-Khwarizmi — A foundational figure in algebra whose methods shaped mathematical problem-solving for centuries",
   },
   {
-    src: engineeringWorkshop,
-    alt: "Engineers and scholars working with brass mechanical devices and water-powered machinery in an Islamic Golden Age workshop",
+    src: bannerAlRazi,
+    alt: "Al-Razi — A major physician and medical writer whose clinical observations shaped later medical practice",
   },
   {
-    src: medicineBimaristan,
-    alt: "Physicians and scholars studying anatomy, medicine, and pharmacology in a historical library and hospital",
-  },
-  {
-    src: astronomyObservatory,
-    alt: "Scholars observing the night sky with an armillary sphere and astronomical instruments on a terrace beneath the Milky Way",
-  },
-  {
-    src: libraryHouseOfWisdom,
-    alt: "Scholars reading, writing, and studying scientific instruments in a grand library of the Islamic Golden Age",
+    src: bannerAlFazari,
+    alt: "Al-Fazari — Among the earliest astronomers associated with the translation and adaptation of astronomical knowledge into Arabic",
   },
 ] as const;
 
@@ -105,10 +96,10 @@ function ScientistsPage() {
                   <img
                     src={slide.src}
                     alt={slide.alt}
-                    width={1280}
-                    height={360}
+                    width={pageBannerDimensions.width}
+                    height={pageBannerDimensions.height}
                     loading="lazy"
-                    className="aspect-[32/9] w-full object-cover"
+                    className={pageBannerImageClass}
                   />
                 </CarouselItem>
               ))}

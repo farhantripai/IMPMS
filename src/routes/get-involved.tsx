@@ -16,6 +16,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import communityImg from "@/assets/community.jpg";
+import { pageBannerDimensions, pageBannerImageClass } from "@/lib/page-banner";
 
 const involvementSections = [
   { id: "board-members", label: "Become a Board Member", icon: LayoutGrid },
@@ -90,10 +91,10 @@ function GetInvolvedPage() {
           <img
             src={communityImg}
             alt="A diverse community of IMPMS volunteers and students smiling together"
-            width={1280}
-            height={360}
+            width={pageBannerDimensions.width}
+            height={pageBannerDimensions.height}
             loading="lazy"
-            className="aspect-[32/9] w-full object-cover"
+            className={pageBannerImageClass}
           />
         </figure>
 
