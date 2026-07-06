@@ -33,8 +33,7 @@ import {
   upcomingEvents,
   type UpcomingEventIcon,
 } from "@/data/events";
-
-const eventBannerImageClass = "aspect-[800/282] w-full object-cover";
+import { pageBannerDimensions, pageBannerImageClass } from "@/lib/page-banner";
 
 const eventSections = [
   { id: "upcoming-soon", label: "Coming Soon", icon: CalendarClock },
@@ -138,10 +137,10 @@ function EventsPage() {
                     <img
                       src={slide.src}
                       alt={slide.alt}
-                      width={800}
-                      height={282}
+                      width={pageBannerDimensions.width}
+                      height={pageBannerDimensions.height}
                       loading="lazy"
-                      className={`${eventBannerImageClass} transition-opacity group-hover:opacity-95`}
+                      className={`${pageBannerImageClass} transition-opacity group-hover:opacity-95`}
                     />
                   </Link>
                 </CarouselItem>

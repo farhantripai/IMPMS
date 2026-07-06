@@ -312,7 +312,7 @@
   }
 
   .featured-leader-photo {
-    width: min(100%, 10.5rem);
+    width: min(100%, 14rem);
     transition: width 600ms cubic-bezier(0.32, 0.72, 0, 1);
   }
 
@@ -334,12 +334,12 @@
   }
 
   .featured-leader-card[data-state="open"] .featured-leader-photo {
-    width: 14rem;
+    width: 16rem;
   }
 
   @media (min-width: 768px) {
     .featured-leader-photo {
-      width: 11rem;
+      width: 15rem;
     }
 
     .featured-leader-card[data-state="open"] .featured-leader-photo {

@@ -1,23 +1,36 @@
 import aiResilienceChallenge from "@/assets/events/ai-resilience-challenge.png";
 import allamaIqbalVision from "@/assets/events/allama-iqbal-vision.png";
+import salmaTauseefPortrait from "@/assets/events/salma-tauseef-portrait.png";
+import salmaTauseefWomanOfTheYear from "@/assets/events/salma-tauseef-woman-of-the-year-2024.png";
 
 export type UpcomingEventIcon = "brain" | "book-open";
 
-export interface EventSpeaker {
-  name: string;
-  title: string;
-  bio: string;
-}
+export type EventThemeIcon = "shield" | "brain" | "sparkles" | "book-open" | "lightbulb" | "heart";
 
-export interface EventAudience {
+export interface EventTheme {
   title: string;
-  description: string;
+  text: string;
+  icon: EventThemeIcon;
 }
 
 export interface EventSchedule {
   date?: string;
   time?: string;
   venue?: string;
+  dinner?: string;
+}
+
+export interface EventSpeaker {
+  name: string;
+  title?: string;
+  bio: string;
+  award?: string;
+  image?: string;
+  imageAlt?: string;
+}
+export interface EventAudience {
+  title: string;
+  description: string;
 }
 
 export interface UpcomingEvent {
@@ -31,7 +44,14 @@ export interface UpcomingEvent {
   icon: UpcomingEventIcon;
   bannerImage: string;
   bannerAlt: string;
+  pageHeroImage?: string;
+  pageHeroAlt?: string;
+  pageHeroWidth?: number;
+  pageHeroHeight?: number;
   hideDetailBanner?: boolean;
+  focusLabel?: string;
+  themes?: EventTheme[];
+  audienceIntro?: string;
   schedule?: EventSchedule;
   keynote?: EventSpeaker;
   registrationPrompt?: string;
@@ -58,6 +78,10 @@ export const upcomingEvents: UpcomingEvent[] = [
     bannerImage: aiResilienceChallenge,
     bannerAlt:
       "Healthcare AI Innovation Challenge — AI Resilience, Saturday October 3, 2026 at Hilton Richardson Dallas",
+    pageHeroImage: salmaTauseefWomanOfTheYear,
+    pageHeroAlt: "Dr. Salma Tauseef — Woman of the Year 2024",
+    pageHeroWidth: 2560,
+    pageHeroHeight: 898,
     hideDetailBanner: true,
     description:
       "AI Resilience is an upcoming IMPMS conference exploring how communities, institutions, and innovators can respond thoughtfully to the opportunities and challenges of artificial intelligence. Centered on resilience, ethics, and long-term human impact, the conference will bring together scholars, professionals, educators, and emerging leaders for meaningful dialogue, shared learning, and future-facing collaboration.",
@@ -65,16 +89,39 @@ export const upcomingEvents: UpcomingEvent[] = [
       date: "Saturday, October 3, 2026",
       time: "6:00 PM to 9:30 PM",
       venue: "Hilton Richardson Dallas",
+      dinner: "Dinner included",
     },
     keynote: {
       name: "Dr. Salma Tauseef",
-      title: "Chief Technology Officer, Johnson Matthey",
-      bio: "Dr. Salma Tauseef serves as Chief Technology Officer at Johnson Matthey, where she leads technology strategy and innovation across global operations. A recognized leader at the intersection of science, engineering, and digital transformation, she was named Woman of the Year 2024 by Women in Chemicals. Her keynote will focus on the role of AI resilience in healthcare, leadership, ethics, and innovation.",
+      award: "Woman of the Year 2024 — Women in Chemicals",
+      image: salmaTauseefPortrait,
+      imageAlt: "Dr. Salma Tauseef, keynote speaker",
+      bio: "Tauseef’s leadership, innovative vision, and dedication to advancing women in the chemicals industry have made her a true trailblazer. Her journey of perseverance and excellence has inspired so many and her extraordinary contributions have shaped the industry.",
     },
     registrationPrompt:
-      "Register your interest for an evening focused on how AI resilience is transforming healthcare, leadership, ethics, and innovation.",
+      "Join us for an evening focused on how AI resilience is transforming healthcare, leadership, ethics, and innovation.",
     ticketNote:
       "Ticket information will be released by email as the event date gets closer.",
+    focusLabel: "Conference Focus",
+    themes: [
+      {
+        icon: "shield",
+        title: "Resilience",
+        text: "Building systems and mindsets that adapt when technology, policy, and patient needs shift.",
+      },
+      {
+        icon: "brain",
+        title: "Ethics",
+        text: "Examining responsible AI adoption with clarity, accountability, and human dignity at the center.",
+      },
+      {
+        icon: "sparkles",
+        title: "Innovation",
+        text: "Connecting scholarship, industry, and emerging leaders to shape healthcare's next chapter.",
+      },
+    ],
+    audienceIntro:
+      "An evening designed for professionals, innovators, and partners shaping the future of healthcare AI.",
     audiences: [
       {
         title: "Healthcare Professionals",
@@ -105,13 +152,70 @@ export const upcomingEvents: UpcomingEvent[] = [
   {
     slug: "allama-iqbal-vision",
     title: "Allama Iqbal's Vision for the 21st Century",
+    tagline: "Exploring Iqbal's poetry, thought, faith, identity, and relevance across generations",
     status: "In Development",
     icon: "book-open",
     bannerImage: allamaIqbalVision,
     bannerAlt: "Special IMPMS Event — Allama Iqbal's Vision for the 21st Century",
+    pageHeroImage: allamaIqbalVision,
+    pageHeroAlt: "Special IMPMS Event — Allama Iqbal's Vision for the 21st Century",
+    pageHeroWidth: 2560,
+    pageHeroHeight: 901,
     hideDetailBanner: true,
     description:
       "IMPMS is planning a special program dedicated to the timeless vision, poetry, and thought of Allama Muhammad Iqbal. This upcoming event will explore Iqbal's continuing relevance in the 21st century, including his powerful message on faith, human identity, self discovery, knowledge, and excellence.",
+    schedule: {
+      date: "Coming Soon",
+      time: "To be announced",
+      venue: "To be announced",
+    },
+    focusLabel: "Program Focus",
+    themes: [
+      {
+        icon: "heart",
+        title: "Faith & Identity",
+        text: "Exploring Iqbal's enduring message on faith, human dignity, and the shaping of individual and collective identity.",
+      },
+      {
+        icon: "lightbulb",
+        title: "Self-Discovery",
+        text: "Engaging with Iqbal's call for self-awareness, purpose, and the awakening of human potential across generations.",
+      },
+      {
+        icon: "book-open",
+        title: "Knowledge & Excellence",
+        text: "Celebrating Iqbal's vision of knowledge, creativity, and excellence as foundations for a thoughtful 21st-century society.",
+      },
+    ],
+    audienceIntro:
+      "A program for scholars, students, and community members inspired by Iqbal's vision for faith, knowledge, and human excellence.",
+    audiences: [
+      {
+        title: "Scholars and Educators",
+        description:
+          "Engage with Iqbal's poetry, philosophy, and intellectual legacy through scholarly dialogue and public reflection.",
+      },
+      {
+        title: "Students and Youth",
+        description:
+          "Discover how Iqbal's message on self-discovery, purpose, and excellence speaks to emerging generations.",
+      },
+      {
+        title: "Community Leaders",
+        description:
+          "Explore Iqbal's continuing relevance for faith, identity, and civic life in the 21st century.",
+      },
+      {
+        title: "Sponsors and Partners",
+        description:
+          "Support a special program connecting heritage, thought, and community engagement.",
+      },
+    ],
+    details: [
+      "Program details and schedule will be announced soon.",
+      "Speaker announcements will be shared with priority list members first.",
+      "Priority list registration details will be announced soon.",
+    ],
     registrationPrompt:
       "Join the priority list to be among the first to receive program details, speaker announcements, and registration information.",
   },
@@ -119,6 +223,14 @@ export const upcomingEvents: UpcomingEvent[] = [
 
 export function getEventBySlug(slug: string): UpcomingEvent | undefined {
   return upcomingEvents.find((event) => event.slug === slug);
+}
+
+export function getEventTitle(event: UpcomingEvent): string {
+  return event.subtitle ? `${event.title}: ${event.subtitle}` : event.title;
+}
+
+export function getPriorityListEvents(): UpcomingEvent[] {
+  return upcomingEvents.filter((event) => event.registrationPrompt);
 }
 
 export function getEventPath(slug: string): `/events/${string}` {

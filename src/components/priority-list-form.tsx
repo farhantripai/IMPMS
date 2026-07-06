@@ -3,7 +3,17 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { getEventTitle, getPriorityListEvents } from "@/data/events";
 import { toast } from "sonner";
+
+const priorityListEvents = getPriorityListEvents();
 
 function RequiredMark() {
   return (
@@ -14,25 +24,43 @@ function RequiredMark() {
   );
 }
 
-export function PriorityListForm() {
+interface PriorityListFormProps {
+  defaultEventSlug?: string;
+}
+
+export function PriorityListForm({ defaultEventSlug }: PriorityListFormProps) {
+  const initialEventSlug =
+    defaultEventSlug && priorityListEvents.some((event) => event.slug === defaultEventSlug)
+      ? defaultEventSlug
+      : (priorityListEvents[0]?.slug ?? "");
+
   const [form, setForm] = useState({
+    eventSlug: initialEventSlug,
     fullName: "",
     email: "",
     mobile: "",
     stayInformed: false,
   });
 
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!form.fullName || !form.email || !form.mobile) return;
-
-    toast.success("Thank you for joining the priority list. We'll be in touch soon.");
+  const resetForm = () => {
     setForm({
+      eventSlug: initialEventSlug,
       fullName: "",
       email: "",
       mobile: "",
       stayInformed: false,
     });
+  };
+
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.eventSlug || !form.fullName || !form.email || !form.mobile) return;
+
+    const selectedEvent = priorityListEvents.find((event) => event.slug === form.eventSlug);
+    const eventLabel = selectedEvent ? getEventTitle(selectedEvent) : "the selected event";
+
+    toast.success(`Thank you for joining the priority list for ${eventLabel}. We'll be in touch soon.`);
+    resetForm();
   };
 
   return (
@@ -43,6 +71,29 @@ export function PriorityListForm() {
         <p className="text-sm text-muted-foreground">
           Required fields are marked with an asterisk.
         </p>
+
+        <div className="space-y-2">
+          <Label htmlFor="priority-event" className="text-foreground">
+            Event of Interest
+            <RequiredMark />
+          </Label>
+          <Select
+            value={form.eventSlug}
+            onValueChange={(value) => setForm({ ...form, eventSlug: value })}
+            required
+          >
+            <SelectTrigger id="priority-event" aria-required="true">
+              <SelectValue placeholder="Select an event" />
+            </SelectTrigger>
+            <SelectContent>
+              {priorityListEvents.map((event) => (
+                <SelectItem key={event.slug} value={event.slug}>
+                  {getEventTitle(event)}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
 
         <div className="space-y-2">
           <Label htmlFor="priority-full-name" className="text-foreground">

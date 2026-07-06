@@ -5,6 +5,21 @@ import manuscriptImg from "@/assets/manuscript.jpg";
 import stemImg from "@/assets/stem.jpg";
 import { Button } from "@/components/ui/button";
 import { CtaBand } from "@/components/cta-band";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { upcomingEvents } from "@/data/events";
+import { pageBannerDimensions, pageBannerImageClass } from "@/lib/page-banner";
+
+const eventSlides = upcomingEvents.map((event) => ({
+  src: event.bannerImage,
+  alt: event.bannerAlt,
+  slug: event.slug,
+}));
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -122,6 +137,47 @@ function HomePage() {
               <p className="mt-1 text-xs text-muted-foreground sm:text-sm">{s.label}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Upcoming events */}
+      <section className="container-page section-y">
+        <div className="mb-8 flex flex-col gap-4 sm:mb-10 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-gold">Events</p>
+            <h2 className="mt-2 text-[clamp(1.5rem,3vw+1rem,2.25rem)] font-bold">Upcoming Events</h2>
+          </div>
+          <Button asChild variant="outline" className="w-full sm:w-auto">
+            <Link to="/events">
+              View all events <ArrowRight className="h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
+        <div className="relative overflow-hidden rounded-2xl border border-border shadow-xl">
+          <Carousel opts={{ loop: true }}>
+            <CarouselContent className="-ml-0">
+              {eventSlides.map((slide) => (
+                <CarouselItem key={slide.alt} className="pl-0">
+                  <Link
+                    to="/events/$slug"
+                    params={{ slug: slide.slug }}
+                    className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  >
+                    <img
+                      src={slide.src}
+                      alt={slide.alt}
+                      width={pageBannerDimensions.width}
+                      height={pageBannerDimensions.height}
+                      loading="lazy"
+                      className={`${pageBannerImageClass} transition-opacity group-hover:opacity-95`}
+                    />
+                  </Link>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-2 top-1/2 h-9 w-9 -translate-y-1/2 border-border/50 bg-background/85 shadow-md hover:bg-background sm:left-3 sm:h-10 sm:w-10" />
+            <CarouselNext className="right-2 top-1/2 h-9 w-9 -translate-y-1/2 border-border/50 bg-background/85 shadow-md hover:bg-background sm:right-3 sm:h-10 sm:w-10" />
+          </Carousel>
         </div>
       </section>
 

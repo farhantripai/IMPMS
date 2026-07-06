@@ -16,7 +16,6 @@ import arshadMajid from "@/assets/board/atty-arshad-majid-j-d-m-b-a.png";
 import laylaMuriby from "@/assets/board/layla-muriby.png";
 import shaukatSheikh from "@/assets/board/shaukat-sheikh.png";
 import salehaSuleman from "@/assets/board/dr-saleha-suleman.png";
-import sadafSyed from "@/assets/board/ms-sadaf-syed.png";
 import edwardThomas from "@/assets/board/edward-thomas.png";
 import mustaphaIshak from "@/assets/board/past-dr-mustapha-ishak-boushaki.png";
 
@@ -217,14 +216,6 @@ export const boardMembers: BoardMember[] = [
     bio: [
       "Dr. Saleha Suleman is President of Enhance International Education, LLC, and a leader in international higher education with more than thirty years of experience. She currently serves as Vice President of Student Services and International Affairs at TexAM University at Dallas, the first Muslim university in the United States.",
       "She has organized major conferences of the National Women's Studies Association, including one hosting Nobel Peace laureate Wangari Maathai. Having traveled to more than thirty countries, she has built partnerships with universities, governments, and NGOs worldwide. She is also a published poet.",
-    ],
-  },
-  {
-    name: "Ms. Sadaf Syed",
-    role: "Board of Directors",
-    photo: sadafSyed,
-    bio: [
-      "Sadaf Syed is a commercial broker and residential realtor who helps property investors and business owners build growth and long-term wealth. A 2025 graduate of the University of Texas at Dallas, she analyzes market trends and identifies strategic opportunities to help clients build strong investment portfolios. With a deep appreciation for culture and diversity, she works to create opportunities that benefit individuals, businesses, and communities alike.",
     ],
   },
 ];

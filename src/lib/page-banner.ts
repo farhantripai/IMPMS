@@ -1,6 +1,6 @@
-export const pageBannerImageClass = "aspect-[32/9] w-full object-cover";
+export const pageBannerImageClass = "aspect-[800/282] w-full object-cover";
 
 export const pageBannerDimensions = {
-  width: 1280,
-  height: 360,
+  width: 800,
+  height: 282,
 } as const;

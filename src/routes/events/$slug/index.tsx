@@ -10,11 +10,13 @@ import {
   Mic,
   Users,
 } from "lucide-react";
+import { FeaturedEventPage } from "@/components/events/featured-event-page";
 import { PageHero } from "@/components/page-hero";
 import { CtaBand } from "@/components/cta-band";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getEventBySlug } from "@/data/events";
+import { pageBannerDimensions, pageBannerImageClass } from "@/lib/page-banner";
 
 export const Route = createFileRoute("/events/$slug/")({
   loader: ({ params }) => {
@@ -44,6 +46,11 @@ export const Route = createFileRoute("/events/$slug/")({
 
 function EventDetailPage() {
   const { event } = Route.useLoaderData();
+
+  if (event.hideDetailBanner) {
+    return <FeaturedEventPage event={event} />;
+  }
+
   const eventTitle = event.subtitle ? `${event.title}: ${event.subtitle}` : event.title;
 
   return (
@@ -68,9 +75,9 @@ function EventDetailPage() {
             <img
               src={event.bannerImage}
               alt={event.bannerAlt}
-              width={800}
-              height={282}
-              className="aspect-[800/282] w-full object-cover"
+              width={pageBannerDimensions.width}
+              height={pageBannerDimensions.height}
+              className={pageBannerImageClass}
             />
           </div>
         )}
@@ -122,7 +129,9 @@ function EventDetailPage() {
             </div>
             <div className="mt-6">
               <h3 className="text-xl font-semibold">{event.keynote.name}</h3>
-              <p className="mt-1 text-sm font-medium text-gold">{event.keynote.title}</p>
+              {event.keynote.title && (
+                <p className="mt-1 text-sm font-medium text-gold">{event.keynote.title}</p>
+              )}
               <p className="mt-4 leading-relaxed text-muted-foreground">{event.keynote.bio}</p>
             </div>
           </section>
@@ -130,8 +139,7 @@ function EventDetailPage() {
 
         {event.registrationPrompt && (
           <section className="mt-12 rounded-2xl border border-gold/30 bg-gold/5 p-8 md:p-10">
-            <h2 className="text-2xl font-bold">Register Your Interest</h2>
-            <p className="mt-4 max-w-2xl leading-relaxed text-muted-foreground">
+            <p className="max-w-2xl leading-relaxed text-muted-foreground">
               {event.registrationPrompt}
             </p>
             <Button asChild size="lg" className="mt-6 bg-gold text-gold-foreground hover:bg-gold/90">

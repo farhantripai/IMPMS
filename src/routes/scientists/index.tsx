@@ -115,7 +115,7 @@ function ScientistsPage() {
         </p>
 
         <nav
-          className="mt-10 grid grid-cols-1 gap-3 min-[480px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6"
+          className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
           aria-label="Scholar categories"
         >
           {featuredScholarFieldOrder.map((field) => {
@@ -125,12 +125,14 @@ function ScientistsPage() {
               <a
                 key={field}
                 href={`#${scholarFieldSlug(field)}`}
-                className="flex min-h-11 items-center justify-center gap-2 rounded-full border-2 border-gold/40 bg-gold/10 px-3 py-3 text-center text-sm font-semibold leading-snug text-foreground shadow-sm transition-all hover:border-gold hover:bg-gold/20 hover:shadow-md sm:px-4"
+                className="group flex items-start gap-4 rounded-2xl border border-primary/10 bg-secondary p-4 shadow-sm transition-all hover:border-gold/50 hover:bg-primary/5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 sm:p-5"
               >
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/20 text-gold">
-                  <FieldIcon className="h-4 w-4" />
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gold text-gold-foreground transition-colors group-hover:bg-gold/90">
+                  <FieldIcon className="h-5 w-5" />
                 </span>
-                <span>{field}</span>
+                <span className="min-w-0 flex-1 pt-0.5 text-sm font-semibold leading-snug text-foreground sm:text-base">
+                  {field}
+                </span>
               </a>
             );
           })}

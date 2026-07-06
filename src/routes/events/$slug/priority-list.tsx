@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, Check } from "lucide-react";
 import { PriorityListForm } from "@/components/priority-list-form";
-import { getEventBySlug } from "@/data/events";
+import { getEventBySlug, getEventTitle } from "@/data/events";
 
 const priorityListBenefits = [
   "Early ticket release notification",
@@ -20,7 +20,7 @@ export const Route = createFileRoute("/events/$slug/priority-list")({
     const event = loaderData?.event;
     if (!event) return {};
 
-    const eventTitle = event.subtitle ? `${event.title}: ${event.subtitle}` : event.title;
+    const eventTitle = getEventTitle(event);
 
     return {
       meta: [
@@ -40,7 +40,7 @@ export const Route = createFileRoute("/events/$slug/priority-list")({
 
 function PriorityListPage() {
   const { event } = Route.useLoaderData();
-  const eventTitle = event.subtitle ? `${event.title}: ${event.subtitle}` : event.title;
+  const eventTitle = getEventTitle(event);
 
   return (
     <section className="relative min-h-[calc(100vh-3.5rem)] overflow-hidden bg-primary text-primary-foreground">
@@ -79,7 +79,7 @@ function PriorityListPage() {
             )}
           </div>
 
-          <PriorityListForm />
+          <PriorityListForm key={event.slug} defaultEventSlug={event.slug} />
         </div>
       </div>
     </section>
