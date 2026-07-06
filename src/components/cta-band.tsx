@@ -2,7 +2,11 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { Button } from "./ui/button";
 
-export function CtaBand() {
+interface CtaBandProps {
+  showSponsorshipButton?: boolean;
+}
+
+export function CtaBand({ showSponsorshipButton = false }: CtaBandProps) {
   return (
     <section className="container-page section-y-lg">
       <div className="relative overflow-hidden rounded-2xl bg-primary px-5 py-10 text-center text-primary-foreground sm:px-8 sm:py-12 md:px-16 md:py-14">
@@ -15,10 +19,19 @@ export function CtaBand() {
             Your support funds conferences, publications, and STEM mentorship that bring
             history's discoveries to a new generation.
           </p>
-          <div className="mt-6 flex flex-col justify-center gap-3 sm:mt-8 sm:flex-row">
+          <div className="mt-6 flex flex-col justify-center gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
             <Button asChild size="lg" className="w-full bg-gold text-gold-foreground hover:bg-gold/90 sm:w-auto">
               <Link to="/donate">Make a Donation</Link>
             </Button>
+            {showSponsorshipButton && (
+              <Button
+                asChild
+                size="lg"
+                className="w-full bg-gold text-gold-foreground hover:bg-gold/90 sm:w-auto"
+              >
+                <Link to="/partnerships/sponsorship">Sponsorship Opportunities</Link>
+              </Button>
+            )}
             <Button
               asChild
               size="lg"

@@ -5,7 +5,7 @@ import { CtaBand } from "@/components/cta-band";
 import partnershipsImg from "@/assets/partnerships.jpg";
 import { pageBannerDimensions, pageBannerImageClass } from "@/lib/page-banner";
 
-export const Route = createFileRoute("/partnerships")({
+export const Route = createFileRoute("/partnerships/")({
   head: () => ({
     meta: [
       { title: "Partnerships — Collaborate with IMPMS" },
@@ -68,7 +68,7 @@ function PartnershipsPage() {
         </div>
       </section>
 
-      <CtaBand />
+      <CtaBand showSponsorshipButton />
     </>
   );
 }

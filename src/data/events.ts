@@ -1,5 +1,6 @@
 import aiResilienceChallenge from "@/assets/events/ai-resilience-challenge.png";
 import allamaIqbalVision from "@/assets/events/allama-iqbal-vision.png";
+import allamaIqbalVisionHero from "@/assets/events/allama-iqbal-vision-hero.png";
 import salmaTauseefPortrait from "@/assets/events/salma-tauseef-portrait.png";
 import salmaTauseefWomanOfTheYear from "@/assets/events/salma-tauseef-woman-of-the-year-2024.png";
 
@@ -157,10 +158,10 @@ export const upcomingEvents: UpcomingEvent[] = [
     icon: "book-open",
     bannerImage: allamaIqbalVision,
     bannerAlt: "Special IMPMS Event — Allama Iqbal's Vision for the 21st Century",
-    pageHeroImage: allamaIqbalVision,
-    pageHeroAlt: "Special IMPMS Event — Allama Iqbal's Vision for the 21st Century",
+    pageHeroImage: allamaIqbalVisionHero,
+    pageHeroAlt: "Allama Iqbal's Vision for the 21st Century — Special IMPMS Event",
     pageHeroWidth: 2560,
-    pageHeroHeight: 901,
+    pageHeroHeight: 700,
     hideDetailBanner: true,
     description:
       "IMPMS is planning a special program dedicated to the timeless vision, poetry, and thought of Allama Muhammad Iqbal. This upcoming event will explore Iqbal's continuing relevance in the 21st century, including his powerful message on faith, human identity, self discovery, knowledge, and excellence.",

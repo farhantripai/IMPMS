@@ -13,7 +13,6 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as ProgramsRouteImport } from './routes/programs'
 import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as PartnershipsRouteImport } from './routes/partnerships'
 import { Route as NewsRouteImport } from './routes/news'
 import { Route as GetInvolvedRouteImport } from './routes/get-involved'
 import { Route as DonateRouteImport } from './routes/donate'
@@ -21,11 +20,14 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BoardOfDirectorsRouteImport } from './routes/board-of-directors'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ScientistsRouteRouteImport } from './routes/scientists/route'
+import { Route as PartnershipsRouteRouteImport } from './routes/partnerships/route'
 import { Route as EventsRouteRouteImport } from './routes/events/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ScientistsIndexRouteImport } from './routes/scientists/index'
+import { Route as PartnershipsIndexRouteImport } from './routes/partnerships/index'
 import { Route as EventsIndexRouteImport } from './routes/events/index'
 import { Route as ScientistsSlugRouteImport } from './routes/scientists/$slug'
+import { Route as PartnershipsSponsorshipRouteImport } from './routes/partnerships/sponsorship'
 import { Route as EventsSlugRouteRouteImport } from './routes/events/$slug/route'
 import { Route as EventsSlugIndexRouteImport } from './routes/events/$slug/index'
 import { Route as EventsSlugPriorityListRouteImport } from './routes/events/$slug/priority-list'
@@ -48,11 +50,6 @@ const ProgramsRoute = ProgramsRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PartnershipsRoute = PartnershipsRouteImport.update({
-  id: '/partnerships',
-  path: '/partnerships',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NewsRoute = NewsRouteImport.update({
@@ -90,6 +87,11 @@ const ScientistsRouteRoute = ScientistsRouteRouteImport.update({
   path: '/scientists',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PartnershipsRouteRoute = PartnershipsRouteRouteImport.update({
+  id: '/partnerships',
+  path: '/partnerships',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EventsRouteRoute = EventsRouteRouteImport.update({
   id: '/events',
   path: '/events',
@@ -105,6 +107,11 @@ const ScientistsIndexRoute = ScientistsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ScientistsRouteRoute,
 } as any)
+const PartnershipsIndexRoute = PartnershipsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PartnershipsRouteRoute,
+} as any)
 const EventsIndexRoute = EventsIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -114,6 +121,11 @@ const ScientistsSlugRoute = ScientistsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => ScientistsRouteRoute,
+} as any)
+const PartnershipsSponsorshipRoute = PartnershipsSponsorshipRouteImport.update({
+  id: '/sponsorship',
+  path: '/sponsorship',
+  getParentRoute: () => PartnershipsRouteRoute,
 } as any)
 const EventsSlugRouteRoute = EventsSlugRouteRouteImport.update({
   id: '/$slug',
@@ -134,6 +146,7 @@ const EventsSlugPriorityListRoute = EventsSlugPriorityListRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/events': typeof EventsRouteRouteWithChildren
+  '/partnerships': typeof PartnershipsRouteRouteWithChildren
   '/scientists': typeof ScientistsRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/board-of-directors': typeof BoardOfDirectorsRoute
@@ -141,14 +154,15 @@ export interface FileRoutesByFullPath {
   '/donate': typeof DonateRoute
   '/get-involved': typeof GetInvolvedRoute
   '/news': typeof NewsRoute
-  '/partnerships': typeof PartnershipsRoute
   '/privacy': typeof PrivacyRoute
   '/programs': typeof ProgramsRoute
   '/resources': typeof ResourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/events/$slug': typeof EventsSlugRouteRouteWithChildren
+  '/partnerships/sponsorship': typeof PartnershipsSponsorshipRoute
   '/scientists/$slug': typeof ScientistsSlugRoute
   '/events/': typeof EventsIndexRoute
+  '/partnerships/': typeof PartnershipsIndexRoute
   '/scientists/': typeof ScientistsIndexRoute
   '/events/$slug/priority-list': typeof EventsSlugPriorityListRoute
   '/events/$slug/': typeof EventsSlugIndexRoute
@@ -161,13 +175,14 @@ export interface FileRoutesByTo {
   '/donate': typeof DonateRoute
   '/get-involved': typeof GetInvolvedRoute
   '/news': typeof NewsRoute
-  '/partnerships': typeof PartnershipsRoute
   '/privacy': typeof PrivacyRoute
   '/programs': typeof ProgramsRoute
   '/resources': typeof ResourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/partnerships/sponsorship': typeof PartnershipsSponsorshipRoute
   '/scientists/$slug': typeof ScientistsSlugRoute
   '/events': typeof EventsIndexRoute
+  '/partnerships': typeof PartnershipsIndexRoute
   '/scientists': typeof ScientistsIndexRoute
   '/events/$slug/priority-list': typeof EventsSlugPriorityListRoute
   '/events/$slug': typeof EventsSlugIndexRoute
@@ -176,6 +191,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/events': typeof EventsRouteRouteWithChildren
+  '/partnerships': typeof PartnershipsRouteRouteWithChildren
   '/scientists': typeof ScientistsRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/board-of-directors': typeof BoardOfDirectorsRoute
@@ -183,14 +199,15 @@ export interface FileRoutesById {
   '/donate': typeof DonateRoute
   '/get-involved': typeof GetInvolvedRoute
   '/news': typeof NewsRoute
-  '/partnerships': typeof PartnershipsRoute
   '/privacy': typeof PrivacyRoute
   '/programs': typeof ProgramsRoute
   '/resources': typeof ResourcesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/events/$slug': typeof EventsSlugRouteRouteWithChildren
+  '/partnerships/sponsorship': typeof PartnershipsSponsorshipRoute
   '/scientists/$slug': typeof ScientistsSlugRoute
   '/events/': typeof EventsIndexRoute
+  '/partnerships/': typeof PartnershipsIndexRoute
   '/scientists/': typeof ScientistsIndexRoute
   '/events/$slug/priority-list': typeof EventsSlugPriorityListRoute
   '/events/$slug/': typeof EventsSlugIndexRoute
@@ -200,6 +217,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/events'
+    | '/partnerships'
     | '/scientists'
     | '/about'
     | '/board-of-directors'
@@ -207,14 +225,15 @@ export interface FileRouteTypes {
     | '/donate'
     | '/get-involved'
     | '/news'
-    | '/partnerships'
     | '/privacy'
     | '/programs'
     | '/resources'
     | '/sitemap.xml'
     | '/events/$slug'
+    | '/partnerships/sponsorship'
     | '/scientists/$slug'
     | '/events/'
+    | '/partnerships/'
     | '/scientists/'
     | '/events/$slug/priority-list'
     | '/events/$slug/'
@@ -227,13 +246,14 @@ export interface FileRouteTypes {
     | '/donate'
     | '/get-involved'
     | '/news'
-    | '/partnerships'
     | '/privacy'
     | '/programs'
     | '/resources'
     | '/sitemap.xml'
+    | '/partnerships/sponsorship'
     | '/scientists/$slug'
     | '/events'
+    | '/partnerships'
     | '/scientists'
     | '/events/$slug/priority-list'
     | '/events/$slug'
@@ -241,6 +261,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/events'
+    | '/partnerships'
     | '/scientists'
     | '/about'
     | '/board-of-directors'
@@ -248,14 +269,15 @@ export interface FileRouteTypes {
     | '/donate'
     | '/get-involved'
     | '/news'
-    | '/partnerships'
     | '/privacy'
     | '/programs'
     | '/resources'
     | '/sitemap.xml'
     | '/events/$slug'
+    | '/partnerships/sponsorship'
     | '/scientists/$slug'
     | '/events/'
+    | '/partnerships/'
     | '/scientists/'
     | '/events/$slug/priority-list'
     | '/events/$slug/'
@@ -264,6 +286,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EventsRouteRoute: typeof EventsRouteRouteWithChildren
+  PartnershipsRouteRoute: typeof PartnershipsRouteRouteWithChildren
   ScientistsRouteRoute: typeof ScientistsRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   BoardOfDirectorsRoute: typeof BoardOfDirectorsRoute
@@ -271,7 +294,6 @@ export interface RootRouteChildren {
   DonateRoute: typeof DonateRoute
   GetInvolvedRoute: typeof GetInvolvedRoute
   NewsRoute: typeof NewsRoute
-  PartnershipsRoute: typeof PartnershipsRoute
   PrivacyRoute: typeof PrivacyRoute
   ProgramsRoute: typeof ProgramsRoute
   ResourcesRoute: typeof ResourcesRoute
@@ -306,13 +328,6 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/partnerships': {
-      id: '/partnerships'
-      path: '/partnerships'
-      fullPath: '/partnerships'
-      preLoaderRoute: typeof PartnershipsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/news': {
@@ -364,6 +379,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ScientistsRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/partnerships': {
+      id: '/partnerships'
+      path: '/partnerships'
+      fullPath: '/partnerships'
+      preLoaderRoute: typeof PartnershipsRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/events': {
       id: '/events'
       path: '/events'
@@ -385,6 +407,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ScientistsIndexRouteImport
       parentRoute: typeof ScientistsRouteRoute
     }
+    '/partnerships/': {
+      id: '/partnerships/'
+      path: '/'
+      fullPath: '/partnerships/'
+      preLoaderRoute: typeof PartnershipsIndexRouteImport
+      parentRoute: typeof PartnershipsRouteRoute
+    }
     '/events/': {
       id: '/events/'
       path: '/'
@@ -398,6 +427,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/scientists/$slug'
       preLoaderRoute: typeof ScientistsSlugRouteImport
       parentRoute: typeof ScientistsRouteRoute
+    }
+    '/partnerships/sponsorship': {
+      id: '/partnerships/sponsorship'
+      path: '/sponsorship'
+      fullPath: '/partnerships/sponsorship'
+      preLoaderRoute: typeof PartnershipsSponsorshipRouteImport
+      parentRoute: typeof PartnershipsRouteRoute
     }
     '/events/$slug': {
       id: '/events/$slug'
@@ -451,6 +487,19 @@ const EventsRouteRouteWithChildren = EventsRouteRoute._addFileChildren(
   EventsRouteRouteChildren,
 )
 
+interface PartnershipsRouteRouteChildren {
+  PartnershipsSponsorshipRoute: typeof PartnershipsSponsorshipRoute
+  PartnershipsIndexRoute: typeof PartnershipsIndexRoute
+}
+
+const PartnershipsRouteRouteChildren: PartnershipsRouteRouteChildren = {
+  PartnershipsSponsorshipRoute: PartnershipsSponsorshipRoute,
+  PartnershipsIndexRoute: PartnershipsIndexRoute,
+}
+
+const PartnershipsRouteRouteWithChildren =
+  PartnershipsRouteRoute._addFileChildren(PartnershipsRouteRouteChildren)
+
 interface ScientistsRouteRouteChildren {
   ScientistsSlugRoute: typeof ScientistsSlugRoute
   ScientistsIndexRoute: typeof ScientistsIndexRoute
@@ -468,6 +517,7 @@ const ScientistsRouteRouteWithChildren = ScientistsRouteRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EventsRouteRoute: EventsRouteRouteWithChildren,
+  PartnershipsRouteRoute: PartnershipsRouteRouteWithChildren,
   ScientistsRouteRoute: ScientistsRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   BoardOfDirectorsRoute: BoardOfDirectorsRoute,
@@ -475,7 +525,6 @@ const rootRouteChildren: RootRouteChildren = {
   DonateRoute: DonateRoute,
   GetInvolvedRoute: GetInvolvedRoute,
   NewsRoute: NewsRoute,
-  PartnershipsRoute: PartnershipsRoute,
   PrivacyRoute: PrivacyRoute,
   ProgramsRoute: ProgramsRoute,
   ResourcesRoute: ResourcesRoute,
