@@ -12,7 +12,6 @@ import mirzaFaizan from "@/assets/board/mirza-faizan.png";
 import usmanGhani from "@/assets/board/usman-a-ghani.png";
 import ausafHusain from "@/assets/board/dr-ausaf-husain.png";
 import bashooNaziruddin from "@/assets/board/dr-bashoo-naziruddin.png";
-import arshadMajid from "@/assets/board/atty-arshad-majid-j-d-m-b-a.png";
 import laylaMuriby from "@/assets/board/layla-muriby.png";
 import shaukatSheikh from "@/assets/board/shaukat-sheikh.png";
 import salehaSuleman from "@/assets/board/dr-saleha-suleman.png";
@@ -163,15 +162,6 @@ export const boardMembers: BoardMember[] = [
     bio: [
       "Dr. Bashoo Naziruddin is Director of the islet cell processing laboratory at Baylor University Medical Center in Dallas and an Adjunct Professor at the Institute of Biomedical Studies at Baylor University in Waco. He earned his Ph.D. in Biochemistry from the University of Madras and was elected a Fellow of the American Society of Transplantation.",
       "He leads the team performing pancreatic islet cell transplants for patients with type 1 diabetes and chronic pancreatitis, and has published 170 manuscripts in peer-reviewed journals. His research has been funded by the NIH, the Juvenile Diabetes Research Foundation, and the American Heart Association.",
-    ],
-  },
-  {
-    name: "Atty. Arshad Majid, J.D., M.B.A.",
-    role: "Board of Directors",
-    photo: arshadMajid,
-    bio: [
-      "Arshad Majid is an attorney, former prosecutor, and finance MBA whose work spans law, wealth strategy, and executive advisory. He is the creator of The Money Lawyer and The Luxury Intelligence Channel, exploring trust, influence, negotiation, and sophisticated decision-making in high-level environments.",
-      "On the IMPMS Board, he has presented on building long-term nonprofit sustainability, co-leads the WAQF endowment initiative in partnership with area mosques, and contributes to cultural and literary programming as a featured speaker at public events.",
     ],
   },
   {
