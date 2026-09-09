@@ -72,14 +72,28 @@ export function FeaturedEventPage({ event }: FeaturedEventPageProps) {
         </div>
 
         <div className="container-page relative z-10 pb-8 pt-6 sm:pb-10 sm:pt-8">
-          <div className="overflow-hidden rounded-2xl border border-gold/25 shadow-2xl shadow-black/30 ring-1 ring-gold/15">
+          <div
+            className={`overflow-hidden rounded-2xl border border-gold/25 shadow-2xl shadow-black/30 ring-1 ring-gold/15 ${
+              event.pageHeroWidth &&
+              event.pageHeroHeight &&
+              event.pageHeroHeight > event.pageHeroWidth
+                ? "mx-auto max-w-xl bg-primary"
+                : ""
+            }`}
+          >
             <img
               src={event.pageHeroImage ?? event.bannerImage}
               alt={event.pageHeroAlt ?? event.bannerAlt}
               width={event.pageHeroWidth ?? pageBannerDimensions.width}
               height={event.pageHeroHeight ?? pageBannerDimensions.height}
               sizes="(max-width: 80rem) 100vw, 80rem"
-              className={pageBannerImageClass}
+              className={
+                event.pageHeroWidth &&
+                event.pageHeroHeight &&
+                event.pageHeroHeight > event.pageHeroWidth
+                  ? "mx-auto h-auto w-full object-contain"
+                  : pageBannerImageClass
+              }
               fetchPriority="high"
               decoding="async"
             />
@@ -132,6 +146,11 @@ export function FeaturedEventPage({ event }: FeaturedEventPageProps) {
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">Venue</p>
                   <p className="mt-1 font-medium leading-snug text-foreground">{schedule.venue}</p>
+                  {schedule.venueAddress && (
+                    <p className="mt-1 text-sm font-normal leading-snug text-muted-foreground">
+                      {schedule.venueAddress}
+                    </p>
+                  )}
                 </div>
               </div>
             )}

@@ -1,8 +1,8 @@
-import aiResilienceChallenge from "@/assets/events/ai-resilience-challenge.png";
-import allamaIqbalVision from "@/assets/events/allama-iqbal-vision.png";
+import aiResilienceChallenge from "@/assets/events/ai-resilience-challenge.jpg";
+import allamaIqbalVision from "@/assets/events/allama-iqbal-vision.jpg";
 import allamaIqbalVisionHero from "@/assets/events/allama-iqbal-vision-hero.png";
 import salmaTauseefPortrait from "@/assets/events/salma-tauseef-portrait.png";
-import salmaTauseefWomanOfTheYear from "@/assets/events/salma-tauseef-woman-of-the-year-2024.png";
+import salmaTauseefWomanOfTheYear from "@/assets/events/salma-tauseef-woman-of-the-year-2024.jpg";
 
 export type UpcomingEventIcon = "brain" | "book-open";
 
@@ -18,6 +18,7 @@ export interface EventSchedule {
   date?: string;
   time?: string;
   venue?: string;
+  venueAddress?: string;
   dinner?: string;
 }
 
@@ -71,83 +72,93 @@ export const eventsIntro =
 export const upcomingEvents: UpcomingEvent[] = [
   {
     slug: "ai-resilience",
-    title: "Healthcare AI Innovation Challenge",
+    title: "An Evening of Learning & Inspiration",
     subtitle: "AI Resilience",
-    tagline: "The Edge That Keeps You Ahead",
-    status: "Coming Soon",
+    tagline: "Two Powerful Programs, One Impactful Evening",
+    status: "By Invitation Only",
     icon: "brain",
     bannerImage: aiResilienceChallenge,
     bannerAlt:
-      "Healthcare AI Innovation Challenge — AI Resilience, Saturday October 3, 2026 at Hilton Richardson Dallas",
+      "An Evening of Learning & Inspiration — AI Resilience and DiscoverSTEM Innovation Day, Saturday October 3, 2026 at Hilton Richardson Dallas",
     pageHeroImage: salmaTauseefWomanOfTheYear,
-    pageHeroAlt: "Dr. Salma Tauseef — Woman of the Year 2024",
-    pageHeroWidth: 2560,
-    pageHeroHeight: 898,
+    pageHeroAlt:
+      "An Evening of Learning & Inspiration — AI Resilience and DiscoverSTEM Innovation Day flyer",
+    pageHeroWidth: 791,
+    pageHeroHeight: 1024,
     hideDetailBanner: true,
     description:
-      "AI Resilience is an upcoming IMPMS conference exploring how communities, institutions, and innovators can respond thoughtfully to the opportunities and challenges of artificial intelligence. Centered on resilience, ethics, and long-term human impact, the conference will bring together scholars, professionals, educators, and emerging leaders for meaningful dialogue, shared learning, and future-facing collaboration.",
+      "IMPMS and discoverSTEM jointly present an evening of learning and inspiration. Part One features AI Resilience: The Edge That Keeps You Ahead, with keynote speaker Dr. Tauseef Salma. Part Two is DiscoverSTEM Innovation Day, including patent certificate presentations and America's Top Young Innovators Awards.",
     schedule: {
       date: "Saturday, October 3, 2026",
-      time: "6:00 PM to 9:30 PM",
+      time: "5:30 PM – 9:30 PM",
       venue: "Hilton Richardson Dallas",
+      venueAddress: "701 E Campbell Rd, Richardson, TX 75081",
       dinner: "Dinner included",
     },
     keynote: {
-      name: "Dr. Salma Tauseef",
+      name: "Dr. Tauseef Salma",
+      title: "Former Chief Technology Officer at Johnson Matthey",
       award: "Woman of the Year 2024 — Women in Chemicals",
       image: salmaTauseefPortrait,
-      imageAlt: "Dr. Salma Tauseef, keynote speaker",
+      imageAlt: "Dr. Tauseef Salma, keynote speaker",
       bio: "Tauseef’s leadership, innovative vision, and dedication to advancing women in the chemicals industry have made her a true trailblazer. Her journey of perseverance and excellence has inspired so many and her extraordinary contributions have shaped the industry.",
     },
     registrationPrompt:
-      "Join us for an evening focused on how AI resilience is transforming healthcare, leadership, ethics, and innovation.",
-    ticketNote:
-      "Ticket information will be released by email as the event date gets closer.",
-    focusLabel: "Conference Focus",
+      "Join the priority list to stay updated on this invitation-only evening of AI resilience, innovation awards, and community inspiration.",
+    ticketNote: "Admission is by invitation only. Join the priority list to stay updated.",
+    focusLabel: "Evening Program",
     themes: [
       {
-        icon: "shield",
-        title: "Resilience",
-        text: "Building systems and mindsets that adapt when technology, policy, and patient needs shift.",
-      },
-      {
         icon: "brain",
-        title: "Ethics",
-        text: "Examining responsible AI adoption with clarity, accountability, and human dignity at the center.",
+        title: "Part One: AI Resilience",
+        text: "The Edge That Keeps You Ahead — a keynote with Dr. Tauseef Salma on resilience, leadership, and staying ahead in an AI-driven world.",
       },
       {
         icon: "sparkles",
-        title: "Innovation",
-        text: "Connecting scholarship, industry, and emerging leaders to shape healthcare's next chapter.",
+        title: "Part Two: DiscoverSTEM Innovation Day",
+        text: "Patent certificate presentations and America's Top Young Innovators Awards celebrating emerging talent.",
+      },
+      {
+        icon: "lightbulb",
+        title: "Joint Partnership",
+        text: "Presented jointly by IMPMS and discoverSTEM — connecting scholarship, science, and the next generation of innovators.",
       },
     ],
-    audienceIntro:
-      "An evening designed for professionals, innovators, and partners shaping the future of healthcare AI.",
     audiences: [
       {
         title: "Healthcare Professionals",
         description:
-          "Explore practical uses of AI in healthcare innovation, leadership, and patient centred systems.",
+          "Engage with ideas at the intersection of AI, resilience, and the future of healthcare leadership.",
+      },
+      {
+        title: "Students",
+        description:
+          "Learn from industry leaders and celebrate young innovators recognized for patent-worthy work.",
+      },
+      {
+        title: "Researchers",
+        description:
+          "Connect with peers exploring AI, science, and innovation across academic and applied settings.",
       },
       {
         title: "Technology Leaders",
         description:
-          "Explore practical uses of AI in healthcare innovation, leadership, and patient centered systems.",
+          "Explore how AI resilience and innovation culture keep organizations ahead of change.",
       },
       {
-        title: "Students and Researchers",
+        title: "Entrepreneurs",
         description:
-          "Gain exposure to emerging ideas, professional networks, and real world innovation themes.",
+          "Meet innovators, educators, and partners advancing new ideas in science, medicine, and technology.",
       },
       {
-        title: "Sponsors and Partners",
+        title: "Educators",
         description:
-          "Support a timely program that connects education, innovation, and public dialogue.",
+          "Support and inspire the next generation through DiscoverSTEM awards, patents, and shared learning.",
       },
     ],
     details: [
-      "Priority list registration details will be announced soon.",
-      "Sponsorship opportunities will be announced soon for organizations and supporters interested in advancing education, innovation, and community engagement through this conference.",
+      "Presented jointly by IMPMS and discoverSTEM.",
+      "Admission is by invitation only — join the priority list to stay updated.",
     ],
   },
   {

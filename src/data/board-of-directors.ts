@@ -12,9 +12,12 @@ import mirzaFaizan from "@/assets/board/mirza-faizan.png";
 import usmanGhani from "@/assets/board/usman-a-ghani.png";
 import ausafHusain from "@/assets/board/dr-ausaf-husain.png";
 import bashooNaziruddin from "@/assets/board/dr-bashoo-naziruddin.png";
+import salmanMalik from "@/assets/board/dr-salman-malik-m-d-facc.jpg";
 import laylaMuriby from "@/assets/board/layla-muriby.png";
+import muntahaNiazi from "@/assets/board/sr-muntaha-niazi.jpg";
 import shaukatSheikh from "@/assets/board/shaukat-sheikh.png";
 import salehaSuleman from "@/assets/board/dr-saleha-suleman.png";
+import shahidBajwa from "@/assets/board/shahid-bajwa.jpg";
 import edwardThomas from "@/assets/board/edward-thomas.png";
 import mustaphaIshak from "@/assets/board/past-dr-mustapha-ishak-boushaki.png";
 
@@ -167,7 +170,7 @@ export const boardMembers: BoardMember[] = [
   {
     name: "Dr. Salman Malik, M.D., FACC",
     role: "Board of Directors",
-    initials: "SM",
+    photo: salmanMalik,
     bio: [
       "Dr. Salman Malik is President of the Cardiovascular Clinic of North Texas and an accomplished interventional and clinical cardiologist. A graduate of King Edward Medical University, he completed his studies with honors and placed first in a nationwide competition for a medical research scholarship, earning a master's in experimental pathology at Boston University, before completing residency and fellowship at the University of Utah and University of Arkansas.",
       "He has held faculty appointments at Marshall University and the University of Oklahoma Health Sciences Center. Guided by the principle *Scientia cum Virtute* — knowledge with virtue — he has broad interests in ancient and medieval history, governance, and population health.",
@@ -185,9 +188,11 @@ export const boardMembers: BoardMember[] = [
   {
     name: "Sr. Muntaha Niazi",
     role: "Board of Directors",
-    initials: "MN",
+    photo: muntahaNiazi,
     bio: [
-      "Sr. Muntaha Niazi serves on the IMPMS Board of Directors and is a regular host and master of ceremonies for the Institute's public programs. She contributes to IMPMS's social media presence and marketing outreach, helping extend the organization's message and engagement across the community.",
+      "Muntaha Niazi is a public health professional with a background in health data analytics, healthcare technology, and medical devices. She holds a B.S. in Public Health and a Graduate Certificate in Health Data Analytics from the University of North Texas.",
+      "Her professional experience includes medical devices, patient data management, and healthcare technology, complemented by experience in marketing, content creation, and event planning. She is passionate about healthcare innovation and the intersection of science, technology, and business.",
+      "As an IMPMS Board Member, Muntaha is passionate about advancing the organization's mission of highlighting Muslim contributions to science and medicine while inspiring the next generation of innovators and healthcare professionals.",
     ],
   },
   {
@@ -207,6 +212,12 @@ export const boardMembers: BoardMember[] = [
       "Dr. Saleha Suleman is President of Enhance International Education, LLC, and a leader in international higher education with more than thirty years of experience. She currently serves as Vice President of Student Services and International Affairs at TexAM University at Dallas, the first Muslim university in the United States.",
       "She has organized major conferences of the National Women's Studies Association, including one hosting Nobel Peace laureate Wangari Maathai. Having traveled to more than thirty countries, she has built partnerships with universities, governments, and NGOs worldwide. She is also a published poet.",
     ],
+  },
+  {
+    name: "Shahid Bajwa",
+    role: "Board of Directors",
+    photo: shahidBajwa,
+    bio: [],
   },
 ];
 

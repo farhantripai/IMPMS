@@ -33,6 +33,7 @@ import {
   upcomingEvents,
   type UpcomingEventIcon,
 } from "@/data/events";
+import { cn } from "@/lib/utils";
 import { pageBannerDimensions, pageBannerImageClass } from "@/lib/page-banner";
 
 const eventSections = [
@@ -95,6 +96,8 @@ const eventSlides = upcomingEvents.map((event) => ({
   src: event.bannerImage,
   alt: event.bannerAlt,
   slug: event.slug,
+  width: event.bannerWidth,
+  height: event.bannerHeight,
 }));
 
 export const Route = createFileRoute("/events/")({
@@ -124,30 +127,50 @@ function EventsPage() {
       />
 
       <section className="container-page section-y">
-        <div className="relative mb-12 overflow-hidden rounded-2xl border border-border shadow-xl">
-          <Carousel opts={{ loop: true }}>
+        <div className="relative mx-auto mb-12 w-full max-w-[989px] overflow-hidden">
+          <Carousel opts={{ loop: true, align: "center" }} className="overflow-hidden">
             <CarouselContent className="-ml-0">
-              {eventSlides.map((slide) => (
-                <CarouselItem key={slide.alt} className="pl-0">
-                  <Link
-                    to="/events/$slug"
-                    params={{ slug: slide.slug }}
-                    className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                  >
-                    <img
-                      src={slide.src}
-                      alt={slide.alt}
-                      width={pageBannerDimensions.width}
-                      height={pageBannerDimensions.height}
-                      loading="lazy"
-                      className={`${pageBannerImageClass} transition-opacity group-hover:opacity-95`}
-                    />
-                  </Link>
-                </CarouselItem>
-              ))}
+              {eventSlides.map((slide) => {
+                const hasExactSize = slide.width != null && slide.height != null;
+
+                return (
+                  <CarouselItem key={slide.alt} className="basis-full pl-0">
+                    <Link
+                      to="/events/$slug"
+                      params={{ slug: slide.slug }}
+                      className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    >
+                      {hasExactSize ? (
+                        <div className="overflow-hidden rounded-2xl">
+                          <img
+                            src={slide.src}
+                            alt={slide.alt}
+                            width={slide.width}
+                            height={slide.height}
+                            loading="lazy"
+                            className="block h-auto w-full transition-opacity group-hover:opacity-95"
+                            style={{ aspectRatio: `${slide.width} / ${slide.height}` }}
+                          />
+                        </div>
+                      ) : (
+                        <div className="overflow-hidden rounded-2xl border border-border shadow-xl">
+                          <img
+                            src={slide.src}
+                            alt={slide.alt}
+                            width={pageBannerDimensions.width}
+                            height={pageBannerDimensions.height}
+                            loading="lazy"
+                            className={cn(pageBannerImageClass, "transition-opacity group-hover:opacity-95")}
+                          />
+                        </div>
+                      )}
+                    </Link>
+                  </CarouselItem>
+                );
+              })}
             </CarouselContent>
-            <CarouselPrevious className="left-2 top-1/2 h-9 w-9 -translate-y-1/2 border-border/50 bg-background/85 shadow-md hover:bg-background sm:left-3 sm:h-10 sm:w-10" />
-            <CarouselNext className="right-2 top-1/2 h-9 w-9 -translate-y-1/2 border-border/50 bg-background/85 shadow-md hover:bg-background sm:right-3 sm:h-10 sm:w-10" />
+            <CarouselPrevious className="left-2 top-1/2 z-10 h-9 w-9 -translate-y-1/2 border-border/50 bg-background/85 shadow-md hover:bg-background sm:left-3 sm:h-10 sm:w-10" />
+            <CarouselNext className="right-2 top-1/2 z-10 h-9 w-9 -translate-y-1/2 border-border/50 bg-background/85 shadow-md hover:bg-background sm:right-3 sm:h-10 sm:w-10" />
           </Carousel>
         </div>
 
