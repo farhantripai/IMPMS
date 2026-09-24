@@ -103,9 +103,6 @@ export const upcomingEvents: UpcomingEvent[] = [
       imageAlt: "Dr. Tauseef Salma, keynote speaker",
       bio: "Tauseef’s leadership, innovative vision, and dedication to advancing women in the chemicals industry have made her a true trailblazer. Her journey of perseverance and excellence has inspired so many and her extraordinary contributions have shaped the industry.",
     },
-    registrationPrompt:
-      "Join the priority list to stay updated on this invitation-only evening of AI resilience, innovation awards, and community inspiration.",
-    ticketNote: "Admission is by invitation only. Join the priority list to stay updated.",
     focusLabel: "Evening Program",
     themes: [
       {
@@ -158,7 +155,7 @@ export const upcomingEvents: UpcomingEvent[] = [
     ],
     details: [
       "Presented jointly by IMPMS and discoverSTEM.",
-      "Admission is by invitation only — join the priority list to stay updated.",
+      "Admission is by invitation only.",
     ],
   },
   {

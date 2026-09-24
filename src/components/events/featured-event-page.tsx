@@ -99,15 +99,19 @@ export function FeaturedEventPage({ event }: FeaturedEventPageProps) {
             />
           </div>
 
-          <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
-            <Button asChild size="lg" className="w-full bg-gold text-gold-foreground hover:bg-gold/90 sm:w-auto">
-              <Link to="/events/$slug/priority-list" params={{ slug: event.slug }}>
-                Join the Priority List <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-          {event.ticketNote && (
-            <p className="mt-3 text-sm text-primary-foreground/70">{event.ticketNote}</p>
+          {event.registrationPrompt && (
+            <>
+              <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
+                <Button asChild size="lg" className="w-full bg-gold text-gold-foreground hover:bg-gold/90 sm:w-auto">
+                  <Link to="/events/$slug/priority-list" params={{ slug: event.slug }}>
+                    Join the Priority List <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
+              {event.ticketNote && (
+                <p className="mt-3 text-sm text-primary-foreground/70">{event.ticketNote}</p>
+              )}
+            </>
           )}
         </div>
       </section>
