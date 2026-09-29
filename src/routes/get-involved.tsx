@@ -19,7 +19,7 @@ import communityImg from "@/assets/community.jpg";
 import { pageBannerDimensions, pageBannerImageClass } from "@/lib/page-banner";
 
 const involvementSections = [
-  { id: "board-members", label: "Become a Board Member", icon: LayoutGrid },
+  { id: "join-impms", label: "Join IMPMS", icon: LayoutGrid },
   { id: "volunteer-student-ambassador", label: "Become a Volunteer / Student Ambassador", icon: Users },
   { id: "support-impms", label: "Support IMPMS", icon: Heart },
   { id: "fund-our-programs", label: "Fund our Programs", icon: GraduationCap },
@@ -40,13 +40,30 @@ const programFundingAreas = [
   "Community outreach and cultural understanding initiatives",
 ];
 
-function SectionHeading({ icon: Icon, title }: { icon: LucideIcon; title: string }) {
+function SectionHeading({
+  icon: Icon,
+  title,
+  subtitle,
+}: {
+  icon: LucideIcon;
+  title: string;
+  subtitle?: string;
+}) {
   return (
-    <div className="flex items-center gap-3">
-      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-foreground">
+    <div className={`flex gap-3.5 ${subtitle ? "items-start" : "items-center"}`}>
+      <span
+        className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-foreground ${
+          subtitle ? "mt-0.5" : ""
+        }`}
+      >
         <Icon className="h-5 w-5" />
       </span>
-      <h2 className="text-2xl font-bold">{title}</h2>
+      <div>
+        <h2 className="text-2xl font-bold">{title}</h2>
+        {subtitle && (
+          <p className="mt-1 text-base text-muted-foreground">{subtitle}</p>
+        )}
+      </div>
     </div>
   );
 }
@@ -117,18 +134,19 @@ function GetInvolvedPage() {
         </div>
 
         <div className="space-y-20">
-          <section id="board-members" className="scroll-mt-28">
-            <SectionHeading icon={LayoutGrid} title="Become a Board Member" />
+          <section id="join-impms" className="scroll-mt-28">
+            <div id="board-members" className="scroll-mt-28" />
+            <SectionHeading
+              icon={LayoutGrid}
+              title="Join IMPMS"
+              subtitle="Explore the past. Enrich the present."
+            />
             <div className="mt-8 rounded-2xl border border-border bg-card p-7 lg:p-8">
               <p className="leading-relaxed text-muted-foreground">
-                IMPMS board members bring together medicine, science, diplomacy, engineering, the
-                academy, law, faith, the arts, and global enterprise in service of knowledge and
-                understanding. Board leadership helps guide programs, partnerships, and the
-                institute&apos;s long-term mission.
-              </p>
-              <p className="mt-4 leading-relaxed text-muted-foreground">
-                Learn about our current leadership, then reach out if you are interested in
-                contributing your experience and perspective at the governance level.
+                IMPMS brings people together to explore the ideas, discoveries, and cultural
+                exchange that have shaped our world. Through scholarship, education, mentorship, and
+                public programs, we make the study of history accessible and relevant to new
+                generations, advancing the institute&apos;s mission, vision, and goals.
               </p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <Button asChild className="bg-gold text-gold-foreground hover:bg-gold/90">
