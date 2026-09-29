@@ -23,7 +23,7 @@ import { pageBannerDimensions, pageBannerImageClass } from "@/lib/page-banner";
 const involvementSections = [
   { id: "join-impms", label: "Join IMPMS", icon: LayoutGrid },
   { id: "volunteer-with-impms", label: "Volunteer with IMPMS", icon: Users },
-  { id: "sponsor-or-partner", label: "Sponsor or partner", icon: Handshake },
+  { id: "sponsor-or-partner", label: "Sponsor or Partner", icon: Handshake },
   { id: "fund-our-programs", label: "Fund our Programs", icon: GraduationCap },
   { id: "students", label: "Students", icon: BookOpen },
 ] as const;
@@ -270,7 +270,7 @@ function GetInvolvedPage() {
 
           <section id="sponsor-or-partner" className="scroll-mt-28">
             <div id="support-impms" className="scroll-mt-28" />
-            <SectionHeading icon={Handshake} title="Sponsor or partner" />
+            <SectionHeading icon={Handshake} title="Sponsor or Partner" />
             <div className="mt-8 rounded-2xl border border-border bg-card p-7 lg:p-8">
               <p className="leading-relaxed text-muted-foreground">
                 Partner with IMPMS to expand educational opportunities and bring the richness of

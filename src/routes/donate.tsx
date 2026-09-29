@@ -2,7 +2,6 @@ import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Heart, Check, QrCode, Copy, CheckCircle2 } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
-import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import zelleQrImg from "@/assets/zelle-qr.png";
 
@@ -32,40 +31,10 @@ const impact = [
 
 function DonatePage() {
   const [selectedAmount, setSelectedAmount] = useState<string>("$500");
-  const [customAmount, setCustomAmount] = useState<string>("");
-  const [isCustomActive, setIsCustomActive] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
 
   const handleSelectPreset = (amount: string) => {
     setSelectedAmount(amount);
-    setIsCustomActive(false);
-    setCustomAmount("");
-  };
-
-  const handleCustomChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = e.target.value.replace(/[^0-9]/g, "");
-    setCustomAmount(val);
-    setIsCustomActive(true);
-    setSelectedAmount("");
-  };
-
-  const currentDisplayAmount = isCustomActive
-    ? customAmount
-      ? `$${Number(customAmount).toLocaleString()}`
-      : ""
-    : selectedAmount;
-
-  const handleDonate = () => {
-    const effectiveAmount = isCustomActive
-      ? customAmount
-        ? `$${Number(customAmount).toLocaleString()}`
-        : "your chosen amount"
-      : selectedAmount || "$500";
-
-    toast.success(
-      `Thank you for your generous support of ${effectiveAmount}! Please scan the Zelle QR code to complete your payment.`
-    );
-
     document.getElementById("zelle-qr-section")?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -94,12 +63,12 @@ function DonatePage() {
           </span>
           <h2 className="mt-5 text-2xl font-bold">Make a donation</h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            Select a contribution tier or specify an amount of your choice:
+            Select a contribution tier — clicking an amount will open the Zelle QR code below:
           </p>
 
           <div className="mt-6 grid grid-cols-2 gap-3">
             {presetAmounts.map((a) => {
-              const isSelected = !isCustomActive && selectedAmount === a;
+              const isSelected = selectedAmount === a;
               return (
                 <button
                   key={a}
@@ -117,59 +86,10 @@ function DonatePage() {
             })}
           </div>
 
-          {/* Option to add an amount of their choice */}
-          <div className="mt-4">
-            <label
-              htmlFor="custom-amount"
-              className="block text-sm font-medium text-foreground mb-1.5"
-            >
-              Or enter an amount of your choice
-            </label>
-            <div className="relative rounded-xl">
-              <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-base font-semibold text-muted-foreground">
-                $
-              </span>
-              <input
-                id="custom-amount"
-                type="text"
-                inputMode="numeric"
-                pattern="[0-9]*"
-                placeholder="Enter custom amount"
-                value={customAmount}
-                onChange={handleCustomChange}
-                onFocus={() => {
-                  setIsCustomActive(true);
-                  setSelectedAmount("");
-                }}
-                className={`w-full rounded-xl border bg-background py-3.5 pl-8 pr-4 text-base font-medium transition-all outline-hidden focus:border-gold focus:ring-2 focus:ring-gold/30 ${
-                  isCustomActive ? "border-gold ring-2 ring-gold/30 bg-gold/5" : "border-border"
-                }`}
-              />
-            </div>
-          </div>
-
-          <Button
-            type="button"
-            onClick={handleDonate}
-            className="mt-6 w-full bg-gold text-gold-foreground hover:bg-gold/90 text-base font-semibold py-6 rounded-xl shadow-xs transition-all hover:scale-[1.01]"
-            size="lg"
-          >
-            {currentDisplayAmount ? `Donate ${currentDisplayAmount} Now` : "Donate Now"}
-          </Button>
-
           <p className="mt-4 text-center text-xs text-muted-foreground">
             Secure giving. IMPMS is a tax-exempt 501(c)(3) organization.
           </p>
 
-          <div className="mt-6 border-t border-border pt-4 text-center">
-            <a
-              href="#zelle-qr-section"
-              className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-gold transition-colors"
-            >
-              <QrCode className="h-4 w-4 text-gold" />
-              Prefer giving via Zelle®? Scan the QR code below
-            </a>
-          </div>
         </div>
 
         {/* Right Column: Zelle QR Code & Impact */}
@@ -185,9 +105,11 @@ function DonatePage() {
                   <QrCode className="h-6 w-6" />
                 </span>
                 <div>
-                  <h3 className="text-xl font-bold text-foreground">Donate with Zelle®</h3>
+                  <h3 className="text-xl font-bold text-foreground">
+                    Donate with Zelle®{selectedAmount && <span className="ml-2 text-gold">{selectedAmount}</span>}
+                  </h3>
                   <p className="text-xs text-muted-foreground">
-                    Instant, direct & 100% fee-free donation
+                    Instant, direct &amp; 100% fee-free donation
                   </p>
                 </div>
               </div>
