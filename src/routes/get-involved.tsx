@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
+  BookOpen,
   Check,
   GraduationCap,
-  Heart,
+  Handshake,
   LayoutGrid,
   Users,
   type LucideIcon,
@@ -11,6 +12,7 @@ import {
 import { PageHero } from "@/components/page-hero";
 import { CtaBand } from "@/components/cta-band";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -20,9 +22,10 @@ import { pageBannerDimensions, pageBannerImageClass } from "@/lib/page-banner";
 
 const involvementSections = [
   { id: "join-impms", label: "Join IMPMS", icon: LayoutGrid },
-  { id: "volunteer-student-ambassador", label: "Become a Volunteer / Student Ambassador", icon: Users },
-  { id: "support-impms", label: "Support IMPMS", icon: Heart },
+  { id: "volunteer-with-impms", label: "Volunteer with IMPMS", icon: Users },
+  { id: "sponsor-or-partner", label: "Sponsor or partner", icon: Handshake },
   { id: "fund-our-programs", label: "Fund our Programs", icon: GraduationCap },
+  { id: "students", label: "Students", icon: BookOpen },
 ] as const;
 
 const volunteerBenefits = [
@@ -30,6 +33,14 @@ const volunteerBenefits = [
   "Access to publications and educational resources",
   "Opportunities to support youth innovation and STEM partnerships",
   "A community advancing shared discovery and understanding",
+];
+
+const sponsorPartnerAreas = [
+  "Research grants for high school students",
+  "Student mentorship and academic enrichment",
+  "Conferences, lectures, and public programs",
+  "Publications and educational resources",
+  "Community outreach and initiatives that promote cultural understanding",
 ];
 
 const programFundingAreas = [
@@ -86,13 +97,34 @@ export const Route = createFileRoute("/get-involved")({
 });
 
 function GetInvolvedPage() {
-  const [volunteerForm, setVolunteerForm] = useState({ name: "", email: "", message: "" });
+  const [volunteerForm, setVolunteerForm] = useState({
+    name: "",
+    email: "",
+    message: "",
+    isStudent: false,
+  });
 
   const submitVolunteer = (e: React.FormEvent) => {
     e.preventDefault();
     if (!volunteerForm.name || !volunteerForm.email) return;
-    toast.success("Thank you! We'll be in touch about volunteering with IMPMS.");
-    setVolunteerForm({ name: "", email: "", message: "" });
+    toast.success(
+      volunteerForm.isStudent
+        ? "Thank you! We'll be in touch about the student volunteer / ambassador opportunity."
+        : "Thank you! We'll be in touch about volunteering with IMPMS."
+    );
+    setVolunteerForm({ name: "", email: "", message: "", isStudent: false });
+  };
+
+  const handleStudentOptionClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setVolunteerForm((prev) => ({
+      ...prev,
+      isStudent: true,
+    }));
+    const el = document.getElementById("volunteer-with-impms");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -159,14 +191,15 @@ function GetInvolvedPage() {
             </div>
           </section>
 
-          <section id="volunteer-student-ambassador" className="scroll-mt-28">
-            <SectionHeading icon={Users} title="Become a Volunteer / Student Ambassador" />
+          <section id="volunteer-with-impms" className="scroll-mt-28">
+            <div id="volunteer-student-ambassador" className="scroll-mt-28" />
+            <SectionHeading icon={Users} title="Volunteer with IMPMS" />
             <div className="mt-8 grid gap-12 lg:grid-cols-2">
               <div>
                 <p className="leading-relaxed text-muted-foreground">
-                  Volunteers and student ambassadors help IMPMS carry its mission into schools,
-                  communities, and public programs. Whether you support events, outreach, or
-                  mentorship, your time strengthens the institute&apos;s reach and impact.
+                  Share your time and skills in support of IMPMS programs and events. Volunteers
+                  help with research, communications, outreach, event coordination, and other
+                  projects. We welcome a range of interests and experience.
                 </p>
                 <ul className="mt-6 space-y-3">
                   {volunteerBenefits.map((benefit) => (
@@ -212,6 +245,21 @@ function GetInvolvedPage() {
                       rows={4}
                     />
                   </div>
+                  <div className="flex items-center space-x-2 pt-1">
+                    <Checkbox
+                      id="student-option"
+                      checked={volunteerForm.isStudent}
+                      onCheckedChange={(checked) =>
+                        setVolunteerForm({ ...volunteerForm, isStudent: !!checked })
+                      }
+                    />
+                    <Label
+                      htmlFor="student-option"
+                      className="text-sm font-normal text-muted-foreground cursor-pointer"
+                    >
+                      Student volunteer option
+                    </Label>
+                  </div>
                   <Button type="submit" className="w-full bg-gold text-gold-foreground hover:bg-gold/90">
                     Submit Interest
                   </Button>
@@ -220,17 +268,26 @@ function GetInvolvedPage() {
             </div>
           </section>
 
-          <section id="support-impms" className="scroll-mt-28">
-            <SectionHeading icon={Heart} title="Support IMPMS" />
+          <section id="sponsor-or-partner" className="scroll-mt-28">
+            <div id="support-impms" className="scroll-mt-28" />
+            <SectionHeading icon={Handshake} title="Sponsor or partner" />
             <div className="mt-8 rounded-2xl border border-border bg-card p-7 lg:p-8">
               <p className="leading-relaxed text-muted-foreground">
-                IMPMS is a registered 501(c)(3) nonprofit. Philanthropic support helps the
-                institute preserve heritage, present public programs, and inspire the next generation
-                of innovators and scholars.
+                Partner with IMPMS to expand educational opportunities and bring the richness of
+                history to wider audiences. Sponsors and donors help sustain programs that serve
+                students, scholars, educators, and the broader community, including:
               </p>
-              <p className="mt-4 leading-relaxed text-muted-foreground">
-                Every contribution is tax-deductible and advances education, scholarship, and
-                community engagement across North Texas and beyond.
+              <ul className="mt-6 space-y-3">
+                {sponsorPartnerAreas.map((area) => (
+                  <li key={area} className="flex items-start gap-3 text-muted-foreground">
+                    <Check className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
+                    {area}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-6 leading-relaxed text-muted-foreground">
+                Support may be directed to a specific program or event, or to IMPMS&apos;s broader
+                work.
               </p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <Button asChild className="bg-gold text-gold-foreground hover:bg-gold/90">
@@ -276,6 +333,24 @@ function GetInvolvedPage() {
                     <Link to="/contact">Discuss Sponsorship</Link>
                   </Button>
                 </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="students" className="scroll-mt-28">
+            <SectionHeading icon={BookOpen} title="Students" />
+            <div className="mt-8 rounded-2xl border border-border bg-card p-7 lg:p-8">
+              <p className="leading-relaxed text-muted-foreground">
+                Bring your curiosity to IMPMS. Take part in events and projects, explore
+                connections between past and present, and learn alongside a community of scholars
+                and enthusiasts. No prior expertise is required.
+              </p>
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                <Button asChild className="bg-gold text-gold-foreground hover:bg-gold/90">
+                  <a href="#volunteer-with-impms" onClick={handleStudentOptionClick}>
+                    Volunteer with IMPMS
+                  </a>
+                </Button>
               </div>
             </div>
           </section>
